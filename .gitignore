@@ -1,0 +1,10 @@
+.venv/
+.uv-cache/
+.uv-python/
+.state/
+frontend/.next/
+frontend/node_modules/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env

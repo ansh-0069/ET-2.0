@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: petravigil
+      POSTGRES_USER: petravigil
+      POSTGRES_PASSWORD: petravigil_dev_only
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U petravigil -d petravigil"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  neo4j:
+    image: neo4j:5-community
+    environment:
+      NEO4J_AUTH: neo4j/petravigil_dev_only
+      NEO4J_server_memory_pagecache_size: 512M
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  redis_data:

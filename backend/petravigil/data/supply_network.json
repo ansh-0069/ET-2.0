@@ -1,0 +1,25 @@
+{
+  "data_status": "Historical",
+  "countries": ["Iraq", "Saudi Arabia", "United Arab Emirates", "United States", "Guyana", "Nigeria", "Iran", "India"],
+  "chokepoints": ["HORMUZ", "BAB_EL_MANDEB", "SUEZ", "MALACCA", "CAPE_OF_GOOD_HOPE"],
+  "crude_grades": [
+    {"name": "Basrah Medium", "country": "Iraq", "api_gravity": 29.5, "sulfur_pct": 2.8},
+    {"name": "Arab Light", "country": "Saudi Arabia", "api_gravity": 33.0, "sulfur_pct": 1.8},
+    {"name": "Murban", "country": "United Arab Emirates", "api_gravity": 40.5, "sulfur_pct": 0.8},
+    {"name": "WTI Midland", "country": "United States", "api_gravity": 41.5, "sulfur_pct": 0.3},
+    {"name": "Liza Light", "country": "Guyana", "api_gravity": 32.1, "sulfur_pct": 0.5},
+    {"name": "Bonny Light", "country": "Nigeria", "api_gravity": 35.4, "sulfur_pct": 0.14}
+  ],
+  "refineries": [
+    {"name": "Jamnagar", "operator": "Reliance Industries", "capacity_mmtpa": 68.2, "complexity_index": 14.0, "compatible_grades": ["Murban", "WTI Midland", "Liza Light", "Bonny Light"]},
+    {"name": "Paradip", "operator": "IndianOil", "capacity_mmtpa": 15.0, "complexity_index": 12.0, "compatible_grades": ["Basrah Medium", "Arab Light", "Liza Light"]},
+    {"name": "Kochi", "operator": "Bharat Petroleum", "capacity_mmtpa": 15.5, "complexity_index": 9.7, "compatible_grades": ["Arab Light", "WTI Midland", "Murban"]}
+  ],
+  "routes": [
+    {"name": "Persian Gulf -> West India", "origin": "Saudi Arabia", "chokepoints": ["HORMUZ"], "transit_days": 8, "risk_score": 0.78, "available_volume_bpd": 500000},
+    {"name": "US Gulf -> West India", "origin": "United States", "chokepoints": ["CAPE_OF_GOOD_HOPE"], "transit_days": 42, "risk_score": 0.18, "available_volume_bpd": 180000},
+    {"name": "Guyana -> West India", "origin": "Guyana", "chokepoints": ["CAPE_OF_GOOD_HOPE"], "transit_days": 34, "risk_score": 0.2, "available_volume_bpd": 90000},
+    {"name": "West Africa -> West India", "origin": "Nigeria", "chokepoints": ["CAPE_OF_GOOD_HOPE"], "transit_days": 25, "risk_score": 0.24, "available_volume_bpd": 110000},
+    {"name": "Persian Gulf -> East India", "origin": "United Arab Emirates", "chokepoints": ["HORMUZ", "MALACCA"], "transit_days": 20, "risk_score": 0.63, "available_volume_bpd": 250000}
+  ]
+}

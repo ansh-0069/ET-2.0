@@ -1,0 +1,108 @@
+{
+  "fixture_version": "phase-0.1",
+  "scenario_id": "SC-HORMUZ-PARTIAL-BLOCKADE",
+  "scenario_name": "Hormuz Partial Blockade",
+  "status": "Simulated",
+  "risk_event": {
+    "event_id": "RE-HORMUZ-001",
+    "event_type": "MILITARY_ACTION",
+    "status": "Simulated",
+    "occurred_at": "2026-07-19T09:15:00Z",
+    "affected_countries": ["Iran", "India"],
+    "affected_chokepoints": ["HORMUZ"],
+    "affected_corridors": ["Persian Gulf -> West India"],
+    "severity": 8.2,
+    "confidence": 0.87,
+    "time_horizon": "DAYS",
+    "estimated_supply_impact_bpd": 1200000,
+    "summary": "Simulated naval escalation near the Strait of Hormuz creates a material risk of partial disruption to India-bound crude cargoes.",
+    "evidence_ids": ["EV-HORMUZ-NEWS-001", "EV-HORMUZ-AIS-001", "EV-HORMUZ-INS-001"]
+  },
+  "evidence": [
+    {
+      "source_id": "EV-HORMUZ-NEWS-001",
+      "title": "Simulated Hormuz maritime escalation bulletin",
+      "status": "Simulated",
+      "observed_at": "2026-07-19T09:15:00Z",
+      "reliability": 0.82,
+      "excerpt": "A simulated escalation event reports heightened risk to commercial shipping near Hormuz."
+    },
+    {
+      "source_id": "EV-HORMUZ-AIS-001",
+      "title": "Simulated AIS deviation cluster",
+      "status": "Simulated",
+      "observed_at": "2026-07-19T09:25:00Z",
+      "reliability": 0.9,
+      "excerpt": "Three simulated VLCCs altered course near the Strait of Hormuz within six hours."
+    },
+    {
+      "source_id": "EV-HORMUZ-INS-001",
+      "title": "Simulated war-risk insurance signal",
+      "status": "Simulated",
+      "observed_at": "2026-07-19T09:30:00Z",
+      "reliability": 0.78,
+      "excerpt": "A simulated insurance input indicates a 15 percent increase in war-risk premium."
+    }
+  ],
+  "risk_score": {
+    "corridor_id": "Persian Gulf -> West India",
+    "score": 0.78,
+    "calculated_at": "2026-07-19T09:31:00Z",
+    "components": {
+      "geopolitical": 0.91,
+      "chokepoint_concentration": 0.86,
+      "historical_frequency": 0.42,
+      "maritime_anomaly": 0.73,
+      "insurance": 0.65
+    },
+    "event_ids": ["RE-HORMUZ-001"]
+  },
+  "assumptions": {
+    "closure_severity": 0.6,
+    "disruption_duration_days": 21,
+    "brent_elasticity_usd_per_mmbpd": 5.4,
+    "alternative_route_capacity_ratio": 0.72,
+    "risk_appetite": "BALANCED",
+    "random_seed": 20260719
+  },
+  "expected_outcomes": {
+    "supply_impact_p50_bpd": 1200000,
+    "brent_premium_p50_usd_per_bbl": 6.5,
+    "additional_import_cost_p50_usd_per_day": 48200000,
+    "spr_bridge_days": 15
+  },
+  "recommendations": [
+    {
+      "recommendation_id": "PA-HORMUZ-001",
+      "status": "Simulated",
+      "rank": 1,
+      "action": "INCREASE_VOLUME",
+      "supplier_country": "United States",
+      "crude_grade": "WTI Midland",
+      "refinery": "Jamnagar",
+      "volume_bpd": 150000,
+      "route": "Houston -> Cape of Good Hope -> Jamnagar",
+      "transit_days": 42,
+      "cost_premium_usd_per_bbl": 3.2,
+      "route_risk_score": 0.18,
+      "confidence": 0.82,
+      "rationale": "Simulated option avoids Hormuz and is compatible with the seeded Jamnagar crude-diet profile.",
+      "feasibility_checks": [
+        {"name": "GRADE", "passed": true, "rationale": "Seeded grade specifications meet the prototype compatibility threshold."},
+        {"name": "CAPACITY", "passed": true, "rationale": "Seeded supplier capacity supports the requested incremental volume."},
+        {"name": "ROUTE_RISK", "passed": true, "rationale": "Seeded Cape route risk remains below the balanced portfolio threshold."}
+      ],
+      "evidence_ids": ["EV-HORMUZ-NEWS-001", "EV-HORMUZ-AIS-001", "EV-HORMUZ-INS-001"]
+    }
+  ],
+  "approval": {
+    "approval_id": "AP-HORMUZ-001",
+    "recommendation_id": "PA-HORMUZ-001",
+    "decision": "DRAFT",
+    "decided_by": "Demo Analyst",
+    "decided_at": "2026-07-19T09:32:00Z",
+    "justification": "Phase 0 fixture only; no external procurement action is permitted.",
+    "execution_external": false
+  }
+}
+
