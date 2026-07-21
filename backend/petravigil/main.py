@@ -1,19 +1,27 @@
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import Body, FastAPI, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
 
-from petravigil.fixtures.loader import load_canonical_scenario
+from petravigil.fixtures.loader import (
+    load_canonical_scenario,
+    load_hormuz_crisis_replay,
+    load_hormuz_decision_clock_with_approval_delay,
+)
 from petravigil.models import (
     ApprovalCreateRequest,
     ApprovalRecord,
     AlternativeRouteOption,
     CanonicalScenarioResponse,
+    CrisisReplayResponse,
     DataStatus,
+    DecisionClockResponse,
     GeminiExplanationResponse,
     GeminiSignalRequest,
     GeminiSignalResponse,
     NetworkSummary,
+    MultiRefineryPortfolioRequest,
+    MultiRefineryPortfolioResponse,
     ProcessedSignal,
     PortfolioComparison,
     PortfolioRequest,
@@ -32,6 +40,7 @@ from petravigil.services.scenario_runs import ScenarioRunRepository
 from petravigil.services.signal_mesh import SignalMeshService, SignalRepository
 from petravigil.services.scenario_engine import ScenarioEngine, SimulationRepository
 from petravigil.services.portfolio_optimizer import PortfolioOptimizer, PortfolioRepository
+from petravigil.services.multi_refinery_allocator import MultiRefineryPortfolioAllocator
 from petravigil.services.approvals import ApprovalRepository
 from petravigil.services.supply_network import get_supply_network
 from petravigil.services.decision_workflow import DecisionWorkflowRepository, DecisionWorkflowService
@@ -91,6 +100,28 @@ def health() -> dict[str, str]:
 def get_canonical_scenario() -> CanonicalScenarioResponse:
     """Return the stable, explicitly simulated Hormuz scenario contract."""
     return load_canonical_scenario()
+
+
+@app.get(
+    "/api/v1/replays/hormuz",
+    response_model=CrisisReplayResponse,
+    tags=["replays"],
+)
+def get_hormuz_crisis_replay() -> CrisisReplayResponse:
+    """Return an offline, source-labelled Hormuz crisis replay for local demos."""
+    return load_hormuz_crisis_replay()
+
+
+@app.get(
+    "/api/v1/decision-clock/hormuz",
+    response_model=DecisionClockResponse,
+    tags=["decision clock"],
+)
+def get_hormuz_decision_clock(
+    approval_delay_hours: int | None = Query(default=None, ge=0, le=168),
+) -> DecisionClockResponse:
+    """Return a source-labelled, local timing replay with no workflow dependency."""
+    return load_hormuz_decision_clock_with_approval_delay(approval_delay_hours)
 
 
 @app.post(
@@ -193,6 +224,23 @@ def get_latest_simulation() -> SimulationResult:
 @app.post("/api/v1/portfolios", response_model=PortfolioComparison, status_code=status.HTTP_201_CREATED, tags=["procurement"])
 def generate_portfolios(request: PortfolioRequest) -> PortfolioComparison:
     return PortfolioOptimizer(portfolio_repository, get_supply_network()).generate(request)
+
+
+@app.post(
+    "/api/v1/portfolios/multi-refinery",
+    response_model=MultiRefineryPortfolioResponse,
+    tags=["procurement", "capacity allocation"],
+    summary="Allocate seeded alternative-route capacity globally across multiple refineries",
+    description=(
+        "Local, source-labelled scenario allocator. It shares each physical route's scaled seeded capacity "
+        "across all demand lines and returns a structured shortfall rather than an error when demand cannot fit. "
+        "A no-body POST uses the deterministic Jamnagar/Paradip/Kochi contention demo."
+    ),
+)
+def generate_multi_refinery_portfolio(
+    request: MultiRefineryPortfolioRequest = Body(default_factory=MultiRefineryPortfolioRequest),
+) -> MultiRefineryPortfolioResponse:
+    return MultiRefineryPortfolioAllocator(get_supply_network()).generate(request)
 
 
 @app.get("/api/v1/portfolios/latest", response_model=PortfolioComparison, tags=["procurement"])

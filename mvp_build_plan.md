@@ -6,7 +6,7 @@
 > ## Current implemented prototype (authoritative runtime note)
 > This document is the **target MVP roadmap**, not a claim that every component below is already running. The current repository implements one linked, analyst-confirmed path: user-entered signal -> optional Gemini structured proposal (or labelled deterministic fallback) -> seeded entity/risk checks -> analyst-confirmed assumptions -> reproducible NumPy simulation -> seeded OR-Tools procurement portfolios -> optional Gemini/local explanation -> local SQLite decision record. The active UI is a single workflow workspace rather than the planned suite of dedicated pages.
 >
-> The runtime has **no live AIS, news, commodity-price, tanker, port, sanctions, or supplier feed**; no map, RAG/vector database, Neo4j, Redis, PostgreSQL, or LangGraph service is active. Bundled network data and scenario outputs are explicitly labelled seeded/simulated, and no recommendation executes an external procurement action. See `README.md` for the current runbook and configuration.
+> The runtime has **no live AIS, news, commodity-price, tanker, port, sanctions, or supplier feed**; no RAG/vector database, Neo4j, Redis, PostgreSQL, or LangGraph service is active. It does include a local D3-projected, source-labelled replay map, a deterministic Decision Clock, finite single-refinery SPR-contingency modelling, a no-recommendation safety gate, and a shared-capacity multi-refinery allocation drill. Bundled network data and scenario outputs are explicitly labelled seeded/simulated, and no recommendation executes an external procurement action. See `README.md` for the current runbook and configuration.
 
 ---
 

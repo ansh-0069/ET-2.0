@@ -1,0 +1,182 @@
+{
+  "clock_id": "CLK-HORMUZ-LOCAL-001",
+  "title": "Hormuz disruption decision clock",
+  "disclaimer": "This is a deterministic, offline local demonstration linked to the simulated Hormuz replay. Every number is explicitly labelled Simulated, Seeded, or User-entered. It does not use current inventory, live laycan, terminal, tanker, approval, market, or procurement data and it must not be used as an operational instruction.",
+  "replay_id": "RPL-HORMUZ-LOCAL-001",
+  "base_decision_window_hours": 72,
+  "stockout_threshold_hours": 216,
+  "baseline_approval_delay_hours": 24,
+  "laycan_cutoff_hours": 96,
+  "protected_inventory_buffer_hours": 48,
+  "usable_stock_cover_hours": 168,
+  "decision_lead_time_hours": 72,
+  "last_responsible_action_offset_hours": 72,
+  "effective_approval_delay_hours": 24,
+  "metrics": [
+    {
+      "key": "base_decision_window_hours",
+      "label": "Baseline decision window",
+      "value": 72,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "The local clock derives this window from the seeded laycan cutoff less the simulated baseline approval delay."
+    },
+    {
+      "key": "stockout_threshold_hours",
+      "label": "Seeded stock-cover threshold",
+      "value": 216,
+      "unit": "hours",
+      "source_status": "Seeded",
+      "rationale": "A fixed nine-day local stock-cover baseline is used solely to demonstrate the time-pressure calculation."
+    },
+    {
+      "key": "baseline_approval_delay_hours",
+      "label": "Baseline approval delay",
+      "value": 24,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "The default is a visible prototype assumption, not a measurement of a real approval workflow."
+    },
+    {
+      "key": "laycan_cutoff_hours",
+      "label": "Seeded laycan cutoff",
+      "value": 96,
+      "unit": "hours",
+      "source_status": "Seeded",
+      "rationale": "The local fixture fixes a four-day booking cutoff to make timing trade-offs testable; it is not a current laycan."
+    },
+    {
+      "key": "protected_inventory_buffer_hours",
+      "label": "Protected inventory buffer",
+      "value": 48,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "The local scenario reserves two days of the seeded cover as a protected operating buffer before escalation."
+    },
+    {
+      "key": "usable_stock_cover_hours",
+      "label": "Usable stock cover",
+      "value": 168,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "The local clock subtracts the simulated protected buffer from the seeded stock-cover threshold."
+    },
+    {
+      "key": "decision_lead_time_hours",
+      "label": "Effective decision lead time",
+      "value": 72,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "With the default approval assumption, the analyst has this much time after the replay signal to submit a decision."
+    },
+    {
+      "key": "last_responsible_action_offset_hours",
+      "label": "Last responsible action",
+      "value": 72,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "A decision submitted after this simulated offset cannot complete the assumed approval before the seeded laycan cutoff."
+    },
+    {
+      "key": "effective_approval_delay_hours",
+      "label": "Effective approval delay",
+      "value": 24,
+      "unit": "hours",
+      "source_status": "Simulated",
+      "rationale": "This default is changeable through the local demo endpoint and is never presented as an observed approval duration."
+    }
+  ],
+  "stages": [
+    {
+      "sequence": 1,
+      "offset_hours": 0,
+      "label": "Replay signal received",
+      "source_status": "Simulated",
+      "kind": "SIGNAL",
+      "action": "Open an analyst review case",
+      "detail": "The clock starts from the simulated Hormuz replay signal, not from a live maritime or geopolitical feed."
+    },
+    {
+      "sequence": 2,
+      "offset_hours": 12,
+      "label": "Analyst assumptions reviewed",
+      "source_status": "User-entered",
+      "kind": "ANALYST_REVIEW",
+      "action": "Confirm scenario assumptions and evidence limits",
+      "detail": "A sample review checkpoint is retained as a user-entered process assumption; it is not a recorded real analyst action."
+    },
+    {
+      "sequence": 3,
+      "offset_hours": 24,
+      "label": "Assumed approval completion",
+      "source_status": "Simulated",
+      "kind": "APPROVAL_COMPLETION",
+      "action": "Complete internal decision approval",
+      "detail": "This is the simulated default approval duration applied only to calculate the local decision deadline."
+    },
+    {
+      "sequence": 4,
+      "offset_hours": 72,
+      "label": "Last responsible action",
+      "source_status": "Simulated",
+      "kind": "LAST_RESPONSIBLE_ACTION",
+      "action": "Submit the decision before the approval buffer is consumed",
+      "detail": "This simulated deadline equals the seeded laycan cutoff minus the assumed approval delay; no booking is created."
+    },
+    {
+      "sequence": 5,
+      "offset_hours": 96,
+      "label": "Seeded laycan cutoff",
+      "source_status": "Seeded",
+      "kind": "LAYCAN_CUTOFF",
+      "action": "Escalate if no analyst-approved contingency exists",
+      "detail": "A local, fixed booking cutoff makes the demonstration testable and must not be interpreted as a current commercial laycan."
+    },
+    {
+      "sequence": 6,
+      "offset_hours": 216,
+      "label": "Seeded stock-cover threshold",
+      "source_status": "Seeded",
+      "kind": "STOCKOUT_THRESHOLD",
+      "action": "Reassess resilient supply and inventory assumptions",
+      "detail": "This fixed nine-day threshold is not a real inventory reading or a claim about national or refinery stock levels."
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption_id": "DCA-STOCK-COVER-001",
+      "label": "Seeded stock cover",
+      "value": "9 days / 216 hours",
+      "source_status": "Seeded",
+      "rationale": "A fixed prototype inventory baseline is used for the clock; no live refinery, strategic reserve, or terminal inventory is connected."
+    },
+    {
+      "assumption_id": "DCA-BUFFER-001",
+      "label": "Protected operating buffer",
+      "value": "2 days / 48 hours",
+      "source_status": "Simulated",
+      "rationale": "The scenario reserves this portion of seeded cover before treating the remaining time as usable decision capacity."
+    },
+    {
+      "assumption_id": "DCA-LAYCAN-001",
+      "label": "Laycan booking cutoff",
+      "value": "T+96 hours",
+      "source_status": "Seeded",
+      "rationale": "This is a local scheduling baseline for a replay, not a live cargo offer, berth slot, or booking window."
+    },
+    {
+      "assumption_id": "DCA-APPROVAL-001",
+      "label": "Approval delay",
+      "value": "24 hours",
+      "source_status": "Simulated",
+      "rationale": "The default approval duration is explicitly assumed; callers may replace it with a user-entered demo value."
+    },
+    {
+      "assumption_id": "DCA-FORMULA-001",
+      "label": "Last responsible action formula",
+      "value": "laycan cutoff minus approval delay",
+      "source_status": "Simulated",
+      "rationale": "The deterministic formula prevents the interface from implying that an AI or live operations feed has calculated the deadline."
+    }
+  ]
+}

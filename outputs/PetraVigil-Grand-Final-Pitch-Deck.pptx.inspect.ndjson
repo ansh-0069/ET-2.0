@@ -1,0 +1,245 @@
+{"kind":"deck","id":"pr/kgkv4b","name":"Deck"}
+{"kind":"layout","layoutId":"1e83f1b3-43f5-4be2-b643-3590bfdf448e","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"ecdacc62-8c71-43c4-a456-162a9decdc05","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/1oi5wn","slide":1,"title":"PETRAVIGIL","textShapes":11}
+{"kind":"textbox","id":"sh/zmlsnq18","slide":1,"name":"brand","text":"PETRAVIGIL","textPreview":"PETRAVIGIL","textChars":10,"textLines":1,"bbox":[72,64,310,26]}
+{"kind":"textbox","id":"sh/0nu9wv2t","slide":1,"name":"hero-title","text":"When a chokepoint moves,\nIndia needs a decision—\nnot another dashboard.","textPreview":"When a chokepoint moves, | India needs a decision— | not another dashboard.","textChars":71,"textLines":3,"bbox":[72,148,720,230]}
+{"kind":"textbox","id":"sh/lo3ap0je","slide":1,"name":"tagline","text":"Evidence-first energy supply resilience","textPreview":"Evidence-first energy supply resilience","textChars":39,"textLines":1,"bbox":[76,410,520,30]}
+{"kind":"textbox","id":"sh/m9cry5kz","slide":1,"name":"chip","text":"ANALYST-CONFIRMED","textPreview":"ANALYST-CONFIRMED","textChars":17,"textLines":1,"bbox":[76,470,182,30]}
+{"kind":"shape","id":"sh/nalsra1k","slide":1,"name":"hero-orbit","bbox":[850,143,250,250]}
+{"kind":"shape","id":"sh/8bu90f2p","slide":1,"name":"hero-core","bbox":[900,193,150,150]}
+{"kind":"textbox","id":"sh/9cnatkja","slide":1,"name":"decision","text":"DECISION","textPreview":"DECISION","textChars":8,"textLines":1,"bbox":[918,245,118,28]}
+{"kind":"textbox","id":"sh/2dsrmlkf","slide":1,"name":"decision-sub","text":"not a prediction\n— a reviewable action","textPreview":"not a prediction | — a reviewable action","textChars":38,"textLines":2,"bbox":[886,292,182,52]}
+{"kind":"shape","id":"sh/3e18f610","slide":1,"name":"hero-step","bbox":[750,455,90,90]}
+{"kind":"textbox","id":"sh/vudwfal0","slide":1,"name":"hero-step-label","text":"SIGNAL","textPreview":"SIGNAL","textChars":6,"textLines":1,"bbox":[762,491,66,20]}
+{"kind":"shape","id":"sh/at4fm54v","slide":1,"name":"hero-step","bbox":[894,455,90,90]}
+{"kind":"textbox","id":"sh/xgvehk36","slide":1,"name":"hero-step-label","text":"RISK","textPreview":"RISK","textChars":4,"textLines":1,"bbox":[906,491,66,20]}
+{"kind":"shape","id":"sh/wfmxofml","slide":1,"name":"hero-step","bbox":[1038,455,90,90]}
+{"kind":"textbox","id":"sh/nqdwbal4","slide":1,"name":"hero-step-label","text":"ACTION","textPreview":"ACTION","textChars":6,"textLines":1,"bbox":[1050,491,66,20]}
+{"kind":"shape","id":"sh/mpkfi54j","slide":1,"bbox":[795,500,95,0]}
+{"kind":"shape","id":"sh/9svedk3a","slide":1,"bbox":[939,500,95,0]}
+{"kind":"textbox","id":"sh/8rmxkfmp","slide":1,"name":"memorable-line","text":"The product that helps India decide before the market does.","textPreview":"The product that helps India decide before the market does.","textChars":59,"textLines":1,"bbox":[76,562,690,32]}
+{"kind":"shape","id":"sh/zmtw7ql8","slide":1,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/ylkvel4n","slide":1,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/1oi5wn","slide":1,"text":"India's energy supply chain does not fail because leaders lack dashboards. It fails when a moving disruption turns into a late, opaque decision. PetraVigil is built for that exact moment: it turns one source-labelled signal into a reviewable procurement decision, with the analyst still in control. This is not an AI that buys crude. It is decision intelligence that shows its work.\n\nTransition: Why does this matter enough to act now? Because India’s exposure is structural, not theoretical."}
+{"kind":"slide","id":"sl/salf5u","slide":2,"title":"ACT 1 · THE PROBLEM","textShapes":16}
+{"kind":"textbox","id":"sh/6dsjihkj","slide":2,"name":"eyebrow","text":"ACT 1 · THE PROBLEM","textPreview":"ACT 1 · THE PROBLEM","textChars":19,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/tgjidw3a","slide":2,"name":"slide-number","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/8fa1kr2p","slide":2,"name":"title","text":"India cannot wait for a crisis call.","textPreview":"India cannot wait for a crisis call.","textChars":36,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/jah07ml8","slide":2,"name":"subtitle","text":"When disruption hits, the cost of delay compounds across energy, freight, and refining.","textPreview":"When disruption hits, the cost of delay compounds across energy, freight, and refining.","textChars":87,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/yp8zehkn","slide":2,"name":"metric","bbox":[72,295,320,118]}
+{"kind":"textbox","id":"sh/lczi9c3y","slide":2,"name":"metric-value","text":"88%","textPreview":"88%","textChars":3,"textLines":1,"bbox":[90,313,284,48]}
+{"kind":"textbox","id":"sh/kbqhgr2t","slide":2,"name":"metric-label","text":"of India’s crude needs are met through imports","textPreview":"of India’s crude needs are met through imports","textChars":46,"textLines":1,"bbox":[90,371,284,30]}
+{"kind":"textbox","id":"sh/bmh032lw","slide":2,"name":"gap-label","text":"The signal-to-decision gap","textPreview":"The signal-to-decision gap","textChars":26,"textLines":1,"bbox":[460,290,400,26]}
+{"kind":"shape","id":"sh/alozaxkb","slide":2,"name":"problem-step","bbox":[460,335,200,142]}
+{"kind":"textbox","id":"sh/8zexgby1","slide":2,"name":"problem-head","text":"Fragmented signal","textPreview":"Fragmented signal","textChars":17,"textLines":1,"bbox":[476,358,168,44]}
+{"kind":"textbox","id":"sh/t0ne9gfm","slide":2,"name":"problem-copy","text":"news · shipping · insurance","textPreview":"news · shipping · insurance","textChars":27,"textLines":1,"bbox":[476,415,168,38]}
+{"kind":"shape","id":"sh/mxwfe1gv","slide":2,"name":"problem-dot","bbox":[476,480,10,10]}
+{"kind":"shape","id":"sh/7y5w76xg","slide":2,"bbox":[660,406,30,0]}
+{"kind":"shape","id":"sh/kvexcryp","slide":2,"name":"problem-step","bbox":[690,335,200,142]}
+{"kind":"textbox","id":"sh/lwne5wfa","slide":2,"name":"problem-head","text":"Manual interpretation","textPreview":"Manual interpretation","textChars":21,"textLines":1,"bbox":[706,358,168,44]}
+{"kind":"textbox","id":"sh/ytcfa1gz","slide":2,"name":"problem-copy","text":"spreadsheets · calls","textPreview":"spreadsheets · calls","textChars":20,"textLines":1,"bbox":[706,415,168,38]}
+{"kind":"shape","id":"sh/zulw3mx4","slide":2,"name":"problem-dot","bbox":[706,480,10,10]}
+{"kind":"shape","id":"sh/4ryxovy9","slide":2,"bbox":[890,406,30,0]}
+{"kind":"shape","id":"sh/5s7yh0fu","slide":2,"name":"problem-step","bbox":[920,335,200,142]}
+{"kind":"textbox","id":"sh/d83e107y","slide":2,"name":"problem-head","text":"Late decision","textPreview":"Late decision","textChars":13,"textLines":1,"bbox":[936,358,168,44]}
+{"kind":"textbox","id":"sh/cnux8vqd","slide":2,"name":"problem-copy","text":"panic-market timing","textPreview":"panic-market timing","textChars":19,"textLines":1,"bbox":[936,415,168,38]}
+{"kind":"shape","id":"sh/rmlwzqps","slide":2,"name":"problem-dot","bbox":[936,480,10,10]}
+{"kind":"textbox","id":"sh/qlcf6l87","slide":2,"name":"problem-statement","text":"No single place connects a signal, its assumptions, an impact range, and a constrained alternative.","textPreview":"No single place connects a signal, its assumptions, an impact range, and a constrained alternative.","textChars":99,"textLines":1,"bbox":[72,520,1050,36]}
+{"kind":"textbox","id":"sh/pk3exg7m","slide":2,"name":"source","text":"Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports.","textPreview":"Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports.","textChars":115,"textLines":1,"bbox":[72,608,970,24]}
+{"kind":"shape","id":"sh/4jux4bq1","slide":2,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/3ilwv6pg","slide":2,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/salf5u","slide":2,"text":"The urgency is simple: India meets about 88 percent of its crude needs through imports. A disruption is not just a news event; it becomes a procurement, route, refinery, and cost decision. Today those threads are often separated—signals in one place, alternatives in another, approvals elsewhere. The consequence is slower, more reactive timing when the market is least forgiving.\n\nTransition: The issue is not a lack of data. It is that generic tools overlook the physics and accountability of the decision."}
+{"kind":"slide","id":"sl/9m71ia","slide":3,"title":"ACT 2 · THE INSIGHT","textShapes":17}
+{"kind":"textbox","id":"sh/utwjuxkj","slide":3,"name":"eyebrow","text":"ACT 2 · THE INSIGHT","textPreview":"ACT 2 · THE INSIGHT","textChars":19,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/hgnipcja","slide":3,"name":"slide-number","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/gve1w72p","slide":3,"name":"title","text":"The blind spot: oil is not fungible.","textPreview":"The blind spot: oil is not fungible.","textChars":36,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/3ip0rm10","slide":3,"name":"subtitle","text":"A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there.","textPreview":"A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there.","textChars":111,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/2hgjyhkf","slide":3,"name":"generic-tools","bbox":[72,294,472,270]}
+{"kind":"textbox","id":"sh/pk7itwj6","slide":3,"name":"generic-label","text":"GENERIC RISK TOOLS","textPreview":"GENERIC RISK TOOLS","textChars":18,"textLines":1,"bbox":[98,320,260,20]}
+{"kind":"textbox","id":"sh/4jy10r2l","slide":3,"name":"generic-flow","text":"Alert\n↓\n“Consider alternatives”","textPreview":"Alert | ↓ | “Consider alternatives”","textChars":31,"textLines":3,"bbox":[98,365,280,132]}
+{"kind":"shape","id":"sh/rmpkvm1c","slide":3,"name":"petravigil-insight","bbox":[600,294,608,270]}
+{"kind":"textbox","id":"sh/qlgj2hkr","slide":3,"name":"pv-label","text":"PETRAVIGIL’S DECISION MODEL","textPreview":"PETRAVIGIL’S DECISION MODEL","textChars":27,"textLines":1,"bbox":[628,320,350,20]}
+{"kind":"shape","id":"sh/4zytoba1","slide":3,"name":"check-circle","bbox":[628,365,34,34]}
+{"kind":"textbox","id":"sh/507uxgb6","slide":3,"name":"check-num","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[639,373,13,18]}
+{"kind":"textbox","id":"sh/ixgbm1sv","slide":3,"name":"check-label","text":"Corridor exposure","textPreview":"Corridor exposure","textChars":17,"textLines":1,"bbox":[678,373,190,22]}
+{"kind":"shape","id":"sh/3ypsv6tg","slide":3,"name":"check-circle","bbox":[898,365,34,34]}
+{"kind":"textbox","id":"sh/s3itsvax","slide":3,"name":"check-num","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[909,373,13,18]}
+{"kind":"textbox","id":"sh/d4ru1gbi","slide":3,"name":"check-label","text":"Refinery-grade fit","textPreview":"Refinery-grade fit","textChars":18,"textLines":1,"bbox":[948,373,190,22]}
+{"kind":"shape","id":"sh/q1gbqlsr","slide":3,"name":"check-circle","bbox":[628,451,34,34]}
+{"kind":"textbox","id":"sh/r29czqtc","slide":3,"name":"check-num","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[639,459,13,18]}
+{"kind":"textbox","id":"sh/0ritwvat","slide":3,"name":"check-label","text":"Route capacity","textPreview":"Route capacity","textChars":14,"textLines":1,"bbox":[678,459,190,22]}
+{"kind":"shape","id":"sh/1sru50be","slide":3,"name":"check-circle","bbox":[898,451,34,34]}
+{"kind":"textbox","id":"sh/9o7ap03i","slide":3,"name":"check-num","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[909,459,13,18]}
+{"kind":"textbox","id":"sh/onetgv2d","slide":3,"name":"check-label","text":"Human approval","textPreview":"Human approval","textChars":14,"textLines":1,"bbox":[948,459,190,22]}
+{"kind":"textbox","id":"sh/nm5snqls","slide":3,"name":"insight-conclusion","text":"The differentiator is not “AI writes a recommendation.”\nIt is making the recommendation feasible, explainable, and accountable.","textPreview":"The differentiator is not “AI writes a recommendation.” | It is making the recommendation feasible, explainable, and accountable.","textChars":127,"textLines":2,"bbox":[72,600,1010,50]}
+{"kind":"shape","id":"sh/mlwbelk7","slide":3,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/xc7ut0ju","slide":3,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/9m71ia","slide":3,"text":"Most risk products stop at an alert, and most generic supply tools treat oil as interchangeable. But a decision is only useful if it respects the refinery’s compatible crude grades, alternative-route capacity, corridor exposure, and a named human approver. PetraVigil makes those constraints part of the product—not a spreadsheet after the fact.\n\nTransition: That insight leads to a very different kind of workflow."}
+{"kind":"slide","id":"sl/5pzkgl","slide":4,"title":"ACT 3 · THE SOLUTION","textShapes":15}
+{"kind":"textbox","id":"sh/l4za543m","slide":4,"name":"eyebrow","text":"ACT 3 · THE SOLUTION","textPreview":"ACT 3 · THE SOLUTION","textChars":20,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/y18bup4v","slide":4,"name":"slide-number","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/z2hs3ulg","slide":4,"name":"title","text":"One signal. One reviewable decision.","textPreview":"One signal. One reviewable decision.","textChars":36,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/cf69szm5","slide":4,"name":"subtitle","text":"PetraVigil links every stage—from intake to human decision—into a single case record.","textPreview":"PetraVigil links every stage—from intake to human decision—into a single case record.","textChars":85,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/x0za143a","slide":4,"bbox":[228,402,31,0]}
+{"kind":"shape","id":"sh/adorqp4z","slide":4,"name":"node","bbox":[72,370,156,66]}
+{"kind":"textbox","id":"sh/bexszulk","slide":4,"name":"node-label","text":"01  Signal","textPreview":"01  Signal","textChars":10,"textLines":1,"bbox":[85,388,130,32]}
+{"kind":"shape","id":"sh/ob69ofmt","slide":4,"bbox":[415,402,31,0]}
+{"kind":"shape","id":"sh/pcfaxkne","slide":4,"name":"node","bbox":[259,370,156,66]}
+{"kind":"textbox","id":"sh/xo7qpcvu","slide":4,"name":"node-label","text":"02  Extract & resolve","textPreview":"02  Extract & resolve","textChars":21,"textLines":1,"bbox":[272,388,130,32]}
+{"kind":"shape","id":"sh/c3y9g7u9","slide":4,"bbox":[602,402,31,0]}
+{"kind":"shape","id":"sh/b2p8n2do","slide":4,"name":"node","bbox":[446,370,156,66]}
+{"kind":"textbox","id":"sh/a1wrexc3","slide":4,"name":"node-label","text":"03  Score risk","textPreview":"03  Score risk","textChars":14,"textLines":1,"bbox":[459,388,130,32]}
+{"kind":"shape","id":"sh/p0nqlsvi","slide":4,"bbox":[789,402,31,0]}
+{"kind":"shape","id":"sh/oze9cnux","slide":4,"name":"node","bbox":[633,370,156,66]}
+{"kind":"textbox","id":"sh/ny58j2dc","slide":4,"name":"node-label","text":"04  Confirm assumptions","textPreview":"04  Confirm assumptions","textChars":23,"textLines":1,"bbox":[646,388,130,32]}
+{"kind":"shape","id":"sh/2xwraxc7","slide":4,"bbox":[976,402,31,0]}
+{"kind":"shape","id":"sh/1wnqhsvm","slide":4,"name":"node","bbox":[820,370,156,66]}
+{"kind":"textbox","id":"sh/0vep8nu1","slide":4,"name":"node-label","text":"05  Simulate & optimize","textPreview":"05  Simulate & optimize","textChars":23,"textLines":1,"bbox":[833,388,130,32]}
+{"kind":"shape","id":"sh/sfi94n2x","slide":4,"name":"node","bbox":[1007,370,156,66]}
+{"kind":"textbox","id":"sh/tgrqxs3i","slide":4,"name":"node-label","text":"06  Decide","textPreview":"06  Decide","textChars":10,"textLines":1,"bbox":[1020,388,130,32]}
+{"kind":"shape","id":"sh/6dgr2dkr","slide":4,"name":"human-gate","bbox":[266,490,748,76]}
+{"kind":"textbox","id":"sh/rep8vilc","slide":4,"name":"gate-text","text":"THE CONTROL POINT  ·  Analyst confirms visible assumptions before simulation and procurement comparison run.","textPreview":"THE CONTROL POINT  ·  Analyst confirms visible assumptions before simulation and procurement comparison run.","textChars":108,"textLines":1,"bbox":[294,515,695,30]}
+{"kind":"textbox","id":"sh/4by90n2l","slide":4,"name":"chip","text":"USER-ENTERED SIGNAL","textPreview":"USER-ENTERED SIGNAL","textChars":19,"textLines":1,"bbox":[72,603,180,30]}
+{"kind":"textbox","id":"sh/5c7qt836","slide":4,"name":"chip","text":"SIMULATED SCENARIO","textPreview":"SIMULATED SCENARIO","textChars":18,"textLines":1,"bbox":[270,603,180,30]}
+{"kind":"textbox","id":"sh/i9grydkv","slide":4,"name":"chip","text":"LOCAL-ONLY DECISION","textPreview":"LOCAL-ONLY DECISION","textChars":19,"textLines":1,"bbox":[468,603,180,30]}
+{"kind":"shape","id":"sh/jap8ril0","slide":4,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/o729c725","slide":4,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/5pzkgl","slide":4,"text":"Here is the product in one line: a source-labelled signal becomes a case, the system extracts and resolves what it can, scores corridor risk, and then stops. The analyst sees and confirms the assumptions. Only then do the simulation and portfolio comparison run. The outcome is recorded locally—never sent as a purchase order or supplier instruction.\n\nTransition: That workflow is deliberately structured so AI has a precise job, not unchecked authority."}
+{"kind":"slide","id":"sl/uv0d81","slide":5,"title":"AI ADVANTAGE","textShapes":15}
+{"kind":"textbox","id":"sh/ytcridgb","slide":5,"name":"eyebrow","text":"AI ADVANTAGE","textPreview":"AI ADVANTAGE","textChars":12,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/lg3adsz2","slide":5,"name":"slide-number","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/kfu9knyh","slide":5,"name":"title","text":"AI earns its place only when it is constrained.","textPreview":"AI earns its place only when it is constrained.","textChars":47,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/bq1s7yh0","slide":5,"name":"subtitle","text":"Gemini interprets and explains; deterministic models calculate and choose within explicit limits.","textPreview":"Gemini interprets and explains; deterministic models calculate and choose within explicit limits.","textChars":97,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/qpsretgf","slide":5,"name":"ai-column","bbox":[72,300,344,248]}
+{"kind":"textbox","id":"sh/ds3a98z6","slide":5,"name":"ai-head","text":"Gemini","textPreview":"Gemini","textChars":6,"textLines":1,"bbox":[96,328,180,22]}
+{"kind":"textbox","id":"sh/cru9g3yl","slide":5,"name":"ai-verb","text":"STRUCTURES\nA SIGNAL","textPreview":"STRUCTURES | A SIGNAL","textChars":19,"textLines":2,"bbox":[96,370,280,56]}
+{"kind":"shape","id":"sh/vm5sj2h4","slide":5,"bbox":[96,446,296,0]}
+{"kind":"textbox","id":"sh/ulwbqxgj","slide":5,"name":"ai-body","text":"Schema-validated proposal\nConfidence and uncertainty disclosed","textPreview":"Schema-validated proposal | Confidence and uncertainty disclosed","textChars":62,"textLines":2,"bbox":[96,466,290,55]}
+{"kind":"shape","id":"sh/0nmdknuh","slide":5,"name":"ai-column","bbox":[452,300,344,248]}
+{"kind":"textbox","id":"sh/loved8v2","slide":5,"name":"ai-head","text":"Risk + scenario","textPreview":"Risk + scenario","textChars":15,"textLines":1,"bbox":[476,328,180,22]}
+{"kind":"textbox","id":"sh/y1kvidcb","slide":5,"name":"ai-verb","text":"QUANTIFIES\nEXPOSURE","textPreview":"QUANTIFIES | EXPOSURE","textChars":19,"textLines":2,"bbox":[476,370,280,56]}
+{"kind":"shape","id":"sh/z2dwbidw","slide":5,"bbox":[476,446,296,0]}
+{"kind":"textbox","id":"sh/cz2dg3el","slide":5,"name":"ai-body","text":"Deterministic corridor score\nReproducible Monte Carlo ranges","textPreview":"Deterministic corridor score | Reproducible Monte Carlo ranges","textChars":60,"textLines":2,"bbox":[476,466,290,55]}
+{"kind":"shape","id":"sh/d0be98vq","slide":5,"name":"ai-column","bbox":[832,300,344,248]}
+{"kind":"textbox","id":"sh/qxkvetwf","slide":5,"name":"ai-head","text":"Optimizer","textPreview":"Optimizer","textChars":9,"textLines":1,"bbox":[856,328,180,22]}
+{"kind":"textbox","id":"sh/bytw7yd0","slide":5,"name":"ai-verb","text":"FINDS\nFEASIBLE OPTIONS","textPreview":"FINDS | FEASIBLE OPTIONS","textChars":22,"textLines":2,"bbox":[856,370,280,56]}
+{"kind":"shape","id":"sh/ov2dc3e9","slide":5,"bbox":[856,446,296,0]}
+{"kind":"textbox","id":"sh/pwbe5ovu","slide":5,"name":"ai-body","text":"OR-Tools allocation with\ncompatibility and capacity constraints","textPreview":"OR-Tools allocation with | compatibility and capacity constraints","textChars":63,"textLines":2,"bbox":[856,466,290,55]}
+{"kind":"shape","id":"sh/5s3u9kni","slide":5,"name":"no-blackbox","bbox":[72,590,1136,54]}
+{"kind":"textbox","id":"sh/4rut0f6x","slide":5,"name":"no-blackbox-copy","text":"Never delegated to AI: prices, capacity, legal status, commercial availability, or approval.","textPreview":"Never delegated to AI: prices, capacity, legal status, commercial availability, or approval.","textChars":92,"textLines":1,"bbox":[96,606,1050,24]}
+{"kind":"shape","id":"sh/3q1c7a5s","slide":5,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/ipsbypo7","slide":5,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/uv0d81","slide":5,"text":"Our AI story is intentionally sober. Gemini turns unstructured input into a structured proposal and later explains the selected portfolio. It does not create prices, approve suppliers, or invent legal status. The risk score is deterministic. The scenario engine is reproducible. The optimizer respects compatibility and capacity constraints. That separation is how we turn AI from a demo trick into decision support a procurement leader can inspect.\n\nTransition: Let me make that concrete with the canonical Hormuz case already implemented in the product."}
+{"kind":"slide","id":"sl/fc0nhg","slide":6,"title":"DEMO STORY · CANONICAL SIMULATED CASE","textShapes":24}
+{"kind":"textbox","id":"sh/ih0jihc3","slide":6,"name":"eyebrow","text":"DEMO STORY · CANONICAL SIMULATED CASE","textPreview":"DEMO STORY · CANONICAL SIMULATED CASE","textChars":37,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/54r2twbu","slide":6,"name":"slide-number","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/4ji1kru9","slide":6,"name":"title","text":"A Hormuz signal becomes an action path.","textPreview":"A Hormuz signal becomes an action path.","textChars":39,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/r69kvmt0","slide":6,"name":"subtitle","text":"The numbers below are explicitly simulated fixture outputs—not live market claims.","textPreview":"The numbers below are explicitly simulated fixture outputs—not live market claims.","textChars":82,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/650jm1cf","slide":6,"name":"demo-ring","bbox":[148,310,70,70]}
+{"kind":"textbox","id":"sh/t8b2xwbq","slide":6,"name":"demo-number","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[172,334,22,25]}
+{"kind":"shape","id":"sh/s7i1ora5","slide":6,"bbox":[219,345,80,0]}
+{"kind":"textbox","id":"sh/fatkz6tw","slide":6,"name":"demo-head","text":"Signal detected","textPreview":"Signal detected","textChars":15,"textLines":1,"bbox":[74,404,215,28]}
+{"kind":"textbox","id":"sh/e9kjq1sb","slide":6,"name":"demo-body","text":"Shipping / insurance cues near Hormuz","textPreview":"Shipping / insurance cues near Hormuz","textChars":37,"textLines":1,"bbox":[74,442,215,58]}
+{"kind":"shape","id":"sh/czuls7i1","slide":6,"name":"demo-ring","bbox":[375,310,70,70]}
+{"kind":"textbox","id":"sh/x0321czm","slide":6,"name":"demo-number","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[399,334,22,25]}
+{"kind":"shape","id":"sh/ads3qh0v","slide":6,"bbox":[446,345,80,0]}
+{"kind":"textbox","id":"sh/bylkz2hg","slide":6,"name":"demo-head","text":"Risk identified","textPreview":"Risk identified","textChars":15,"textLines":1,"bbox":[301,404,215,28]}
+{"kind":"textbox","id":"sh/k3ulwrix","slide":6,"name":"demo-body","text":"Persian Gulf → West India · 78/100","textPreview":"Persian Gulf → West India · 78/100","textChars":34,"textLines":1,"bbox":[301,442,215,58]}
+{"kind":"shape","id":"sh/l4325wzi","slide":6,"name":"demo-ring","bbox":[602,310,70,70]}
+{"kind":"textbox","id":"sh/y1c3uh07","slide":6,"name":"demo-number","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[626,334,22,25]}
+{"kind":"shape","id":"sh/z2lk3mhc","slide":6,"bbox":[673,345,80,0]}
+{"kind":"textbox","id":"sh/87el0ri9","slide":6,"name":"demo-head","text":"Scenario run","textPreview":"Scenario run","textChars":12,"textLines":1,"bbox":[528,404,215,28]}
+{"kind":"textbox","id":"sh/98n29wzu","slide":6,"name":"demo-body","text":"P50: 1.2M bpd impact · +$6.5/bbl","textPreview":"P50: 1.2M bpd impact · +$6.5/bbl","textChars":32,"textLines":1,"bbox":[528,442,215,58]}
+{"kind":"shape","id":"sh/hoj2dwry","slide":6,"name":"demo-ring","bbox":[829,310,70,70]}
+{"kind":"textbox","id":"sh/gnalkrad","slide":6,"name":"demo-number","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[853,334,22,25]}
+{"kind":"shape","id":"sh/vm1kbm9s","slide":6,"bbox":[900,345,80,0]}
+{"kind":"textbox","id":"sh/uls3ihs7","slide":6,"name":"demo-head","text":"Recommendation","textPreview":"Recommendation","textChars":14,"textLines":1,"bbox":[755,404,215,28]}
+{"kind":"textbox","id":"sh/5s32hgru","slide":6,"name":"demo-body","text":"150k bpd WTI Midland via Cape route","textPreview":"150k bpd WTI Midland via Cape route","textChars":35,"textLines":1,"bbox":[755,442,215,58]}
+{"kind":"shape","id":"sh/4raloba9","slide":6,"name":"demo-ring","bbox":[1056,310,70,70]}
+{"kind":"textbox","id":"sh/3q1kf69o","slide":6,"name":"demo-number","text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1080,334,22,25]}
+{"kind":"textbox","id":"sh/ips3m1sj","slide":6,"name":"demo-head","text":"Decision","textPreview":"Decision","textChars":8,"textLines":1,"bbox":[982,404,215,28]}
+{"kind":"textbox","id":"sh/lwz25crq","slide":6,"name":"demo-body","text":"Human approval recorded locally","textPreview":"Human approval recorded locally","textChars":31,"textLines":1,"bbox":[982,442,215,58]}
+{"kind":"textbox","id":"sh/kvq1c7a5","slide":6,"name":"demo-conclusion","text":"Every result carries its evidence, assumptions, alternatives, and unknowns forward.","textPreview":"Every result carries its evidence, assumptions, alternatives, and unknowns forward.","textChars":83,"textLines":1,"bbox":[72,565,1020,30]}
+{"kind":"textbox","id":"sh/a1ozmd83","slide":6,"name":"chip","text":"SIMULATED","textPreview":"SIMULATED","textChars":9,"textLines":1,"bbox":[72,618,114,30]}
+{"kind":"textbox","id":"sh/b2x0fip8","slide":6,"name":"chip","text":"REPRODUCIBLE","textPreview":"REPRODUCIBLE","textChars":12,"textLines":1,"bbox":[201,618,136,30]}
+{"kind":"textbox","id":"sh/w36honqt","slide":6,"name":"chip","text":"NO EXTERNAL EXECUTION","textPreview":"NO EXTERNAL EXECUTION","textChars":21,"textLines":1,"bbox":[352,618,194,30]}
+{"kind":"shape","id":"sh/x4fihs7e","slide":6,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/ypozqd8z","slide":6,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/fc0nhg","slide":6,"text":"Imagine a shipping advisory reports elevated military activity near Hormuz. PetraVigil retains it as user-entered evidence, extracts a structured proposal, resolves the corridor, and surfaces a 78 out of 100 simulated corridor-risk score. The analyst confirms the scenario assumptions. In the canonical simulated case, we then see a P50 1.2 million bpd supply impact and a 6.5 dollar-per-barrel Brent premium. The system proposes a refinery-compatible 150 thousand bpd WTI Midland alternative via the Cape route—then waits for a human decision.\n\nTransition: The key is that the product does not hide the trade-off behind a single “best” answer."}
+{"kind":"slide","id":"sl/8478cn","slide":7,"title":"DECISION INTELLIGENCE","textShapes":20}
+{"kind":"textbox","id":"sh/srehsjix","slide":7,"name":"eyebrow","text":"DECISION INTELLIGENCE","textPreview":"DECISION INTELLIGENCE","textChars":21,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/rq50zehc","slide":7,"name":"slide-number","text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/qpwzq90r","slide":7,"name":"title","text":"The output is a choice—not a black box.","textPreview":"The output is a choice—not a black box.","textChars":39,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/5o3ix4z6","slide":7,"name":"subtitle","text":"Decision-makers compare risk, cost, and resilience before calling anything “best.”","textPreview":"Decision-makers compare risk, cost, and resilience before calling anything “best.”","textChars":82,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/4nuhozil","slide":7,"name":"portfolio","bbox":[72,310,258,142]}
+{"kind":"textbox","id":"sh/3ml0vuh0","slide":7,"name":"portfolio-label","text":"DO NOTHING","textPreview":"DO NOTHING","textChars":10,"textLines":1,"bbox":[90,332,222,22]}
+{"kind":"textbox","id":"sh/ilczmp0f","slide":7,"name":"portfolio-value","text":"Exposed","textPreview":"Exposed","textChars":7,"textLines":1,"bbox":[90,376,222,27]}
+{"kind":"textbox","id":"sh/hk3itkza","slide":7,"name":"portfolio-copy","text":"Feasible within seeded constraints","textPreview":"Feasible within seeded constraints","textChars":34,"textLines":1,"bbox":[90,420,222,24]}
+{"kind":"shape","id":"sh/gjuhkzip","slide":7,"name":"portfolio","bbox":[355,310,258,142]}
+{"kind":"textbox","id":"sh/u1svitsr","slide":7,"name":"portfolio-label","text":"LOWEST COST","textPreview":"LOWEST COST","textChars":11,"textLines":1,"bbox":[373,332,222,22]}
+{"kind":"textbox","id":"sh/v2lwbytc","slide":7,"name":"portfolio-value","text":"Constrained allocation","textPreview":"Constrained allocation","textChars":22,"textLines":1,"bbox":[373,376,222,27]}
+{"kind":"textbox","id":"sh/g3udk3ax","slide":7,"name":"portfolio-copy","text":"Feasible within seeded constraints","textPreview":"Feasible within seeded constraints","textChars":34,"textLines":1,"bbox":[373,420,222,24]}
+{"kind":"shape","id":"sh/h43ed8bi","slide":7,"name":"portfolio","bbox":[638,310,258,142]}
+{"kind":"textbox","id":"sh/6xsvetsv","slide":7,"name":"portfolio-label","text":"BALANCED","textPreview":"BALANCED","textChars":8,"textLines":1,"bbox":[656,332,222,22]}
+{"kind":"textbox","id":"sh/7y1w7ytg","slide":7,"name":"portfolio-value","text":"Diversified allocation","textPreview":"Diversified allocation","textChars":22,"textLines":1,"bbox":[656,376,222,27]}
+{"kind":"textbox","id":"sh/8zadg3a1","slide":7,"name":"portfolio-copy","text":"Example of a visible trade-off","textPreview":"Example of a visible trade-off","textChars":30,"textLines":1,"bbox":[656,420,222,24]}
+{"kind":"shape","id":"sh/t0je9obm","slide":7,"name":"portfolio","bbox":[921,310,258,142]}
+{"kind":"textbox","id":"sh/yt8va9sz","slide":7,"name":"portfolio-label","text":"MAX RESILIENCE","textPreview":"MAX RESILIENCE","textChars":14,"textLines":1,"bbox":[939,332,222,22]}
+{"kind":"textbox","id":"sh/juhw3et4","slide":7,"name":"portfolio-value","text":"Lower route risk","textPreview":"Lower route risk","textChars":16,"textLines":1,"bbox":[939,376,222,27]}
+{"kind":"textbox","id":"sh/nexsba9w","slide":7,"name":"portfolio-copy","text":"Feasible within seeded constraints","textPreview":"Feasible within seeded constraints","textChars":34,"textLines":1,"bbox":[939,420,222,24]}
+{"kind":"shape","id":"sh/mdobi58r","slide":7,"name":"evidence-box","bbox":[72,500,1136,105]}
+{"kind":"textbox","id":"sh/90fadkr2","slide":7,"name":"why-label","text":"Why this recommendation won","textPreview":"Why this recommendation won","textChars":27,"textLines":1,"bbox":[96,522,320,22]}
+{"kind":"textbox","id":"sh/oz6tkfqh","slide":7,"name":"why-copy","text":"Evidence chain  ·  confirmed assumptions  ·  simulation range  ·  rejected alternatives  ·  unresolved risks","textPreview":"Evidence chain  ·  confirmed assumptions  ·  simulation range  ·  rejected alternatives  ·  unresolved risks","textChars":108,"textLines":1,"bbox":[96,555,1030,28]}
+{"kind":"textbox","id":"sh/b2xsfu98","slide":7,"name":"decision-note","text":"This is how a team can challenge the decision before a crisis makes the choice for them.","textPreview":"This is how a team can challenge the decision before a crisis makes the choice for them.","textChars":88,"textLines":1,"bbox":[72,624,1060,24]}
+{"kind":"shape","id":"sh/a1obmp8n","slide":7,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/x4zuh4re","slide":7,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/8478cn","slide":7,"text":"The final deliverable is not a score or a chatbot answer. It is a comparison: do nothing, optimize for lowest cost, balance the trade-off, or prioritize resilience. The selected option is accompanied by the evidence chain, analyst-confirmed assumptions, simulated impact range, rejected alternatives, and the open unknowns. That makes the recommendation contestable—which is exactly what a high-stakes decision needs.\n\nTransition: And it is built with a credible boundary between what works today and what becomes live in a pilot."}
+{"kind":"slide","id":"sl/mg93t8","slide":8,"title":"WHY THIS CAN DEPLOY","textShapes":11}
+{"kind":"textbox","id":"sh/q5g32p4j","slide":8,"name":"eyebrow","text":"WHY THIS CAN DEPLOY","textPreview":"WHY THIS CAN DEPLOY","textChars":19,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/d872xk3a","slide":8,"name":"slide-number","text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/c7yl4fmp","slide":8,"name":"title","text":"Built for a credible pilot—not a fictional control room.","textPreview":"Built for a credible pilot—not a fictional control room.","textChars":56,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/325krals","slide":8,"name":"subtitle","text":"The MVP is complete end-to-end today; live feeds and commercial checks are clearly scoped next.","textPreview":"The MVP is complete end-to-end today; live feeds and commercial checks are clearly scoped next.","textChars":95,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/21w3y547","slide":8,"name":"now","bbox":[72,292,520,270]}
+{"kind":"textbox","id":"sh/p4n2tk3y","slide":8,"name":"now-label","text":"WORKING NOW","textPreview":"WORKING NOW","textChars":11,"textLines":1,"bbox":[98,320,250,20]}
+{"kind":"textbox","id":"sh/o3el0fmd","slide":8,"name":"now-list","text":"• FastAPI + Next.js decision workspace\n• SQLite case and approval records\n• Pydantic-validated contracts\n• NumPy simulation + OR-Tools optimization\n• 22 backend regression tests passing","textPreview":"• FastAPI + Next.js decision workspace | • SQLite case and approval records | • Pydantic-validated contracts | • NumPy simulation + OR-To...","textChars":185,"textLines":5,"bbox":[98,365,440,160]}
+{"kind":"shape","id":"sh/fe5knqlw","slide":8,"name":"next","bbox":[656,292,552,270]}
+{"kind":"textbox","id":"sh/edwju54b","slide":8,"name":"next-label","text":"PILOT INTEGRATIONS","textPreview":"PILOT INTEGRATIONS","textChars":18,"textLines":1,"bbox":[682,320,260,20]}
+{"kind":"textbox","id":"sh/sv6xonit","slide":8,"name":"next-list","text":"• Trusted AIS, news, price, and sanctions adapters\n• Commercial availability, tanker, port, and legal checks\n• Production knowledge graph and governed deployments\n• Existing architecture documents define the path","textPreview":"• Trusted AIS, news, price, and sanctions adapters | • Commercial availability, tanker, port, and legal checks | • Production knowledge g...","textChars":212,"textLines":4,"bbox":[682,365,470,144]}
+{"kind":"shape","id":"sh/tgfehsjy","slide":8,"bbox":[592,428,64,0]}
+{"kind":"textbox","id":"sh/6tofmd0n","slide":8,"name":"arrow-label","text":"PROTOTYPE → PILOT","textPreview":"PROTOTYPE → PILOT","textChars":17,"textLines":1,"bbox":[539,582,210,24]}
+{"kind":"textbox","id":"sh/ruxwfi18","slide":8,"name":"scale-conclusion","text":"Trust comes from making the boundary visible.","textPreview":"Trust comes from making the boundary visible.","textChars":45,"textLines":1,"bbox":[72,620,760,30]}
+{"kind":"shape","id":"sh/kr6xk3ih","slide":8,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/5sfed8j2","slide":8,"name":"footer","text":"PETRAVIGIL · GRAND FINAL","textPreview":"PETRAVIGIL · GRAND FINAL","textChars":24,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/mg93t8","slide":8,"text":"We are not asking you to believe a fictional control room. The MVP is a working, vertically complete chain: FastAPI and Next.js, typed contracts, persistent local case records, reproducible NumPy scenarios, OR-Tools optimization, and a passing backend regression suite. The production path is also clear: connect trusted feeds and commercial validation into the same governed workflow. Importantly, those integrations are roadmap, not demo theatre.\n\nTransition: That clarity is why this project deserves to win."}
+{"kind":"slide","id":"sl/8zgdng","slide":9,"title":"WHY WE WIN","textShapes":20}
+{"kind":"textbox","id":"sh/0zetw3q9","slide":9,"name":"eyebrow","text":"WHY WE WIN","textPreview":"WHY WE WIN","textChars":10,"textLines":1,"bbox":[72,50,700,22]}
+{"kind":"textbox","id":"sh/fy5s3y9o","slide":9,"name":"slide-number","text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1150,50,58,22]}
+{"kind":"textbox","id":"sh/exwrut83","slide":9,"name":"title","text":"A practical system for the decisions that cannot wait.","textPreview":"A practical system for the decisions that cannot wait.","textChars":54,"textLines":1,"bbox":[72,90,1050,100]}
+{"kind":"textbox","id":"sh/dwna1ori","slide":9,"name":"subtitle","text":"PetraVigil is designed around the real failure mode: late, unexplainable action in a moving crisis.","textPreview":"PetraVigil is designed around the real failure mode: late, unexplainable action in a moving crisis.","textChars":99,"textLines":1,"bbox":[72,196,1000,50]}
+{"kind":"shape","id":"sh/sve9sjqx","slide":9,"name":"win-point","bbox":[72,294,540,92]}
+{"kind":"shape","id":"sh/ra5szy9s","slide":9,"name":"win-dot","bbox":[94,318,44,44]}
+{"kind":"textbox","id":"sh/q9wrqt87","slide":9,"name":"win-num","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[110,331,14,16]}
+{"kind":"textbox","id":"sh/583axorm","slide":9,"name":"win-head","text":"Problem fit","textPreview":"Problem fit","textChars":11,"textLines":1,"bbox":[160,316,190,22]}
+{"kind":"textbox","id":"sh/47u9ojq1","slide":9,"name":"win-copy","text":"India’s import exposure meets chokepoint risk","textPreview":"India’s import exposure meets chokepoint risk","textChars":45,"textLines":1,"bbox":[160,344,420,22]}
+{"kind":"shape","id":"sh/ud8zyhof","slide":9,"name":"win-point","bbox":[640,294,540,92]}
+{"kind":"shape","id":"sh/feh0rm50","slide":9,"name":"win-dot","bbox":[662,318,44,44]}
+{"kind":"textbox","id":"sh/gfqh0r65","slide":9,"name":"win-num","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[678,331,14,16]}
+{"kind":"textbox","id":"sh/hgzitcnq","slide":9,"name":"win-head","text":"Innovation","textPreview":"Innovation","textChars":10,"textLines":1,"bbox":[728,316,190,22]}
+{"kind":"textbox","id":"sh/69ozuxo3","slide":9,"name":"win-copy","text":"AI + simulation + constraints + human gate","textPreview":"AI + simulation + constraints + human gate","textChars":42,"textLines":1,"bbox":[728,344,420,22]}
+{"kind":"shape","id":"sh/7ax0n25o","slide":9,"name":"win-point","bbox":[72,412,540,92]}
+{"kind":"shape","id":"sh/8b6hw769","slide":9,"name":"win-dot","bbox":[94,436,44,44]}
+{"kind":"textbox","id":"sh/tcfipcnu","slide":9,"name":"win-num","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[110,449,14,16]}
+{"kind":"textbox","id":"sh/ylozqxo7","slide":9,"name":"win-head","text":"Engineering","textPreview":"Engineering","textChars":11,"textLines":1,"bbox":[160,434,190,22]}
+{"kind":"textbox","id":"sh/j6xgj25s","slide":9,"name":"win-copy","text":"Linked workflow, reproducible runs, tested safeguards","textPreview":"Linked workflow, reproducible runs, tested safeguards","textChars":53,"textLines":1,"bbox":[160,462,420,22]}
+{"kind":"shape","id":"sh/nqtwrylk","slide":9,"name":"win-point","bbox":[640,412,540,92]}
+{"kind":"shape","id":"sh/mpkfit4z","slide":9,"name":"win-dot","bbox":[662,436,44,44]}
+{"kind":"textbox","id":"sh/9cbeto3a","slide":9,"name":"win-num","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[678,449,14,16]}
+{"kind":"textbox","id":"sh/or2xk3m5","slide":9,"name":"win-head","text":"Readiness","textPreview":"Readiness","textChars":9,"textLines":1,"bbox":[728,434,190,22]}
+{"kind":"textbox","id":"sh/bedwvylg","slide":9,"name":"win-copy","text":"Clear prototype limits and pilot path","textPreview":"Clear prototype limits and pilot path","textChars":37,"textLines":1,"bbox":[728,462,420,22]}
+{"kind":"textbox","id":"sh/adkfmt4v","slide":9,"name":"closing-line","text":"The winning product doesn’t decide for India.\nIt helps India decide before the market does.","textPreview":"The winning product doesn’t decide for India. | It helps India decide before the market does.","textChars":91,"textLines":2,"bbox":[72,570,1020,76]}
+{"kind":"textbox","id":"sh/xgvex83m","slide":9,"name":"chip","text":"EVIDENCE-FIRST","textPreview":"EVIDENCE-FIRST","textChars":14,"textLines":1,"bbox":[72,650,144,30]}
+{"kind":"textbox","id":"sh/wfmxo3m1","slide":9,"name":"chip","text":"HUMAN-CONTROLLED","textPreview":"HUMAN-CONTROLLED","textChars":16,"textLines":1,"bbox":[232,650,172,30]}
+{"kind":"shape","id":"sh/ri9wje5c","slide":9,"bbox":[72,670,1136,0]}
+{"kind":"textbox","id":"sh/qh0va94r","slide":9,"name":"footer","text":"PETRAVIGIL · DECISION INTELLIGENCE FOR ENERGY RESILIENCE","textPreview":"PETRAVIGIL · DECISION INTELLIGENCE FOR ENERGY RESILIENCE","textChars":56,"textLines":1,"bbox":[72,681,500,18]}
+{"kind":"notes","id":"nt/8zgdng","slide":9,"text":"Why should this win? Because it is practical. We understood the problem as an evidence-to-action gap, not a dashboard gap. We use AI where language and explanation help, deterministic models where math matters, and humans where accountability belongs. We built the complete workflow, tested the safeguards, and drew a clean line between a working prototype and a future pilot. PetraVigil does not decide for India. It helps India decide before the market does.\n\nTransition: Thank you. We welcome questions on the workflow, the model assumptions, and the pilot path."}

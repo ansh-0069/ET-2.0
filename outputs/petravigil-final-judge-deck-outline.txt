@@ -1,0 +1,77 @@
+PETRAVIGIL — FINAL HACKATHON JUDGE DECK
+
+Audience: Hackathon jury
+Communication job: By the end, judges should choose PetraVigil because it turns uncertain energy-supply signals into a tested, evidence-first, human-approved decision workflow without overstating prototype capabilities.
+
+SLIDE 1 — PetraVigil
+Objective: Establish the mission and emotional promise.
+Exact content: "When a maritime signal changes, procurement should not improvise." / "Evidence-first energy supply resilience for India’s crude-oil supply chain." / "Mission: turn uncertain disruption signals into an auditable, human-approved decision path."
+Visual/layout: Dark title composition with abstract route-to-decision visual on right.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional 250ms fade for route nodes, then title.
+
+SLIDE 2 — A supply shock is really a decision-compression problem
+Objective: Make the disruption stakes tangible without fake national statistics.
+Exact content: Risk score 0.78; simulated P50 supply impact 1.2M bpd; simulated cost $48.2M/day; 21-day scenario.
+Visual/layout: Four metric rails and a simulated-data badge.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional sequential metric fade.
+
+SLIDE 3 — One linked workflow—from signal to accountable action
+Objective: Show the end-to-end solution.
+Exact content: Signal → Structure → Score → Confirm → Simulate → Optimize → Approve.
+Visual/layout: Single horizontal pipeline, with stage ownership below.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional left-to-right wipe.
+
+SLIDE 4 — AI interprets uncertainty. Engineering decides what is feasible.
+Objective: Demonstrate meaningful, bounded AI.
+Exact content: Gemini 2.5 Flash for extraction/explanation; deterministic validation, risk scoring, simulation, constraints; confidence, assumptions, unknowns, human approval visible.
+Visual/layout: Two-sided AI-versus-deterministic architecture.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional reveal Gemini side, then deterministic controls.
+
+SLIDE 5 — A real decision stack—with a truthful prototype boundary
+Objective: Prove architecture quality while clearly labeling roadmap infrastructure.
+Exact content: Next.js 15, FastAPI, decision services, SQLite; PostgreSQL/Neo4j/Redis marked deployment scaffold, not active runtime.
+Visual/layout: Compact layered architecture.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional build from UI to repository.
+
+SLIDE 6 — The judge demo is a complete decision path—not a click-through
+Objective: Make the live walkthrough memorable.
+Exact content: Input, Process, Review, Simulate, Recommend, Approve; no analyst confirmation, no downstream simulation.
+Visual/layout: Left vertical timeline with decision gate callout.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional stage progression as the demo runs.
+
+SLIDE 7 — The safeguards are part of the product—not a footnote
+Objective: Frame product trust as innovation.
+Exact content: Provenance cannot be spoofed; assumptions are first-class; optimizer shows trade-offs; approval links to exact recommendation.
+Visual/layout: Four flat rows: problem solved / implementation / business value.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional row-by-row reveal.
+
+SLIDE 8 — Start with the operating decision. Expand into resilience intelligence.
+Objective: Establish adoption and roadmap.
+Exact content: Procurement lead, risk & trading, refinery operations, public-sector planners; MVP value now and roadmap next.
+Visual/layout: Four buyer roles with a two-line future state.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional buyer-role reveal.
+
+SLIDE 9 — We tested the decision mechanics—not just the happy path
+Objective: Give quantitative proof of execution and reliability.
+Exact content: 22/22 passing tests; 6 stages; 1,000 runs; 4 portfolios; offline-ready labeled fallback.
+Visual/layout: Four metric rails + failure-mode proof list.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional metrics first, safeguards second.
+
+SLIDE 10 — The winning standard for AI decision tools is not autonomy. It is accountable speed.
+Objective: Land the winning argument.
+Exact content: Four reasons to win; "Make resilience a rehearsed decision—not a crisis improvisation."
+Visual/layout: Quiet close with four proof rails and one central statement.
+Speaker notes: Stored in PowerPoint.
+Animation: Optional final statement fade only.
+
+JURY REVIEW
+Every slide advances a relevant judging criterion: problem relevance, meaningful AI, technical excellence, business viability, scalability, and presentation quality. All high-impact metrics are labeled simulated, and all inactive infrastructure is labeled as scaffold/roadmap. No live data, ROI, performance latency, or production integrations are claimed.

@@ -6,17 +6,28 @@ import {
   approveWorkflow,
   executeWorkflow,
   getApprovals,
+  getHormuzDecisionClock,
+  getHormuzReplay,
   getNetworkSummary,
   getRefineries,
   proposeWorkflow,
+  runMultiRefineryAllocation,
   type ApprovalRecord,
   type AgentTraceEntry,
+  type CrisisReplay,
+  type DecisionClock,
+  type MultiRefineryAllocationResult,
+  type MultiRefineryRequest,
   type NetworkSummary,
   type Refinery,
   type WorkflowAssumptions,
   type WorkflowExecution,
   type WorkflowProposal,
 } from "../lib/api";
+import CrisisReplaySurface from "./CrisisReplaySurface";
+import DecisionClockSurface from "./DecisionClockSurface";
+import DecisionSafetyGate from "./DecisionSafetyGate";
+import MultiRefineryAllocationSurface from "./MultiRefineryAllocationSurface";
 
 const DEMO_SIGNAL = "Shipping advisory: elevated military activity near the Strait of Hormuz may disrupt India-bound crude cargoes over the coming days.";
 const WORKFLOW_STAGES = ["Signal", "Intelligence", "Risk", "Economic", "Procurement", "Decision"] as const;
@@ -43,6 +54,9 @@ export default function WorkflowWorkbench() {
   const [summary, setSummary] = useState<NetworkSummary | null>(null);
   const [refineries, setRefineries] = useState<Refinery[]>([]);
   const [approvals, setApprovals] = useState<ApprovalRecord[]>([]);
+  const [replay, setReplay] = useState<CrisisReplay | null>(null);
+  const [decisionClock, setDecisionClock] = useState<DecisionClock | null>(null);
+  const [multiRefineryResult, setMultiRefineryResult] = useState<MultiRefineryAllocationResult | null>(null);
   const [signalText, setSignalText] = useState(DEMO_SIGNAL);
   const [refinery, setRefinery] = useState("Jamnagar");
   const [requiredVolume, setRequiredVolume] = useState(210_000);
@@ -54,6 +68,8 @@ export default function WorkflowWorkbench() {
   const [approvalDecision, setApprovalDecision] = useState<"APPROVED" | "REJECTED" | "DEFERRED">("APPROVED");
   const [approvalJustification, setApprovalJustification] = useState("Approve for commercial validation only; no purchase order is authorised.");
   const [loading, setLoading] = useState(true);
+  const [clockLoading, setClockLoading] = useState(false);
+  const [multiRefineryLoading, setMultiRefineryLoading] = useState(false);
   const [working, setWorking] = useState<"signal" | "execute" | "approval" | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [lastSuccessfulRequestAt, setLastSuccessfulRequestAt] = useState<Date | null>(null);
@@ -61,10 +77,13 @@ export default function WorkflowWorkbench() {
   useEffect(() => {
     async function loadWorkspace(): Promise<void> {
       try {
-        const [network, loadedRefineries, loadedApprovals] = await Promise.all([getNetworkSummary(), getRefineries(), getApprovals()]);
+        const [network, loadedRefineries, loadedApprovals, loadedReplay, loadedClock, loadedMultiRefinery] = await Promise.all([getNetworkSummary(), getRefineries(), getApprovals(), getHormuzReplay().catch(() => null), getHormuzDecisionClock().catch(() => null), runMultiRefineryAllocation().catch(() => null)]);
         setSummary(network);
         setRefineries(loadedRefineries);
         setApprovals(loadedApprovals);
+        setReplay(loadedReplay);
+        setDecisionClock(loadedClock);
+        setMultiRefineryResult(loadedMultiRefinery);
         setLastSuccessfulRequestAt(new Date());
       } catch {
         setError("Unable to reach the PetraVigil API. Start the local API on port 8000 and retry.");
@@ -78,10 +97,12 @@ export default function WorkflowWorkbench() {
   const trace = execution?.agent_trace ?? proposal?.agent_trace ?? [];
   const providerStatus = proposal?.processed_signal.gemini.provider_status;
   const volumeIsValid = Number.isFinite(requiredVolume) && requiredVolume >= 50_000 && requiredVolume <= 500_000;
+  const sprAssumptionsAreValid = !draftAssumptions?.spr_bridge_opt_in || draftAssumptions.government_authorization_assumed_for_scenario;
   const selectedPortfolio = useMemo(
     () => execution?.portfolios?.portfolios.find((portfolio) => portfolio.label === execution.transparency?.selected_portfolio),
     [execution],
   );
+  const selectedRouteNames = useMemo(() => selectedPortfolio?.allocations.map((allocation) => allocation.route) ?? [], [selectedPortfolio]);
 
   function resetDependentWork(): void {
     setProposal(null);
@@ -89,6 +110,33 @@ export default function WorkflowWorkbench() {
     setExecution(null);
     setWorkflowApproval(null);
     setError(null);
+  }
+
+  async function handleApprovalDelayChange(hours: number): Promise<void> {
+    setClockLoading(true);
+    try {
+      const next = await getHormuzDecisionClock(hours);
+      setDecisionClock(next);
+      setLastSuccessfulRequestAt(new Date());
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Unable to recalculate the local decision clock.");
+    } finally {
+      setClockLoading(false);
+    }
+  }
+
+  async function handleMultiRefineryAllocation(payload: MultiRefineryRequest): Promise<void> {
+    setMultiRefineryLoading(true);
+    setError(null);
+    try {
+      const next = await runMultiRefineryAllocation(payload);
+      setMultiRefineryResult(next);
+      setLastSuccessfulRequestAt(new Date());
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Unable to allocate the shared refinery cargo lanes.");
+    } finally {
+      setMultiRefineryLoading(false);
+    }
   }
 
   async function handlePropose(): Promise<void> {
@@ -110,6 +158,16 @@ export default function WorkflowWorkbench() {
 
   function updateAssumption<K extends keyof WorkflowAssumptions>(key: K, value: WorkflowAssumptions[K]): void {
     setDraftAssumptions((current) => current ? { ...current, [key]: value } : current);
+    setExecution(null);
+    setWorkflowApproval(null);
+  }
+
+  function updateSprBridgeOptIn(enabled: boolean): void {
+    setDraftAssumptions((current) => current ? {
+      ...current,
+      spr_bridge_opt_in: enabled,
+      government_authorization_assumed_for_scenario: enabled ? current.government_authorization_assumed_for_scenario : false,
+    } : current);
     setExecution(null);
     setWorkflowApproval(null);
   }
@@ -181,6 +239,12 @@ export default function WorkflowWorkbench() {
         <span className="provenance-chip">Execution: local only</span>
       </section>
 
+      {replay && <CrisisReplaySurface replay={replay} selectedRoutes={selectedRouteNames} onUseReplay={(signal) => { setSignalText(signal); resetDependentWork(); }} />}
+
+      {decisionClock && <DecisionClockSurface clock={decisionClock} loading={clockLoading} onApprovalDelayChange={handleApprovalDelayChange} />}
+
+      <MultiRefineryAllocationSurface result={multiRefineryResult} loading={multiRefineryLoading} onRun={handleMultiRefineryAllocation} />
+
       <ol className="workflow-rail" aria-label="Decision workflow progress">
         {WORKFLOW_STAGES.map((label, index) => <li className={`workflow-step is-${workflowStepState(index)}`} aria-current={workflowStepState(index) === "active" ? "step" : undefined} key={label}><span>{index + 1}</span><strong>{label}</strong></li>)}
       </ol>
@@ -199,16 +263,17 @@ export default function WorkflowWorkbench() {
         <section className="stage-card" data-stage="review">
           <div className="section-heading"><div><p className="label">02–03 · INTELLIGENCE AND RISK REVIEW</p><h3>Confirm what the system knows—and what it does not</h3></div><span className={`badge ${proposal.processed_signal.review_required ? "risk-badge medium" : "risk-badge high"}`}>{proposal.processed_signal.review_required ? "Review required" : "Resolved"}</span></div>
           <div className="review-grid"><article><p className="label">Structured proposal</p><h4>{proposal.processed_signal.gemini.proposal.summary}</h4><p className="muted">Severity {proposal.processed_signal.gemini.proposal.severity}/10 · extraction confidence {percent(proposal.processed_signal.gemini.proposal.confidence)}</p><p className="evidence-note">{proposal.processed_signal.gemini.proposal.evidence_note}</p></article><article><p className="label">Entity and corridor checks</p>{proposal.processed_signal.entity_resolutions.map((item) => <p className="audit-row" key={`${item.entity_type}-${item.entity}`}><strong>{item.entity}</strong><span className={item.resolved ? "resolved" : "unresolved"}>{item.resolved ? `Matched: ${item.canonical_name}` : "Requires review"}</span></p>)}{proposal.processed_signal.risk_scores.map((risk) => <div className="risk-card" key={risk.corridor_id}><strong>{risk.corridor_id}</strong><span>{percent(risk.score)}</span><small>Geo {percent(risk.components.geopolitical)} · chokepoint {percent(risk.components.chokepoint_concentration)} · maritime {percent(risk.components.maritime_anomaly)}</small></div>)}</article></div>
-          <fieldset className="assumption-form"><legend>Analyst confirmation gate</legend><p className="muted">These values were proposed from the extracted severity, confidence, and corridor score. Edit them before running the scenario.</p><div className="scenario-controls"><label>Closure severity <strong>{percent(draftAssumptions.closure_severity)}</strong><input type="range" min="0.2" max="1" step="0.05" value={draftAssumptions.closure_severity} aria-valuetext={`${percent(draftAssumptions.closure_severity)} closure severity`} onChange={(event) => updateAssumption("closure_severity", Number(event.target.value))} /></label><label>Disruption duration <strong>{draftAssumptions.disruption_duration_days} days</strong><input type="range" min="5" max="90" step="1" value={draftAssumptions.disruption_duration_days} aria-valuetext={`${draftAssumptions.disruption_duration_days} disruption days`} onChange={(event) => updateAssumption("disruption_duration_days", Number(event.target.value))} /></label><label>Alternative route capacity <strong>{percent(draftAssumptions.alternative_route_capacity_ratio)}</strong><input type="range" min="0.3" max="1" step="0.05" value={draftAssumptions.alternative_route_capacity_ratio} aria-valuetext={`${percent(draftAssumptions.alternative_route_capacity_ratio)} alternative route capacity`} onChange={(event) => updateAssumption("alternative_route_capacity_ratio", Number(event.target.value))} /></label></div><div className="reproducibility-controls"><label>Brent elasticity <input type="number" min="0.1" max="30" step="0.1" value={draftAssumptions.brent_elasticity_usd_per_mmbpd} onChange={(event) => updateAssumption("brent_elasticity_usd_per_mmbpd", Number(event.target.value))} /><small>USD per MMBPD</small></label><label>Simulation runs <input type="number" min="100" max="5000" step="100" value={draftAssumptions.n_runs} onChange={(event) => updateAssumption("n_runs", Number(event.target.value))} /><small>Higher count improves stability</small></label><label>Random seed <input type="number" min="0" step="1" value={draftAssumptions.random_seed} onChange={(event) => updateAssumption("random_seed", Number(event.target.value))} /><small>Retain to reproduce this result</small></label></div><p className="reproducibility-note">All six inputs are included in the signed-off scenario request. The seed is visible so the simulation can be reproduced.</p><p className="assumption-rationale">{draftAssumptions.rationale}</p><ul className="unknowns-list">{draftAssumptions.unknowns.map((item) => <li key={item}>{item}</li>)}</ul><button className="accent-button" onClick={handleExecute} disabled={working !== null}>{working === "execute" ? "Running the confirmed workflow..." : "Confirm assumptions and run workflow"}</button></fieldset>
+          <fieldset className="assumption-form"><legend>Analyst confirmation gate</legend><p className="muted">These values were proposed from the extracted severity, confidence, and corridor score. Edit them before running the scenario.</p><div className="scenario-controls"><label>Closure severity <strong>{percent(draftAssumptions.closure_severity)}</strong><input type="range" min="0.2" max="1" step="0.05" value={draftAssumptions.closure_severity} aria-valuetext={`${percent(draftAssumptions.closure_severity)} closure severity`} onChange={(event) => updateAssumption("closure_severity", Number(event.target.value))} /></label><label>Disruption duration <strong>{draftAssumptions.disruption_duration_days} days</strong><input type="range" min="5" max="90" step="1" value={draftAssumptions.disruption_duration_days} aria-valuetext={`${draftAssumptions.disruption_duration_days} disruption days`} onChange={(event) => updateAssumption("disruption_duration_days", Number(event.target.value))} /></label><label>Alternative route capacity <strong>{percent(draftAssumptions.alternative_route_capacity_ratio)}</strong><input type="range" min="0.3" max="1" step="0.05" value={draftAssumptions.alternative_route_capacity_ratio} aria-valuetext={`${percent(draftAssumptions.alternative_route_capacity_ratio)} alternative route capacity`} onChange={(event) => updateAssumption("alternative_route_capacity_ratio", Number(event.target.value))} /></label></div><div className="reproducibility-controls"><label>Brent elasticity <input type="number" min="0.1" max="30" step="0.1" value={draftAssumptions.brent_elasticity_usd_per_mmbpd} onChange={(event) => updateAssumption("brent_elasticity_usd_per_mmbpd", Number(event.target.value))} /><small>USD per MMBPD</small></label><label>Simulation runs <input type="number" min="100" max="5000" step="100" value={draftAssumptions.n_runs} onChange={(event) => updateAssumption("n_runs", Number(event.target.value))} /><small>Higher count improves stability</small></label><label>Random seed <input type="number" min="0" step="1" value={draftAssumptions.random_seed} onChange={(event) => updateAssumption("random_seed", Number(event.target.value))} /><small>Retain to reproduce this result</small></label></div><fieldset className="spr-bridge-controls"><legend>Strategic reserve contingency</legend><p>Model a finite bridge only after you explicitly record the scenario authorization assumption. This local prototype cannot verify reserve availability or authorize a drawdown.</p><label className="spr-check"><input type="checkbox" checked={draftAssumptions.spr_bridge_opt_in} onChange={(event) => updateSprBridgeOptIn(event.target.checked)} /><span>Consider a strategic reserve bridge if seeded external alternatives leave a residual gap.</span></label><label className="spr-check"><input type="checkbox" disabled={!draftAssumptions.spr_bridge_opt_in} checked={draftAssumptions.government_authorization_assumed_for_scenario} onChange={(event) => updateAssumption("government_authorization_assumed_for_scenario", event.target.checked)} /><span>I record a user-entered scenario assumption that government authorization would be sought. This is not authorization.</span></label><label className="spr-duration">Maximum bridge duration <strong>{draftAssumptions.spr_bridge_duration_days} days</strong><input type="range" min="1" max="7" step="1" disabled={!draftAssumptions.spr_bridge_opt_in} value={draftAssumptions.spr_bridge_duration_days} onChange={(event) => updateAssumption("spr_bridge_duration_days", Number(event.target.value))} /></label>{!sprAssumptionsAreValid && <small className="field-error">Record the authorization assumption or disable the contingency before running the model.</small>}</fieldset><p className="reproducibility-note">All nine inputs are included in the signed-off scenario request. The seed is visible so the simulation can be reproduced.</p><p className="assumption-rationale">{draftAssumptions.rationale}</p><ul className="unknowns-list">{draftAssumptions.unknowns.map((item) => <li key={item}>{item}</li>)}</ul><button className="accent-button" onClick={handleExecute} disabled={working !== null || !sprAssumptionsAreValid}>{working === "execute" ? "Running the confirmed workflow..." : "Confirm assumptions and run workflow"}</button></fieldset>
         </section>
       </>}
 
-      {execution?.status === "BLOCKED" && <section className="stage-card stage-gate"><p className="label">WORKFLOW BLOCKED</p><h3>No feasible procurement portfolio was fabricated.</h3><p>{execution.blocking_reason}</p><p className="muted">Adjust the analyst-confirmed volume or capacity assumptions and run a new case.</p></section>}
+      {execution?.decision_safety_gate && <DecisionSafetyGate gate={execution.decision_safety_gate} />}
+      {execution?.status === "BLOCKED" && !execution.decision_safety_gate && <section className="stage-card stage-gate"><p className="label">WORKFLOW BLOCKED</p><h3>No feasible procurement portfolio was fabricated.</h3><p>{execution.blocking_reason}</p><p className="muted">Adjust the analyst-confirmed volume or capacity assumptions and run a new case.</p></section>}
 
       {execution?.status === "COMPLETED" && execution.simulation && execution.portfolios && execution.transparency && <>
         <section className="stage-card" data-stage="economic"><div className="section-heading"><div><p className="label">04 · ECONOMIC AGENT</p><h3>Scenario results use the assumptions you confirmed</h3></div><span className="badge">{execution.simulation.data_status}</span></div><div className="metrics"><article className="metric"><span className="metric-label">P50 supply impact</span><strong>{number(execution.simulation.supply_impact_bpd.p50)} bpd</strong><small>P10–P90: {number(execution.simulation.supply_impact_bpd.p10)}–{number(execution.simulation.supply_impact_bpd.p90)}</small></article><article className="metric"><span className="metric-label">P50 Brent premium</span><strong>${execution.simulation.brent_premium_usd_per_bbl.p50}/bbl</strong><small>P10–P90: ${execution.simulation.brent_premium_usd_per_bbl.p10}–${execution.simulation.brent_premium_usd_per_bbl.p90}</small></article><article className="metric"><span className="metric-label">Avoided exposure estimate</span><strong>${number(execution.simulation.act_now_avoided_cost_usd / 1_000_000)}M</strong><small>{execution.assumptions.n_runs.toLocaleString()} reproducible runs</small></article></div></section>
 
-        <section className="stage-card" data-stage="procurement"><div className="section-heading"><div><p className="label">05 · PROCUREMENT AGENT</p><h3>Compare allocations before calling anything “best”</h3></div><span className="badge">OR-Tools constrained optimizer</span></div><div className="portfolio-grid">{execution.portfolios.portfolios.map((portfolio) => <article className={`portfolio-card ${portfolio.label === execution.transparency?.selected_portfolio ? "is-selected" : ""}`} key={portfolio.portfolio_id}><p className="label">{portfolio.label.replaceAll("_", " ")}</p><strong>{portfolio.total_volume_bpd ? `${number(portfolio.total_volume_bpd)} bpd` : "Exposed"}</strong><span>{portfolio.total_volume_bpd ? `$${number(portfolio.total_daily_cost_usd / 1_000_000)}M/day` : "No proactive cost"}</span><span>Route risk {percent(portfolio.weighted_route_risk)}</span><p>{portfolio.rationale}</p>{portfolio.allocations.map((item) => <small key={`${item.crude_grade}-${item.route}`}>{item.crude_grade}: {number(item.volume_bpd)} bpd via {item.route}</small>)}</article>)}</div>{selectedPortfolio && <article className="recommendation-detail"><p className="label">Selected recommendation · {execution.recommendation_id}</p><h4>{execution.transparency.why_this_won}</h4><div className="recommendation-scoreline"><span><small>Decision confidence</small><strong>{percent(execution.transparency.confidence)}</strong></span>{execution.transparency.requires_human_approval && <span className="human-gate">Human approval required</span>}</div><div className="transparency-grid"><div><strong>Evidence</strong><ul>{execution.transparency.evidence.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Confirmed assumptions</strong><ul>{execution.transparency.assumptions.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Risk factors</strong><ul>{execution.transparency.risk_factors.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Rejected alternatives</strong><ul>{execution.transparency.rejected_alternatives.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Unknowns</strong><ul>{execution.transparency.unknowns.map((item) => <li key={item}>{item}</li>)}</ul></div></div></article>}</section>
+        <section className="stage-card" data-stage="procurement"><div className="section-heading"><div><p className="label">05 · PROCUREMENT AGENT</p><h3>Compare allocations before calling anything “best”</h3></div><span className="badge">OR-Tools constrained optimizer</span></div><div className="portfolio-grid">{execution.portfolios.portfolios.map((portfolio) => <article className={`portfolio-card ${portfolio.label === execution.transparency?.selected_portfolio ? "is-selected" : ""}`} key={portfolio.portfolio_id}><p className="label">{portfolio.label.replaceAll("_", " ")}</p><strong>{portfolio.total_volume_bpd ? `${number(portfolio.total_volume_bpd)} bpd` : "Exposed"}</strong><span>{portfolio.total_volume_bpd ? `$${number(portfolio.total_daily_cost_usd / 1_000_000)}M/day` : "No proactive cost"}</span><span>Route risk {percent(portfolio.weighted_route_risk)}</span><p>{portfolio.rationale}</p>{portfolio.allocations.map((item) => <small key={`${item.crude_grade}-${item.route}`}>{item.crude_grade}: {number(item.volume_bpd)} bpd via {item.route}</small>)}<div className={`spr-bridge-summary is-${portfolio.spr_bridge.status.toLowerCase()}`}><p className="label">Strategic reserve bridge</p>{portfolio.spr_bridge.status === "CONTINGENCY_ALLOCATED" ? <><strong>{number(portfolio.spr_bridge.bridge_volume_bpd)} bpd for {portfolio.spr_bridge.bridge_duration_days} days</strong><span>{number(portfolio.spr_bridge.bridge_volume_bbl)} bbl · simulated finite bridge</span><small>Human and government authorization required.</small></> : <><strong>{portfolio.spr_bridge.status === "NOT_NEEDED" ? "Not needed" : "Not requested"}</strong><span>{portfolio.spr_bridge.status === "NOT_NEEDED" ? "Seeded external alternatives cover the confirmed demand." : "Requires explicit analyst opt-in and an authorization assumption."}</span></>}<small>{portfolio.spr_bridge.limitations[0]}</small></div></article>)}</div>{selectedPortfolio && <article className="recommendation-detail"><p className="label">Selected recommendation · {execution.recommendation_id}</p><h4>{execution.transparency.why_this_won}</h4><div className="recommendation-scoreline"><span><small>Decision confidence</small><strong>{percent(execution.transparency.confidence)}</strong></span>{execution.transparency.requires_human_approval && <span className="human-gate">Human approval required</span>}</div><div className="transparency-grid"><div><strong>Evidence</strong><ul>{execution.transparency.evidence.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Confirmed assumptions</strong><ul>{execution.transparency.assumptions.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Risk factors</strong><ul>{execution.transparency.risk_factors.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Rejected alternatives</strong><ul>{execution.transparency.rejected_alternatives.map((item) => <li key={item}>{item}</li>)}</ul></div><div><strong>Unknowns</strong><ul>{execution.transparency.unknowns.map((item) => <li key={item}>{item}</li>)}</ul></div></div></article>}</section>
 
         {execution.executive_brief && <section className="stage-card" data-stage="executive"><div className="section-heading"><div><p className="label">06 · EXECUTIVE AGENT</p><h3>Explain the selected constrained portfolio</h3></div><span className="badge">{providerLabel(execution.executive_brief.provider_status)}</span></div>{execution.executive_brief.provider_status === "Cached demo result" && <p className="fallback-notice">Gemini is not configured, so this explanation uses deterministic local wording and does not create new facts.</p>}<div className="ai-result"><p>{execution.executive_brief.explanation}</p><ul>{execution.executive_brief.risks.map((risk) => <li key={risk}>{risk}</li>)}</ul><p className="next-question">Next: {execution.executive_brief.next_question}</p></div></section>}
 

@@ -1,0 +1,1225 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/salf5u",
+    "id": "salf5u",
+    "slide": 2,
+    "layoutId": "ecdacc62-8c71-43c4-a456-162a9decdc05",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#07111F",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "ecdacc62-8c71-43c4-a456-162a9decdc05",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dsjihkj",
+      "id": "1",
+      "name": "eyebrow",
+      "bbox": [
+        72,
+        50,
+        700,
+        22
+      ],
+      "geometry": "rect",
+      "text": "ACT 1 · THE PROBLEM",
+      "textPreview": "ACT 1 · THE PROBLEM",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#51E5D6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ACT 1 · THE PROBLEM"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ACT 1 · THE PROBLEM",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#51E5D6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ACT 1 · THE PROBLEM",
+              "fontSize": 13,
+              "color": "#51E5D6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tgjidw3a",
+      "id": "2",
+      "name": "slide-number",
+      "bbox": [
+        1150,
+        50,
+        58,
+        22
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 13,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8fa1kr2p",
+      "id": "3",
+      "name": "title",
+      "bbox": [
+        72,
+        90,
+        1050,
+        100
+      ],
+      "geometry": "rect",
+      "text": "India cannot wait for a crisis call.",
+      "textPreview": "India cannot wait for a crisis call.",
+      "resolvedFontSize": 42,
+      "resolvedTextStyle": {
+        "fontSize": 42,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "India cannot wait for a crisis call."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "India cannot wait for a crisis call.",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "India cannot wait for a crisis call.",
+              "fontSize": 42,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/jah07ml8",
+      "id": "4",
+      "name": "subtitle",
+      "bbox": [
+        72,
+        196,
+        1000,
+        50
+      ],
+      "geometry": "rect",
+      "text": "When disruption hits, the cost of delay compounds across energy, freight, and refining.",
+      "textPreview": "When disruption hits, the cost of delay compounds across energy, freight, and refining.",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "When disruption hits, the cost of delay compounds across energy, freight, and refining."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "When disruption hits, the cost of delay compounds across energy, freight, and refining.",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "When disruption hits, the cost of delay compounds across energy, freight, and refining.",
+              "fontSize": 20,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yp8zehkn",
+      "id": "5",
+      "name": "metric",
+      "bbox": [
+        72,
+        295,
+        320,
+        118
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0D1D31",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lczi9c3y",
+      "id": "6",
+      "name": "metric-value",
+      "bbox": [
+        90,
+        313,
+        284,
+        48
+      ],
+      "geometry": "rect",
+      "text": "88%",
+      "textPreview": "88%",
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "fontSize": 32,
+        "typeface": "+mn-lt",
+        "color": "#51E5D6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "88%"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "88%",
+          "resolvedTextStyle": {
+            "fontSize": 32,
+            "color": "#51E5D6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "88%",
+              "fontSize": 32,
+              "color": "#51E5D6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kbqhgr2t",
+      "id": "7",
+      "name": "metric-label",
+      "bbox": [
+        90,
+        371,
+        284,
+        30
+      ],
+      "geometry": "rect",
+      "text": "of India’s crude needs are met through imports",
+      "textPreview": "of India’s crude needs are met through imports",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "of India’s crude needs are met through"
+          },
+          {
+            "index": 2,
+            "text": "imports"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "of India’s crude needs are met through imports",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "of India’s crude needs are met through imports",
+              "fontSize": 15,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bmh032lw",
+      "id": "8",
+      "name": "gap-label",
+      "bbox": [
+        460,
+        290,
+        400,
+        26
+      ],
+      "geometry": "rect",
+      "text": "The signal-to-decision gap",
+      "textPreview": "The signal-to-decision gap",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The signal-to-decision gap"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The signal-to-decision gap",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The signal-to-decision gap",
+              "fontSize": 18,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/alozaxkb",
+      "id": "9",
+      "name": "problem-step",
+      "bbox": [
+        460,
+        335,
+        200,
+        142
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0D1D31",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8zexgby1",
+      "id": "10",
+      "name": "problem-head",
+      "bbox": [
+        476,
+        358,
+        168,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Fragmented signal",
+      "textPreview": "Fragmented signal",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Fragmented signal"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Fragmented signal",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Fragmented signal",
+              "fontSize": 19,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/t0ne9gfm",
+      "id": "11",
+      "name": "problem-copy",
+      "bbox": [
+        476,
+        415,
+        168,
+        38
+      ],
+      "geometry": "rect",
+      "text": "news · shipping · insurance",
+      "textPreview": "news · shipping · insurance",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "news · shipping ·"
+          },
+          {
+            "index": 2,
+            "text": "insurance"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "news · shipping · insurance",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "news · shipping · insurance",
+              "fontSize": 14,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mxwfe1gv",
+      "id": "12",
+      "name": "problem-dot",
+      "bbox": [
+        476,
+        480,
+        10,
+        10
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#F58D95",
+      "lineColor": "#F58D95",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7y5w76xg",
+      "id": "13",
+      "bbox": [
+        660,
+        406,
+        30,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 2
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kvexcryp",
+      "id": "14",
+      "name": "problem-step",
+      "bbox": [
+        690,
+        335,
+        200,
+        142
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0D1D31",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwne5wfa",
+      "id": "15",
+      "name": "problem-head",
+      "bbox": [
+        706,
+        358,
+        168,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Manual interpretation",
+      "textPreview": "Manual interpretation",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Manual"
+          },
+          {
+            "index": 2,
+            "text": "interpretation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Manual interpretation",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Manual interpretation",
+              "fontSize": 19,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytcfa1gz",
+      "id": "16",
+      "name": "problem-copy",
+      "bbox": [
+        706,
+        415,
+        168,
+        38
+      ],
+      "geometry": "rect",
+      "text": "spreadsheets · calls",
+      "textPreview": "spreadsheets · calls",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "spreadsheets · calls"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "spreadsheets · calls",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "spreadsheets · calls",
+              "fontSize": 14,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zulw3mx4",
+      "id": "17",
+      "name": "problem-dot",
+      "bbox": [
+        706,
+        480,
+        10,
+        10
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFC56E",
+      "lineColor": "#FFC56E",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4ryxovy9",
+      "id": "18",
+      "bbox": [
+        890,
+        406,
+        30,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 2
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5s7yh0fu",
+      "id": "19",
+      "name": "problem-step",
+      "bbox": [
+        920,
+        335,
+        200,
+        142
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0D1D31",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d83e107y",
+      "id": "20",
+      "name": "problem-head",
+      "bbox": [
+        936,
+        358,
+        168,
+        44
+      ],
+      "geometry": "rect",
+      "text": "Late decision",
+      "textPreview": "Late decision",
+      "resolvedFontSize": 19,
+      "resolvedTextStyle": {
+        "fontSize": 19,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Late decision"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Late decision",
+          "resolvedTextStyle": {
+            "fontSize": 19,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Late decision",
+              "fontSize": 19,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cnux8vqd",
+      "id": "21",
+      "name": "problem-copy",
+      "bbox": [
+        936,
+        415,
+        168,
+        38
+      ],
+      "geometry": "rect",
+      "text": "panic-market timing",
+      "textPreview": "panic-market timing",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "panic-market timing"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "panic-market timing",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "panic-market timing",
+              "fontSize": 14,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmlwzqps",
+      "id": "22",
+      "name": "problem-dot",
+      "bbox": [
+        936,
+        480,
+        10,
+        10
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#F58D95",
+      "lineColor": "#F58D95",
+      "lineWidth": 1
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qlcf6l87",
+      "id": "23",
+      "name": "problem-statement",
+      "bbox": [
+        72,
+        520,
+        1050,
+        36
+      ],
+      "geometry": "rect",
+      "text": "No single place connects a signal, its assumptions, an impact range, and a constrained alternative.",
+      "textPreview": "No single place connects a signal, its assumptions, an impact range, and a constrained alternative.",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "fontSize": 25,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "No single place connects a signal, its assumptions, an impact range, and a constrained alternative."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "No single place connects a signal, its assumptions, an impact range, and a constrained alternative.",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "No single place connects a signal, its assumptions, an impact range, and a constrained alternative.",
+              "fontSize": 25,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pk3exg7m",
+      "id": "24",
+      "name": "source",
+      "bbox": [
+        72,
+        608,
+        970,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports.",
+      "textPreview": "Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports.",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports.",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Source: Government of India, Press Information Bureau (2025): India meets about 88% of crude needs through imports.",
+              "fontSize": 12,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4jux4bq1",
+      "id": "25",
+      "bbox": [
+        72,
+        670,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ilwv6pg",
+      "id": "26",
+      "name": "footer",
+      "bbox": [
+        72,
+        681,
+        500,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PETRAVIGIL · GRAND FINAL",
+      "textPreview": "PETRAVIGIL · GRAND FINAL",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PETRAVIGIL · GRAND FINAL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PETRAVIGIL · GRAND FINAL",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PETRAVIGIL · GRAND FINAL",
+              "fontSize": 11,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

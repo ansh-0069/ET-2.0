@@ -1,0 +1,99 @@
+{
+  "replay_id": "RPL-HORMUZ-LOCAL-001",
+  "title": "Hormuz disruption decision replay",
+  "disclaimer": "This is an offline local demonstration assembled from simulated events and seeded historical route context. It is not connected to live AIS, news, prices, sanctions, insurance, ports, or tanker systems; it includes no external citations and must not be treated as an operational fact or procurement instruction.",
+  "chokepoint": "Strait of Hormuz",
+  "replay_signal": "Simulated signal: a hypothetical partial transit restriction near the Strait of Hormuz may interrupt India-bound crude cargoes over the next 21 days.",
+  "evidence": [
+    {
+      "sequence": 1,
+      "label": "Scenario injection",
+      "source_status": "Simulated",
+      "reliability": 1.0,
+      "summary": "The local replay starts with an explicitly simulated partial disruption affecting the Strait of Hormuz corridor.",
+      "impact": "Marks the Persian Gulf to West India corridor as exposed so the prototype can compare alternatives."
+    },
+    {
+      "sequence": 2,
+      "label": "Seeded route baseline",
+      "source_status": "Historical",
+      "reliability": 0.7,
+      "summary": "A seeded historical route profile identifies the Strait of Hormuz as a shared passage for the exposed corridor in this prototype dataset.",
+      "impact": "Provides a labelled baseline for route exposure; it is not vessel telemetry or a current traffic observation."
+    },
+    {
+      "sequence": 3,
+      "label": "Scenario capacity constraint",
+      "source_status": "Simulated",
+      "reliability": 1.0,
+      "summary": "The replay applies a 28 percent alternative-route capacity reduction and a 21-day disruption duration as visible scenario assumptions.",
+      "impact": "Makes alternative cargo capacity finite so the procurement comparison cannot imply unlimited rerouting."
+    },
+    {
+      "sequence": 4,
+      "label": "Analyst review gate",
+      "source_status": "User-entered",
+      "reliability": 0.6,
+      "summary": "A sample analyst assumption flags the simulated signal for review before any scenario result or portfolio can be relied upon.",
+      "impact": "Keeps the replay evidence-first: user-entered context remains unverified and no external action is executed."
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "RPL-HORMUZ-EXPOSED-001",
+      "name": "Persian Gulf -> Strait of Hormuz -> West India",
+      "coordinates": [[52.4, 26.1], [56.5, 26.6], [58.9, 25.8], [66.5, 20.4], [72.1, 19.0]],
+      "status": "EXPOSED",
+      "source_status": "Simulated",
+      "transit_days": 14,
+      "available_volume_bpd": 0,
+      "route_risk_score": 0.78,
+      "note": "Schematic exposed route for the local replay; it represents no live vessel location or current navigational instruction."
+    },
+    {
+      "route_id": "RPL-US-CAPE-ALT-001",
+      "name": "US Gulf -> Cape of Good Hope -> Jamnagar",
+      "coordinates": [[-95.4, 29.7], [-78.0, 23.0], [-18.0, 0.0], [18.5, -34.4], [55.0, -10.0], [72.1, 19.0]],
+      "status": "ALTERNATIVE",
+      "source_status": "Historical",
+      "transit_days": 42,
+      "available_volume_bpd": 210000,
+      "route_risk_score": 0.18,
+      "note": "Seeded alternative-route schematic with prototype capacity and risk assumptions; not an offer, booking, or live route plan."
+    },
+    {
+      "route_id": "RPL-BRAZIL-CAPE-ALT-002",
+      "name": "Brazil -> Cape of Good Hope -> Jamnagar",
+      "coordinates": [[-43.2, -22.9], [-18.0, -8.0], [18.5, -34.4], [55.0, -10.0], [72.1, 19.0]],
+      "status": "ALTERNATIVE",
+      "source_status": "Historical",
+      "transit_days": 38,
+      "available_volume_bpd": 90000,
+      "route_risk_score": 0.24,
+      "note": "Seeded alternative-route schematic with prototype capacity and risk assumptions; it is not live shipping or market data."
+    }
+  ],
+  "locations": [
+    {
+      "location_id": "LOC-HORMUZ-001",
+      "name": "Strait of Hormuz",
+      "kind": "CHOKEPOINT",
+      "coordinates": [56.5, 26.6],
+      "source_status": "Historical"
+    },
+    {
+      "location_id": "LOC-JAMNAGAR-001",
+      "name": "Jamnagar",
+      "kind": "DESTINATION",
+      "coordinates": [72.1, 22.5],
+      "source_status": "Historical"
+    },
+    {
+      "location_id": "LOC-CAPE-001",
+      "name": "Cape of Good Hope",
+      "kind": "WAYPOINT",
+      "coordinates": [18.5, -34.4],
+      "source_status": "Historical"
+    }
+  ]
+}

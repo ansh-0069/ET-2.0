@@ -1,0 +1,1313 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/9m71ia",
+    "id": "9m71ia",
+    "slide": 3,
+    "layoutId": "ecdacc62-8c71-43c4-a456-162a9decdc05",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#07111F",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "ecdacc62-8c71-43c4-a456-162a9decdc05",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/utwjuxkj",
+      "id": "1",
+      "name": "eyebrow",
+      "bbox": [
+        72,
+        50,
+        700,
+        22
+      ],
+      "geometry": "rect",
+      "text": "ACT 2 · THE INSIGHT",
+      "textPreview": "ACT 2 · THE INSIGHT",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#51E5D6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ACT 2 · THE INSIGHT"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ACT 2 · THE INSIGHT",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#51E5D6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ACT 2 · THE INSIGHT",
+              "fontSize": 13,
+              "color": "#51E5D6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hgnipcja",
+      "id": "2",
+      "name": "slide-number",
+      "bbox": [
+        1150,
+        50,
+        58,
+        22
+      ],
+      "geometry": "rect",
+      "text": "03",
+      "textPreview": "03",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "03",
+              "fontSize": 13,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gve1w72p",
+      "id": "3",
+      "name": "title",
+      "bbox": [
+        72,
+        90,
+        1050,
+        100
+      ],
+      "geometry": "rect",
+      "text": "The blind spot: oil is not fungible.",
+      "textPreview": "The blind spot: oil is not fungible.",
+      "resolvedFontSize": 42,
+      "resolvedTextStyle": {
+        "fontSize": 42,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The blind spot: oil is not fungible."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The blind spot: oil is not fungible.",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The blind spot: oil is not fungible.",
+              "fontSize": 42,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ip0rm10",
+      "id": "4",
+      "name": "subtitle",
+      "bbox": [
+        72,
+        196,
+        1000,
+        50
+      ],
+      "geometry": "rect",
+      "text": "A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there.",
+      "textPreview": "A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there.",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there.",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "A route that avoids disruption is useless if the crude cannot run in the refinery—or the capacity is not there.",
+              "fontSize": 20,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hgjyhkf",
+      "id": "5",
+      "name": "generic-tools",
+      "bbox": [
+        72,
+        294,
+        472,
+        270
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#0D1D31",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pk7itwj6",
+      "id": "6",
+      "name": "generic-label",
+      "bbox": [
+        98,
+        320,
+        260,
+        20
+      ],
+      "geometry": "rect",
+      "text": "GENERIC RISK TOOLS",
+      "textPreview": "GENERIC RISK TOOLS",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "GENERIC RISK TOOLS"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "GENERIC RISK TOOLS",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "GENERIC RISK TOOLS",
+              "fontSize": 13,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4jy10r2l",
+      "id": "7",
+      "name": "generic-flow",
+      "bbox": [
+        98,
+        365,
+        280,
+        132
+      ],
+      "geometry": "rect",
+      "text": "Alert\n↓\n“Consider alternatives”",
+      "textPreview": "Alert | ↓ | “Consider alternatives”",
+      "resolvedFontSize": 27,
+      "resolvedTextStyle": {
+        "fontSize": 27,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Alert"
+          },
+          {
+            "index": 2,
+            "text": "↓"
+          },
+          {
+            "index": 3,
+            "text": "“Consider"
+          },
+          {
+            "index": 4,
+            "text": "alternatives”"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Alert",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Alert",
+              "fontSize": 27,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "↓",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "↓",
+              "fontSize": 27,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "“Consider alternatives”",
+          "resolvedTextStyle": {
+            "fontSize": 27,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "“Consider alternatives”",
+              "fontSize": 27,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rmpkvm1c",
+      "id": "8",
+      "name": "petravigil-insight",
+      "bbox": [
+        600,
+        294,
+        608,
+        270
+      ],
+      "geometry": "roundRect",
+      "fillColor": "#102B47",
+      "lineColor": "#66B3FF",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qlgj2hkr",
+      "id": "9",
+      "name": "pv-label",
+      "bbox": [
+        628,
+        320,
+        350,
+        20
+      ],
+      "geometry": "rect",
+      "text": "PETRAVIGIL’S DECISION MODEL",
+      "textPreview": "PETRAVIGIL’S DECISION MODEL",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#51E5D6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PETRAVIGIL’S DECISION MODEL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PETRAVIGIL’S DECISION MODEL",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#51E5D6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PETRAVIGIL’S DECISION MODEL",
+              "fontSize": 13,
+              "color": "#51E5D6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4zytoba1",
+      "id": "10",
+      "name": "check-circle",
+      "bbox": [
+        628,
+        365,
+        34,
+        34
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#F58D95",
+      "lineColor": "#F58D95",
+      "lineWidth": 1
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/507uxgb6",
+      "id": "11",
+      "name": "check-num",
+      "bbox": [
+        639,
+        373,
+        13,
+        18
+      ],
+      "geometry": "rect",
+      "text": "1",
+      "textPreview": "1",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#07111F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#07111F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1",
+              "fontSize": 13,
+              "color": "#07111F",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ixgbm1sv",
+      "id": "12",
+      "name": "check-label",
+      "bbox": [
+        678,
+        373,
+        190,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Corridor exposure",
+      "textPreview": "Corridor exposure",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Corridor exposure"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Corridor exposure",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Corridor exposure",
+              "fontSize": 17,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ypsv6tg",
+      "id": "13",
+      "name": "check-circle",
+      "bbox": [
+        898,
+        365,
+        34,
+        34
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#FFC56E",
+      "lineColor": "#FFC56E",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s3itsvax",
+      "id": "14",
+      "name": "check-num",
+      "bbox": [
+        909,
+        373,
+        13,
+        18
+      ],
+      "geometry": "rect",
+      "text": "2",
+      "textPreview": "2",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#07111F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#07111F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2",
+              "fontSize": 13,
+              "color": "#07111F",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4ru1gbi",
+      "id": "15",
+      "name": "check-label",
+      "bbox": [
+        948,
+        373,
+        190,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Refinery-grade fit",
+      "textPreview": "Refinery-grade fit",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Refinery-grade fit"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Refinery-grade fit",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Refinery-grade fit",
+              "fontSize": 17,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1gbqlsr",
+      "id": "16",
+      "name": "check-circle",
+      "bbox": [
+        628,
+        451,
+        34,
+        34
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#66B3FF",
+      "lineColor": "#66B3FF",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r29czqtc",
+      "id": "17",
+      "name": "check-num",
+      "bbox": [
+        639,
+        459,
+        13,
+        18
+      ],
+      "geometry": "rect",
+      "text": "3",
+      "textPreview": "3",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#07111F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#07111F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3",
+              "fontSize": 13,
+              "color": "#07111F",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0ritwvat",
+      "id": "18",
+      "name": "check-label",
+      "bbox": [
+        678,
+        459,
+        190,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Route capacity",
+      "textPreview": "Route capacity",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Route capacity"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Route capacity",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Route capacity",
+              "fontSize": 17,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1sru50be",
+      "id": "19",
+      "name": "check-circle",
+      "bbox": [
+        898,
+        451,
+        34,
+        34
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#86E5B6",
+      "lineColor": "#86E5B6",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9o7ap03i",
+      "id": "20",
+      "name": "check-num",
+      "bbox": [
+        909,
+        459,
+        13,
+        18
+      ],
+      "geometry": "rect",
+      "text": "4",
+      "textPreview": "4",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "fontSize": 13,
+        "typeface": "+mn-lt",
+        "color": "#07111F",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "color": "#07111F",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4",
+              "fontSize": 13,
+              "color": "#07111F",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onetgv2d",
+      "id": "21",
+      "name": "check-label",
+      "bbox": [
+        948,
+        459,
+        190,
+        22
+      ],
+      "geometry": "rect",
+      "text": "Human approval",
+      "textPreview": "Human approval",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Human approval"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Human approval",
+          "resolvedTextStyle": {
+            "fontSize": 17,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Human approval",
+              "fontSize": 17,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nm5snqls",
+      "id": "22",
+      "name": "insight-conclusion",
+      "bbox": [
+        72,
+        600,
+        1010,
+        50
+      ],
+      "geometry": "rect",
+      "text": "The differentiator is not “AI writes a recommendation.”\nIt is making the recommendation feasible, explainable, and accountable.",
+      "textPreview": "The differentiator is not “AI writes a recommendation.” | It is making the recommendation feasible, explainable, and accountable.",
+      "resolvedFontSize": 23,
+      "resolvedTextStyle": {
+        "fontSize": 23,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The differentiator is not “AI writes a recommendation.”"
+          },
+          {
+            "index": 2,
+            "text": "It is making the recommendation feasible, explainable, and accountable."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The differentiator is not “AI writes a recommendation.”",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The differentiator is not “AI writes a recommendation.”",
+              "fontSize": 23,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "It is making the recommendation feasible, explainable, and accountable.",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "It is making the recommendation feasible, explainable, and accountable.",
+              "fontSize": 23,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mlwbelk7",
+      "id": "23",
+      "bbox": [
+        72,
+        670,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xc7ut0ju",
+      "id": "24",
+      "name": "footer",
+      "bbox": [
+        72,
+        681,
+        500,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PETRAVIGIL · GRAND FINAL",
+      "textPreview": "PETRAVIGIL · GRAND FINAL",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PETRAVIGIL · GRAND FINAL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PETRAVIGIL · GRAND FINAL",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PETRAVIGIL · GRAND FINAL",
+              "fontSize": 11,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

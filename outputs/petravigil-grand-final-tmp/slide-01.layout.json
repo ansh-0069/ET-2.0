@@ -1,0 +1,948 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/1oi5wn",
+    "id": "1oi5wn",
+    "slide": 1,
+    "layoutId": "ecdacc62-8c71-43c4-a456-162a9decdc05",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#07111F",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "+mn-lt"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "ecdacc62-8c71-43c4-a456-162a9decdc05",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "1e83f1b3-43f5-4be2-b643-3590bfdf448e",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zmlsnq18",
+      "id": "1",
+      "name": "brand",
+      "bbox": [
+        72,
+        64,
+        310,
+        26
+      ],
+      "geometry": "rect",
+      "text": "PETRAVIGIL",
+      "textPreview": "PETRAVIGIL",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "+mn-lt",
+        "color": "#51E5D6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PETRAVIGIL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PETRAVIGIL",
+          "resolvedTextStyle": {
+            "fontSize": 16,
+            "color": "#51E5D6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PETRAVIGIL",
+              "fontSize": 16,
+              "color": "#51E5D6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0nu9wv2t",
+      "id": "2",
+      "name": "hero-title",
+      "bbox": [
+        72,
+        148,
+        720,
+        230
+      ],
+      "geometry": "rect",
+      "text": "When a chokepoint moves,\nIndia needs a decision—\nnot another dashboard.",
+      "textPreview": "When a chokepoint moves, | India needs a decision— | not another dashboard.",
+      "resolvedFontSize": 54,
+      "resolvedTextStyle": {
+        "fontSize": 54,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "When a chokepoint moves,"
+          },
+          {
+            "index": 2,
+            "text": "India needs a decision—"
+          },
+          {
+            "index": 3,
+            "text": "not another dashboard."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "When a chokepoint moves,",
+          "resolvedTextStyle": {
+            "fontSize": 54,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "When a chokepoint moves,",
+              "fontSize": 54,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "India needs a decision—",
+          "resolvedTextStyle": {
+            "fontSize": 54,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "India needs a decision—",
+              "fontSize": 54,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "not another dashboard.",
+          "resolvedTextStyle": {
+            "fontSize": 54,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "not another dashboard.",
+              "fontSize": 54,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lo3ap0je",
+      "id": "3",
+      "name": "tagline",
+      "bbox": [
+        76,
+        410,
+        520,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Evidence-first energy supply resilience",
+      "textPreview": "Evidence-first energy supply resilience",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Evidence-first energy supply resilience"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Evidence-first energy supply resilience",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Evidence-first energy supply resilience",
+              "fontSize": 22,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m9cry5kz",
+      "id": "4",
+      "name": "chip",
+      "bbox": [
+        76,
+        470,
+        182,
+        30
+      ],
+      "geometry": "roundRect",
+      "text": "ANALYST-CONFIRMED",
+      "textPreview": "ANALYST-CONFIRMED",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#51E5D6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ANALYST-CONFIRMED"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ANALYST-CONFIRMED",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#51E5D6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ANALYST-CONFIRMED",
+              "fontSize": 12,
+              "color": "#51E5D6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#102B47",
+      "lineColor": "#51E5D6",
+      "lineWidth": 1
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nalsra1k",
+      "id": "5",
+      "name": "hero-orbit",
+      "bbox": [
+        850,
+        143,
+        250,
+        250
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0E3154",
+      "lineColor": "#2A78B7",
+      "lineWidth": 1
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8bu90f2p",
+      "id": "6",
+      "name": "hero-core",
+      "bbox": [
+        900,
+        193,
+        150,
+        150
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#123E66",
+      "lineColor": "#51E5D6",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9cnatkja",
+      "id": "7",
+      "name": "decision",
+      "bbox": [
+        918,
+        245,
+        118,
+        28
+      ],
+      "geometry": "rect",
+      "text": "DECISION",
+      "textPreview": "DECISION",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "+mn-lt",
+        "color": "#F5F8FC",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "DECISION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "DECISION",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "color": "#F5F8FC",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "DECISION",
+              "fontSize": 18,
+              "color": "#F5F8FC",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2dsrmlkf",
+      "id": "8",
+      "name": "decision-sub",
+      "bbox": [
+        886,
+        292,
+        182,
+        52
+      ],
+      "geometry": "rect",
+      "text": "not a prediction\n— a reviewable action",
+      "textPreview": "not a prediction | — a reviewable action",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "not a prediction"
+          },
+          {
+            "index": 2,
+            "text": "— a reviewable action"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "not a prediction",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "not a prediction",
+              "fontSize": 14,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "— a reviewable action",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "color": "#AABFD2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "— a reviewable action",
+              "fontSize": 14,
+              "color": "#AABFD2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3e18f610",
+      "id": "9",
+      "name": "hero-step",
+      "bbox": [
+        750,
+        455,
+        90,
+        90
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0D1D31",
+      "lineColor": "#F58D95",
+      "lineWidth": 1
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vudwfal0",
+      "id": "10",
+      "name": "hero-step-label",
+      "bbox": [
+        762,
+        491,
+        66,
+        20
+      ],
+      "geometry": "rect",
+      "text": "SIGNAL",
+      "textPreview": "SIGNAL",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#F58D95",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SIGNAL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SIGNAL",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#F58D95",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SIGNAL",
+              "fontSize": 12,
+              "color": "#F58D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/at4fm54v",
+      "id": "11",
+      "name": "hero-step",
+      "bbox": [
+        894,
+        455,
+        90,
+        90
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0D1D31",
+      "lineColor": "#FFC56E",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xgvehk36",
+      "id": "12",
+      "name": "hero-step-label",
+      "bbox": [
+        906,
+        491,
+        66,
+        20
+      ],
+      "geometry": "rect",
+      "text": "RISK",
+      "textPreview": "RISK",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#FFC56E",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "RISK"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "RISK",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#FFC56E",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "RISK",
+              "fontSize": 12,
+              "color": "#FFC56E",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfmxofml",
+      "id": "13",
+      "name": "hero-step",
+      "bbox": [
+        1038,
+        455,
+        90,
+        90
+      ],
+      "geometry": "ellipse",
+      "fillColor": "#0D1D31",
+      "lineColor": "#86E5B6",
+      "lineWidth": 1
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqdwbal4",
+      "id": "14",
+      "name": "hero-step-label",
+      "bbox": [
+        1050,
+        491,
+        66,
+        20
+      ],
+      "geometry": "rect",
+      "text": "ACTION",
+      "textPreview": "ACTION",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "+mn-lt",
+        "color": "#86E5B6",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ACTION"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "ACTION",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "color": "#86E5B6",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "ACTION",
+              "fontSize": 12,
+              "color": "#86E5B6",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mpkfi54j",
+      "id": "15",
+      "bbox": [
+        795,
+        500,
+        95,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 2
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9svedk3a",
+      "id": "16",
+      "bbox": [
+        939,
+        500,
+        95,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 2
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8rmxkfmp",
+      "id": "17",
+      "name": "memorable-line",
+      "bbox": [
+        76,
+        562,
+        690,
+        32
+      ],
+      "geometry": "rect",
+      "text": "The product that helps India decide before the market does.",
+      "textPreview": "The product that helps India decide before the market does.",
+      "resolvedFontSize": 22,
+      "resolvedTextStyle": {
+        "fontSize": 22,
+        "typeface": "+mn-lt",
+        "color": "#66B3FF",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "The product that helps India decide before the market does."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "The product that helps India decide before the market does.",
+          "resolvedTextStyle": {
+            "fontSize": 22,
+            "color": "#66B3FF",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "The product that helps India decide before the market does.",
+              "fontSize": 22,
+              "color": "#66B3FF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zmtw7ql8",
+      "id": "18",
+      "bbox": [
+        72,
+        670,
+        1136,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#244563",
+      "lineWidth": 1
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ylkvel4n",
+      "id": "19",
+      "name": "footer",
+      "bbox": [
+        72,
+        681,
+        500,
+        18
+      ],
+      "geometry": "rect",
+      "text": "PETRAVIGIL · GRAND FINAL",
+      "textPreview": "PETRAVIGIL · GRAND FINAL",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "fontSize": 11,
+        "typeface": "+mn-lt",
+        "color": "#AABFD2",
+        "bold": true,
+        "alignment": "left",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "PETRAVIGIL · GRAND FINAL"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "PETRAVIGIL · GRAND FINAL",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "color": "#AABFD2",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PETRAVIGIL · GRAND FINAL",
+              "fontSize": 11,
+              "color": "#AABFD2",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
