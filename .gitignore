@@ -4,6 +4,7 @@
 .state/
 frontend/.next/
 frontend/node_modules/
+frontend/dev.log
 __pycache__/
 .pytest_cache/
 *.py[cod]
