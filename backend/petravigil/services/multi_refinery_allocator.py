@@ -98,24 +98,33 @@ class MultiRefineryPortfolioAllocator:
         )
         if has_unserved_volume:
             rationale += " Unserved demand makes this a capacity shortfall, not a procurement recommendation."
+        demand_source_status = (
+            DataStatus.SIMULATED
+            if any(line.source_status == DataStatus.SIMULATED for line in request.demand_lines)
+            else DataStatus.USER_ENTERED
+        )
+        demand_detail = (
+            "At least one refinery demand line is a local simulated scenario tranche; the remaining lines may be analyst-entered assumptions. "
+            "None are purchase requests or verified operating data."
+            if demand_source_status == DataStatus.SIMULATED
+            else "Demand lines and alternative-route capacity ratio are analyst-entered scenario assumptions; they are not purchase requests or verified operating data."
+        )
 
         return MultiRefineryPortfolioResponse(
             allocation_id=f"MR-PORT-{str(uuid4()).upper()}",
             created_at=datetime.now(timezone.utc),
             status=status,
             decision=decision,
+            demand_source_status=demand_source_status,
             request=request,
             refinery_results=refinery_results,
             shared_route_utilization=shared_route_utilization,
             cargo_contention=cargo_contention,
             provenance=[
                 MultiRefineryProvenance(
-                    label="Analyst demand lines and capacity ratio",
-                    source_status=DataStatus.USER_ENTERED,
-                    detail=(
-                        "Demand lines and alternative-route capacity ratio are analyst-entered scenario assumptions; "
-                        "they are not purchase requests or verified operating data."
-                    ),
+                    label="Scenario demand lines and capacity ratio",
+                    source_status=demand_source_status,
+                    detail=demand_detail,
                 ),
                 MultiRefineryProvenance(
                     label="Seeded compatibility and route capacity network",
@@ -268,6 +277,7 @@ class MultiRefineryPortfolioAllocator:
                     fulfillment_status=fulfillment_status,
                     compatible_route_count=len(options_by_refinery[refinery_index]),
                     allocations=allocations,
+                    demand_source_status=demand_line.source_status,
                     note=note,
                 )
             )
@@ -337,6 +347,7 @@ class MultiRefineryPortfolioAllocator:
                         refinery=demand.refinery,
                         scenario_requested_volume_bpd=scenario_requested,
                         allocated_volume_bpd=allocated,
+                        demand_source_status=demand.source_status,
                     )
                 )
             requested = sum(item.scenario_requested_volume_bpd for item in participants)

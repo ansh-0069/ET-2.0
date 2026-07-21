@@ -25,7 +25,7 @@ export default function DecisionClockSurface({ clock, loading, onApprovalDelayCh
   const laycanPosition = Math.min(100, (clock.laycan_cutoff_hours / timelineSpan) * 100);
 
   return (
-    <section className="stage-card decision-clock" aria-labelledby="decision-clock-title">
+    <section className="context-surface decision-clock" aria-labelledby="decision-clock-title">
       <div className="section-heading decision-clock-heading">
         <div>
           <p className="label">DECISION CLOCK · LEAD-TIME REPLAY</p>

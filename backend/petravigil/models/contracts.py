@@ -463,14 +463,17 @@ class PortfolioComparison(BaseModel):
     portfolios: list[ProcurementPortfolio] = Field(min_length=4, max_length=4)
 
 
+MultiRefineryDemandSourceStatus = Literal[DataStatus.USER_ENTERED, DataStatus.SIMULATED]
+
+
 class MultiRefineryDemandLine(BaseModel):
-    """One analyst-entered refinery demand in the shared-capacity scenario."""
+    """One source-labelled refinery demand in the shared-capacity scenario."""
 
     model_config = ConfigDict(extra="forbid")
 
     refinery: str = Field(min_length=2, max_length=120)
     required_volume_bpd: int = Field(ge=10_000, le=500_000)
-    source_status: Literal[DataStatus.USER_ENTERED] = DataStatus.USER_ENTERED
+    source_status: MultiRefineryDemandSourceStatus = DataStatus.USER_ENTERED
 
 
 def _default_multi_refinery_demand_lines() -> list[MultiRefineryDemandLine]:
@@ -512,7 +515,7 @@ class MultiRefineryPortfolioRequest(BaseModel):
     )
     alternative_route_capacity_ratio: Probability = 0.72
     disrupted_chokepoint: str = Field(default="HORMUZ", min_length=3, max_length=80)
-    assumption_source_status: Literal[DataStatus.USER_ENTERED] = DataStatus.USER_ENTERED
+    assumption_source_status: MultiRefineryDemandSourceStatus = DataStatus.USER_ENTERED
 
     @model_validator(mode="after")
     def validate_distinct_refineries(self) -> "MultiRefineryPortfolioRequest":
@@ -548,7 +551,7 @@ class MultiRefineryResultLine(BaseModel):
     allocated_volume_bpd: int = Field(ge=0)
     unserved_volume_bpd: int = Field(ge=0)
     fulfillment_status: Literal["FULLY_ALLOCATED", "PARTIALLY_ALLOCATED", "UNSERVED", "UNKNOWN_REFINERY"]
-    demand_source_status: Literal[DataStatus.USER_ENTERED] = DataStatus.USER_ENTERED
+    demand_source_status: MultiRefineryDemandSourceStatus = DataStatus.USER_ENTERED
     compatible_route_count: int = Field(ge=0)
     allocations: list[MultiRefineryAllocation] = Field(default_factory=list)
     note: str = Field(min_length=15, max_length=1_000)
@@ -603,7 +606,7 @@ class CargoContentionParticipant(BaseModel):
     refinery: str
     scenario_requested_volume_bpd: int = Field(ge=0)
     allocated_volume_bpd: int = Field(ge=0)
-    demand_source_status: Literal[DataStatus.USER_ENTERED] = DataStatus.USER_ENTERED
+    demand_source_status: MultiRefineryDemandSourceStatus = DataStatus.USER_ENTERED
 
 
 class CargoContentionRecord(BaseModel):
@@ -660,7 +663,7 @@ class MultiRefineryPortfolioResponse(BaseModel):
     decision: Literal["ALLOCATION_READY", "NO_RECOMMENDATION_YET"]
     data_status: Literal[DataStatus.SIMULATED] = DataStatus.SIMULATED
     network_source_status: Literal[DataStatus.HISTORICAL] = DataStatus.HISTORICAL
-    demand_source_status: Literal[DataStatus.USER_ENTERED] = DataStatus.USER_ENTERED
+    demand_source_status: MultiRefineryDemandSourceStatus = DataStatus.USER_ENTERED
     live_data_connected: Literal[False] = False
     request: MultiRefineryPortfolioRequest
     refinery_results: list[MultiRefineryResultLine] = Field(min_length=2, max_length=12)
@@ -692,6 +695,119 @@ class MultiRefineryPortfolioResponse(BaseModel):
         for route in self.shared_route_utilization:
             if route_allocations.get(route.route, 0) != route.allocated_capacity_bpd:
                 raise ValueError("shared route utilization must reconcile with per-refinery allocations")
+        return self
+
+
+class CaseEvidenceLedgerEntry(BaseModel):
+    """One source-labelled item in the canonical local intelligence case."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    evidence_id: str = Field(pattern=r"^CASE-EV-[A-Z0-9-]+$")
+    label: str = Field(min_length=3, max_length=180)
+    source_status: DataStatus
+    validation_status: Literal[
+        "UNVERIFIED_USER_INPUT",
+        "MODEL_PROPOSAL",
+        "SEEDED_CONSTRAINT",
+        "FIXTURE_CONTEXT",
+    ]
+    observed_at: datetime | None = None
+    freshness_confidence: Probability
+    validation_confidence: Probability
+    requires_analyst_review: bool
+    detail: str = Field(min_length=20, max_length=1_200)
+
+
+class EvidenceValidationSummary(BaseModel):
+    """Explicitly separates scenario validation from operational verification."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: Literal["REQUIRES_ANALYST_REVIEW", "SCENARIO_CONTEXT_ONLY"]
+    freshness_confidence: Probability
+    validation_confidence: Probability
+    independently_verified_evidence_count: int = Field(ge=0)
+    unverified_evidence_count: int = Field(ge=0)
+    requires_analyst_review: Literal[True] = True
+    rationale: str = Field(min_length=30, max_length=1_500)
+    next_actions: list[str] = Field(min_length=1, max_length=6)
+
+
+class CaseReplayContext(BaseModel):
+    """Replay context linked into a workflow without presenting it as live intelligence."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: Literal["LINKED", "NOT_AVAILABLE"]
+    replay_id: str | None = Field(default=None, pattern=r"^RPL-[A-Z0-9-]+$")
+    title: str | None = Field(default=None, min_length=3, max_length=200)
+    source_status: DataStatus
+    evidence_item_count: int = Field(ge=0)
+    disclaimer: str = Field(min_length=20, max_length=1_500)
+    note: str = Field(min_length=20, max_length=1_000)
+
+    @model_validator(mode="after")
+    def validate_replay_link(self) -> "CaseReplayContext":
+        if self.status == "LINKED" and (self.replay_id is None or self.title is None or self.evidence_item_count < 1):
+            raise ValueError("a linked replay context requires an id, title, and at least one evidence item")
+        if self.status == "NOT_AVAILABLE" and self.replay_id is not None:
+            raise ValueError("an unavailable replay context cannot point to a replay id")
+        return self
+
+
+class CaseDecisionClockContext(BaseModel):
+    """Decision-deadline context linked into a workflow as a local scenario aid."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: Literal["LINKED", "NOT_AVAILABLE"]
+    clock_id: str | None = Field(default=None, pattern=r"^CLK-[A-Z0-9-]+$")
+    source_status: DataStatus
+    decision_lead_time_hours: int | None = Field(default=None, ge=0, le=2_000)
+    last_responsible_action_offset_hours: int | None = Field(default=None, ge=0, le=2_000)
+    disclaimer: str = Field(min_length=20, max_length=2_000)
+    note: str = Field(min_length=20, max_length=1_000)
+
+    @model_validator(mode="after")
+    def validate_clock_link(self) -> "CaseDecisionClockContext":
+        linked_values = (
+            self.clock_id,
+            self.decision_lead_time_hours,
+            self.last_responsible_action_offset_hours,
+        )
+        if self.status == "LINKED" and any(value is None for value in linked_values):
+            raise ValueError("a linked decision-clock context requires an id and both timing values")
+        if self.status == "NOT_AVAILABLE" and any(value is not None for value in linked_values):
+            raise ValueError("an unavailable decision-clock context cannot contain timing values")
+        return self
+
+
+class CanonicalIntelligenceCase(BaseModel):
+    """One source-labelled case joining evidence, scenario context, and national impact."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    case_id: str = Field(pattern=r"^CASE-[A-F0-9-]+$")
+    status: Literal["LOCAL_SCENARIO"]
+    source_status: Literal[DataStatus.SIMULATED] = DataStatus.SIMULATED
+    evidence_ledger: list[CaseEvidenceLedgerEntry] = Field(min_length=3, max_length=12)
+    evidence_validation: EvidenceValidationSummary
+    replay_context: CaseReplayContext
+    decision_clock_context: CaseDecisionClockContext
+    # A workflow with explicit refinery demand lines is a decision-bearing
+    # national case.  For backwards-compatible single-refinery workflows we
+    # still calculate a small shared-capacity drill, but must not silently
+    # turn simulated supporting demand into a hard procurement blocker.
+    national_scope_status: Literal["EXPLICIT_NATIONAL_SCOPE", "SIMULATED_NATIONAL_IMPACT_DRILL"]
+    national_capacity_request: MultiRefineryPortfolioRequest
+    limitations: list[str] = Field(min_length=2, max_length=8)
+
+    @model_validator(mode="after")
+    def validate_evidence_summary(self) -> "CanonicalIntelligenceCase":
+        reviewable_count = sum(item.requires_analyst_review for item in self.evidence_ledger)
+        if self.evidence_validation.unverified_evidence_count != reviewable_count:
+            raise ValueError("evidence validation summary must reconcile with the ledger review count")
         return self
 
 
@@ -755,6 +871,30 @@ class WorkflowProposalRequest(BaseModel):
     text: str = Field(min_length=20, max_length=12_000)
     refinery: str = Field(default="Jamnagar", min_length=2, max_length=120)
     required_volume_bpd: int = Field(default=210_000, ge=50_000, le=500_000)
+    # Optional so existing single-refinery workflow callers remain compatible.
+    # When omitted, the backend attaches a clearly labelled local national
+    # impact scope with small supporting refinery tranches.
+    national_demand_lines: list[MultiRefineryDemandLine] | None = Field(
+        default=None,
+        min_length=2,
+        max_length=12,
+    )
+
+    @model_validator(mode="after")
+    def validate_national_demand_lines(self) -> "WorkflowProposalRequest":
+        if self.national_demand_lines is None:
+            return self
+        normalized = [line.refinery.casefold().strip() for line in self.national_demand_lines]
+        if len(set(normalized)) != len(normalized):
+            raise ValueError("each refinery may appear only once in national_demand_lines")
+        primary_lines = [
+            line for line in self.national_demand_lines if line.refinery.casefold().strip() == self.refinery.casefold().strip()
+        ]
+        if len(primary_lines) != 1:
+            raise ValueError("national_demand_lines must include the workflow refinery exactly once")
+        if primary_lines[0].required_volume_bpd != self.required_volume_bpd:
+            raise ValueError("the workflow refinery volume must match its national_demand_lines volume")
+        return self
 
 
 class WorkflowProposal(BaseModel):
@@ -768,6 +908,9 @@ class WorkflowProposal(BaseModel):
     processed_signal: ProcessedSignal
     proposed_assumptions: WorkflowAssumptions
     agent_trace: list[AgentTraceEntry] = Field(min_length=3, max_length=3)
+    # Optional only for compatibility with case records persisted before the
+    # canonical-case integration. Newly proposed workflows always include it.
+    case_context: CanonicalIntelligenceCase | None = None
 
 
 class WorkflowConfirmationRequest(BaseModel):
@@ -822,7 +965,9 @@ class DecisionSafetyCheck(BaseModel):
         "EXTRACTION_CONFIDENCE",
         "CORRIDOR_RESOLUTION",
         "SOURCE_PROVENANCE",
+        "EVIDENCE_VALIDATION",
         "SUPPLY_FEASIBILITY",
+        "NATIONAL_CAPACITY",
     ]
     state: DecisionSafetyCheckState
     summary: str = Field(min_length=20, max_length=1_000)
@@ -844,7 +989,7 @@ class DecisionSafetyGate(BaseModel):
     status: Literal["CLEARED", "BLOCKED"]
     decision: Literal["RECOMMENDATION_READY", "NO_RECOMMENDATION_YET"]
     summary: str = Field(min_length=20, max_length=1_000)
-    checks: list[DecisionSafetyCheck] = Field(min_length=4, max_length=4)
+    checks: list[DecisionSafetyCheck] = Field(min_length=4, max_length=6)
     blockers: list[str] = Field(default_factory=list, max_length=8)
     warnings: list[str] = Field(default_factory=list, max_length=12)
     next_actions: list[str] = Field(min_length=1, max_length=12)
@@ -874,6 +1019,10 @@ class WorkflowExecution(BaseModel):
     portfolios: PortfolioComparison | None = None
     executive_brief: GeminiExplanationResponse | None = None
     transparency: RecommendationTransparency | None = None
+    # New workflow records keep the proposal's evidence and deadline context
+    # beside downstream outputs so the client renders one causal case.
+    case_context: CanonicalIntelligenceCase | None = None
+    national_impact: MultiRefineryPortfolioResponse | None = None
     # Optional only so records saved before the decision-readiness upgrade can
     # still be read. All newly executed workflows include this object.
     decision_safety_gate: DecisionSafetyGate | None = None

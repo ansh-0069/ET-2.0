@@ -18,11 +18,19 @@ from petravigil.models import (
     AgentTraceEntry,
     ApprovalCreateRequest,
     ApprovalRecord,
+    CanonicalIntelligenceCase,
+    CaseDecisionClockContext,
+    CaseEvidenceLedgerEntry,
+    CaseReplayContext,
     DataStatus,
     DecisionSafetyCheck,
     DecisionSafetyCheckState,
     DecisionSafetyGate,
     DecisionSafetySource,
+    EvidenceValidationSummary,
+    MultiRefineryDemandLine,
+    MultiRefineryPortfolioRequest,
+    MultiRefineryPortfolioResponse,
     PortfolioComparison,
     PortfolioRequest,
     RecommendationTransparency,
@@ -34,7 +42,9 @@ from petravigil.models import (
     WorkflowProposalRequest,
 )
 from petravigil.services.approvals import ApprovalRepository
+from petravigil.fixtures.loader import load_hormuz_crisis_replay, load_hormuz_decision_clock
 from petravigil.services.gemini import GeminiService
+from petravigil.services.multi_refinery_allocator import MultiRefineryPortfolioAllocator
 from petravigil.services.portfolio_optimizer import (
     SPR_BRIDGE_SEEDED_CAPACITY_BPD,
     SPR_BRIDGE_MAX_DAYS,
@@ -134,6 +144,7 @@ class DecisionWorkflowService:
             raise ValueError("No seeded corridor could be linked to this signal; analyst review is required before modelling.")
         assumptions = self._propose_assumptions(signal, primary_risk.score)
         workflow_id = f"WF-{str(uuid4()).upper()}"
+        case_context = self._build_case_context(workflow_id, request, signal, assumptions)
         trace = [
             AgentTraceEntry(
                 stage=AgentStage.SIGNAL,
@@ -169,6 +180,7 @@ class DecisionWorkflowService:
             processed_signal=signal,
             proposed_assumptions=assumptions,
             agent_trace=trace,
+            case_context=case_context,
         )
         return self.repository.create(proposal)
 
@@ -183,6 +195,18 @@ class DecisionWorkflowService:
         signal = proposal.processed_signal
         assumptions = confirmation.assumptions
         base_trace = list(proposal.agent_trace)
+        case_context = proposal.case_context or self._build_case_context(
+            proposal.workflow_id,
+            WorkflowProposalRequest(
+                text=signal.raw_text,
+                refinery=proposal.refinery,
+                required_volume_bpd=proposal.required_volume_bpd,
+            ),
+            signal,
+            assumptions,
+        )
+        national_impact: MultiRefineryPortfolioResponse | None = None
+        national_error: RuntimeError | None = None
         try:
             simulation = self.scenario_engine.simulate(
                 SimulationRequest(
@@ -220,6 +244,8 @@ class DecisionWorkflowService:
                 assumptions,
                 supply_outcome="UNAVAILABLE",
                 runtime_error=error,
+                case_context=case_context,
+                national_outcome="NOT_EVALUATED",
             )
             base_trace.append(
                 AgentTraceEntry(
@@ -232,13 +258,35 @@ class DecisionWorkflowService:
                 )
             )
             return self.repository.save_execution(
-                self._blocked_execution(proposal, confirmation, simulation=None, gate=gate, agent_trace=base_trace)
+                self._blocked_execution(
+                    proposal,
+                    confirmation,
+                    simulation=None,
+                    gate=gate,
+                    agent_trace=base_trace,
+                    case_context=case_context,
+                    national_impact=None,
+                )
             )
+
+        case_context = self._with_confirmed_national_request(case_context, assumptions)
+        try:
+            national_impact = MultiRefineryPortfolioAllocator(self.portfolio_optimizer.network).generate(
+                case_context.national_capacity_request
+            )
+            national_outcome = national_impact.status
+        except RuntimeError as error:
+            national_error = error
+            national_outcome = "UNAVAILABLE"
 
         preliminary_gate = self._decision_safety_gate(
             proposal,
             assumptions,
             supply_outcome="NOT_EVALUATED",
+            case_context=case_context,
+            national_impact=national_impact,
+            national_outcome=national_outcome,
+            national_error=national_error,
         )
         if preliminary_gate.status == "BLOCKED":
             base_trace.append(
@@ -258,6 +306,8 @@ class DecisionWorkflowService:
                     simulation=simulation,
                     gate=preliminary_gate,
                     agent_trace=base_trace,
+                    case_context=case_context,
+                    national_impact=national_impact,
                 )
             )
 
@@ -280,6 +330,10 @@ class DecisionWorkflowService:
                 assumptions,
                 supply_outcome="INFEASIBLE",
                 feasibility_error=error,
+                case_context=case_context,
+                national_impact=national_impact,
+                national_outcome=national_outcome,
+                national_error=national_error,
             )
             base_trace.append(
                 AgentTraceEntry(
@@ -292,7 +346,15 @@ class DecisionWorkflowService:
                 )
             )
             return self.repository.save_execution(
-                self._blocked_execution(proposal, confirmation, simulation=simulation, gate=gate, agent_trace=base_trace)
+                self._blocked_execution(
+                    proposal,
+                    confirmation,
+                    simulation=simulation,
+                    gate=gate,
+                    agent_trace=base_trace,
+                    case_context=case_context,
+                    national_impact=national_impact,
+                )
             )
         except RuntimeError as error:
             gate = self._decision_safety_gate(
@@ -300,6 +362,10 @@ class DecisionWorkflowService:
                 assumptions,
                 supply_outcome="UNAVAILABLE",
                 runtime_error=error,
+                case_context=case_context,
+                national_impact=national_impact,
+                national_outcome=national_outcome,
+                national_error=national_error,
             )
             base_trace.append(
                 AgentTraceEntry(
@@ -312,13 +378,25 @@ class DecisionWorkflowService:
                 )
             )
             return self.repository.save_execution(
-                self._blocked_execution(proposal, confirmation, simulation=simulation, gate=gate, agent_trace=base_trace)
+                self._blocked_execution(
+                    proposal,
+                    confirmation,
+                    simulation=simulation,
+                    gate=gate,
+                    agent_trace=base_trace,
+                    case_context=case_context,
+                    national_impact=national_impact,
+                )
             )
 
         gate = self._decision_safety_gate(
             proposal,
             assumptions,
             supply_outcome="FEASIBLE",
+            case_context=case_context,
+            national_impact=national_impact,
+            national_outcome=national_outcome,
+            national_error=national_error,
         )
         if gate.status == "BLOCKED":
             # Defensive guard for future changes: a recommendation may never
@@ -334,7 +412,15 @@ class DecisionWorkflowService:
                 )
             )
             return self.repository.save_execution(
-                self._blocked_execution(proposal, confirmation, simulation=simulation, gate=gate, agent_trace=base_trace)
+                self._blocked_execution(
+                    proposal,
+                    confirmation,
+                    simulation=simulation,
+                    gate=gate,
+                    agent_trace=base_trace,
+                    case_context=case_context,
+                    national_impact=national_impact,
+                )
             )
 
         try:
@@ -388,6 +474,8 @@ class DecisionWorkflowService:
                 transparency=transparency,
                 decision_safety_gate=gate,
                 agent_trace=base_trace,
+                case_context=case_context,
+                national_impact=national_impact,
             )
         except RuntimeError as error:
             gate = self._decision_safety_gate(
@@ -395,6 +483,10 @@ class DecisionWorkflowService:
                 assumptions,
                 supply_outcome="UNAVAILABLE",
                 runtime_error=error,
+                case_context=case_context,
+                national_impact=national_impact,
+                national_outcome=national_outcome,
+                national_error=national_error,
             )
             base_trace.append(
                 AgentTraceEntry(
@@ -412,6 +504,8 @@ class DecisionWorkflowService:
                 simulation=simulation,
                 gate=gate,
                 agent_trace=base_trace,
+                case_context=case_context,
+                national_impact=national_impact,
             )
         return self.repository.save_execution(execution)
 
@@ -423,6 +517,8 @@ class DecisionWorkflowService:
         simulation,
         gate: DecisionSafetyGate,
         agent_trace: list[AgentTraceEntry],
+        case_context: CanonicalIntelligenceCase,
+        national_impact: MultiRefineryPortfolioResponse | None,
     ) -> WorkflowExecution:
         """Persist an auditable no-recommendation result without a portfolio."""
 
@@ -437,6 +533,8 @@ class DecisionWorkflowService:
             decision_safety_gate=gate,
             blocking_reason=gate.summary,
             agent_trace=agent_trace,
+            case_context=case_context,
+            national_impact=national_impact,
         )
 
     @staticmethod
@@ -447,6 +545,10 @@ class DecisionWorkflowService:
         supply_outcome: str,
         feasibility_error: PortfolioFeasibilityError | None = None,
         runtime_error: RuntimeError | None = None,
+        case_context: CanonicalIntelligenceCase | None = None,
+        national_impact: MultiRefineryPortfolioResponse | None = None,
+        national_outcome: str = "NOT_EVALUATED",
+        national_error: RuntimeError | None = None,
     ) -> DecisionSafetyGate:
         """Return explicit decision controls, never an opaque solver verdict.
 
@@ -589,6 +691,44 @@ class DecisionWorkflowService:
             ],
         )
 
+        if case_context is None:
+            evidence_validation_check = DecisionSafetyCheck(
+                check_id="EVIDENCE_VALIDATION",
+                state=DecisionSafetyCheckState.WARNING,
+                summary="No canonical case ledger was available for this legacy workflow record; independent source validation remains incomplete.",
+                sources=[
+                    DecisionSafetySource(
+                        label="Legacy workflow record",
+                        kind="EVIDENCE",
+                        source_status=signal.source_status,
+                        detail="This record predates the canonical case ledger and retains only the original user-entered signal provenance.",
+                    )
+                ],
+                next_actions=[
+                    "Create a new workflow proposal to attach the canonical source-labelled evidence ledger.",
+                ],
+            )
+        else:
+            validation = case_context.evidence_validation
+            evidence_validation_check = DecisionSafetyCheck(
+                check_id="EVIDENCE_VALIDATION",
+                state=DecisionSafetyCheckState.WARNING,
+                summary=(
+                    f"Canonical evidence validation is {round(validation.validation_confidence * 100)}% and freshness confidence is "
+                    f"{round(validation.freshness_confidence * 100)}%; the local case remains analyst-reviewable, not operationally verified."
+                ),
+                sources=[
+                    DecisionSafetySource(
+                        label=item.label,
+                        kind="CONSTRAINT" if item.validation_status == "SEEDED_CONSTRAINT" else "EVIDENCE",
+                        source_status=item.source_status,
+                        detail=item.detail,
+                    )
+                    for item in case_context.evidence_ledger
+                ],
+                next_actions=validation.next_actions[:5],
+            )
+
         supply_sources = [
             DecisionSafetySource(
                 label="Confirmed required volume",
@@ -665,7 +805,97 @@ class DecisionWorkflowService:
             next_actions=supply_actions,
         )
 
-        checks = [extraction_check, corridor_check, provenance_check, supply_check]
+        national_source_status = (
+            national_impact.demand_source_status
+            if national_impact is not None
+            else (
+                case_context.national_capacity_request.assumption_source_status
+                if case_context is not None
+                else DataStatus.USER_ENTERED
+            )
+        )
+        national_sources = [
+            DecisionSafetySource(
+                label="National refinery demand scope",
+                kind="ASSUMPTION",
+                source_status=national_source_status,
+                detail=(
+                    "National demand lines are local analyst-entered and/or simulated scenario assumptions; they are not verified refinery nominations."
+                ),
+            ),
+            DecisionSafetySource(
+                label="Shared physical-route capacity",
+                kind="CONSTRAINT",
+                source_status=DataStatus.HISTORICAL,
+                detail="Each compatible route has one seeded global capacity ledger shared across all refinery demand lines.",
+            ),
+            DecisionSafetySource(
+                label="National allocation result",
+                kind="CONSTRAINT",
+                source_status=DataStatus.SIMULATED,
+                detail="The multi-refinery allocator is deterministic local solver output and is not a cargo booking, supplier offer, or execution instruction.",
+            ),
+        ]
+        if national_outcome == "FEASIBLE" and national_impact is not None:
+            national_state = DecisionSafetyCheckState.PASS
+            national_summary = (
+                f"National shared-capacity allocation met all {sum(item.requested_volume_bpd for item in national_impact.refinery_results):,} "
+                "bpd of the local multi-refinery scenario scope."
+            )
+            national_actions = [
+                "Validate actual refinery demand, supplier allocation, tanker availability, and commercial route capacity before acting on the local scenario.",
+            ]
+        elif national_outcome == "INFEASIBLE" and national_impact is not None:
+            national_shortfall = sum(item.unserved_volume_bpd for item in national_impact.refinery_results)
+            if case_context is not None and case_context.national_scope_status == "SIMULATED_NATIONAL_IMPACT_DRILL":
+                national_state = DecisionSafetyCheckState.WARNING
+                national_summary = (
+                    f"The simulated national-impact drill leaves {national_shortfall:,} bpd unserved in shared route capacity. "
+                    "It is not a decision blocker because no explicit national refinery demand scope was supplied."
+                )
+                national_actions = [
+                    "Provide explicit, analyst-confirmed national refinery demand lines to turn this shared-capacity drill into a decision-bearing national case.",
+                    "Do not infer a national supply commitment from simulated supporting refinery tranches.",
+                ]
+            else:
+                national_state = DecisionSafetyCheckState.BLOCKER
+                national_summary = (
+                    f"No recommendation yet: national shared route capacity leaves {national_shortfall:,} bpd unserved across the canonical case."
+                )
+                national_actions = [
+                    f"Provide verified compatible national supply or route capacity for the {national_shortfall:,} bpd shared-capacity shortfall.",
+                    "Reduce or revise the national demand assumptions only with documented analyst justification.",
+                    "Do not assign a separate SPR bridge per refinery; a globally finite reserve constraint is not configured in this allocator.",
+                ]
+        elif national_outcome == "NOT_EVALUATED":
+            national_state = DecisionSafetyCheckState.WARNING
+            national_summary = "National shared-capacity impact was not evaluated because the prerequisite scenario stage did not complete."
+            national_actions = [
+                "Restore the scenario stage and rerun the workflow before relying on a national capacity conclusion.",
+            ]
+        else:
+            national_state = DecisionSafetyCheckState.BLOCKER
+            national_detail = str(national_error) if national_error is not None else "The national allocator did not return a usable result."
+            national_summary = f"No recommendation yet: national shared-capacity impact could not be established. {national_detail}"
+            national_actions = [
+                "Restore the shared-capacity allocator and rerun the canonical case before generating a procurement recommendation.",
+            ]
+        national_check = DecisionSafetyCheck(
+            check_id="NATIONAL_CAPACITY",
+            state=national_state,
+            summary=national_summary,
+            sources=national_sources,
+            next_actions=national_actions,
+        )
+
+        checks = [
+            extraction_check,
+            corridor_check,
+            provenance_check,
+            evidence_validation_check,
+            supply_check,
+            national_check,
+        ]
         blockers = [check.summary for check in checks if check.state == DecisionSafetyCheckState.BLOCKER]
         warnings = [check.summary for check in checks if check.state == DecisionSafetyCheckState.WARNING]
         priority_checks = [check for check in checks if check.state != DecisionSafetyCheckState.PASS] or checks
@@ -696,6 +926,237 @@ class DecisionWorkflowService:
         if execution is None or execution.status != "COMPLETED" or execution.recommendation_id is None:
             raise ValueError("A completed, decision-ready workflow is required before recording approval.")
         return self.approval_repository.create(execution.recommendation_id, request)
+
+    @staticmethod
+    def _national_demand_lines(request: WorkflowProposalRequest) -> list[MultiRefineryDemandLine]:
+        """Keep the main refinery demand inside a small, explicit national scope.
+
+        Existing workflow callers only send one refinery demand. For those
+        compatible calls we add two 10,000 bpd simulated support tranches so
+        the national allocator can expose shared-route contention without
+        pretending that the prototype received a verified national demand plan.
+        """
+
+        if request.national_demand_lines is not None:
+            primary_lines = [
+                line for line in request.national_demand_lines if line.refinery.casefold() == request.refinery.casefold()
+            ]
+            if len(primary_lines) != 1:
+                raise ValueError("national_demand_lines must include the workflow refinery exactly once")
+            if primary_lines[0].required_volume_bpd != request.required_volume_bpd:
+                raise ValueError("the workflow refinery volume must match its national_demand_lines volume")
+            return list(request.national_demand_lines)
+
+        seeded_refineries = ("Jamnagar", "Paradip", "Kochi")
+        supporting_volume_bpd = 10_000
+        lines: list[MultiRefineryDemandLine] = []
+        primary_found = False
+        for refinery in seeded_refineries:
+            if refinery.casefold() == request.refinery.casefold():
+                lines.append(
+                    MultiRefineryDemandLine(
+                        refinery=refinery,
+                        required_volume_bpd=request.required_volume_bpd,
+                        source_status=DataStatus.USER_ENTERED,
+                    )
+                )
+                primary_found = True
+            else:
+                lines.append(
+                    MultiRefineryDemandLine(
+                        refinery=refinery,
+                        required_volume_bpd=supporting_volume_bpd,
+                        source_status=DataStatus.SIMULATED,
+                    )
+                )
+        if not primary_found:
+            lines.insert(
+                0,
+                MultiRefineryDemandLine(
+                    refinery=request.refinery,
+                    required_volume_bpd=request.required_volume_bpd,
+                    source_status=DataStatus.USER_ENTERED,
+                ),
+            )
+        return lines
+
+    def _build_case_context(
+        self,
+        workflow_id: str,
+        request: WorkflowProposalRequest,
+        signal,
+        assumptions: WorkflowAssumptions,
+    ) -> CanonicalIntelligenceCase:
+        """Create one case object rather than parallel replay/demo artefacts."""
+
+        resolution_rate = sum(item.resolved for item in signal.entity_resolutions) / len(signal.entity_resolutions)
+        validation_confidence = round(signal.gemini.proposal.confidence * resolution_rate, 3)
+        chokepoint = self._selected_chokepoint(signal)
+        national_lines = self._national_demand_lines(request)
+        national_request = MultiRefineryPortfolioRequest(
+            scenario_label=f"WORKFLOW_{workflow_id[3:]}_NATIONAL_IMPACT",
+            demand_lines=national_lines,
+            alternative_route_capacity_ratio=assumptions.alternative_route_capacity_ratio,
+            disrupted_chokepoint=chokepoint,
+            assumption_source_status=(
+                DataStatus.SIMULATED
+                if any(line.source_status == DataStatus.SIMULATED for line in national_lines)
+                else DataStatus.USER_ENTERED
+            ),
+        )
+        case_token = workflow_id[3:]
+        evidence_ledger = [
+            CaseEvidenceLedgerEntry(
+                evidence_id=f"CASE-EV-SIGNAL-{case_token}",
+                label="Retained user-entered signal",
+                source_status=signal.source_status,
+                validation_status="UNVERIFIED_USER_INPUT",
+                observed_at=signal.created_at,
+                freshness_confidence=0.0,
+                validation_confidence=0.0,
+                requires_analyst_review=True,
+                detail=(
+                    "The raw signal text is retained for audit, but no publisher, source URL, independent observation time, "
+                    "or live-feed verification is connected in this local prototype."
+                ),
+            ),
+            CaseEvidenceLedgerEntry(
+                evidence_id=f"CASE-EV-GEMINI-{case_token}",
+                label="Gemini structured extraction proposal",
+                source_status=signal.gemini.provider_status,
+                validation_status="MODEL_PROPOSAL",
+                observed_at=signal.created_at,
+                freshness_confidence=0.0,
+                validation_confidence=signal.gemini.proposal.confidence,
+                requires_analyst_review=True,
+                detail=(
+                    "Gemini output is a structured interpretation of unverified text. Its confidence is not a source reliability "
+                    "or an independently verified disruption probability."
+                ),
+            ),
+            CaseEvidenceLedgerEntry(
+                evidence_id=f"CASE-EV-NETWORK-{case_token}",
+                label="Seeded compatibility and corridor network",
+                source_status=DataStatus.HISTORICAL,
+                validation_status="SEEDED_CONSTRAINT",
+                observed_at=None,
+                freshness_confidence=0.0,
+                validation_confidence=resolution_rate,
+                requires_analyst_review=True,
+                detail=(
+                    "Entity matches, refinery compatibility, route capacities, and route risk are local seeded constraints without "
+                    "a current commercial or maritime refresh."
+                ),
+            ),
+        ]
+        if chokepoint == "HORMUZ":
+            replay = load_hormuz_crisis_replay()
+            clock = load_hormuz_decision_clock()
+            replay_context = CaseReplayContext(
+                status="LINKED",
+                replay_id=replay.replay_id,
+                title=replay.title,
+                source_status=DataStatus.SIMULATED,
+                evidence_item_count=len(replay.evidence),
+                disclaimer=replay.disclaimer,
+                note="The Hormuz replay is local scenario context linked to this case; it is not an independent live intelligence source.",
+            )
+            decision_clock_context = CaseDecisionClockContext(
+                status="LINKED",
+                clock_id=clock.clock_id,
+                source_status=DataStatus.SIMULATED,
+                decision_lead_time_hours=clock.decision_lead_time_hours,
+                last_responsible_action_offset_hours=clock.last_responsible_action_offset_hours,
+                disclaimer=clock.disclaimer,
+                note="The decision clock is a deterministic local deadline aid linked to this replay, not measured operational lead time.",
+            )
+            evidence_ledger.extend(
+                [
+                    CaseEvidenceLedgerEntry(
+                        evidence_id=f"CASE-EV-REPLAY-{case_token}",
+                        label="Hormuz replay context",
+                        source_status=DataStatus.SIMULATED,
+                        validation_status="FIXTURE_CONTEXT",
+                        observed_at=None,
+                        freshness_confidence=0.0,
+                        validation_confidence=1.0,
+                        requires_analyst_review=True,
+                        detail="The replay fixture is structurally validated local scenario context, not a current event feed or external citation.",
+                    ),
+                    CaseEvidenceLedgerEntry(
+                        evidence_id=f"CASE-EV-CLOCK-{case_token}",
+                        label="Hormuz decision-clock context",
+                        source_status=DataStatus.SIMULATED,
+                        validation_status="FIXTURE_CONTEXT",
+                        observed_at=None,
+                        freshness_confidence=0.0,
+                        validation_confidence=1.0,
+                        requires_analyst_review=True,
+                        detail="The clock fixture provides labelled local timing assumptions and cannot establish a real laycan, inventory, or approval deadline.",
+                    ),
+                ]
+            )
+        else:
+            replay_context = CaseReplayContext(
+                status="NOT_AVAILABLE",
+                source_status=DataStatus.SIMULATED,
+                evidence_item_count=0,
+                disclaimer="No replay fixture is attached for this chokepoint; the Hormuz replay is not reused for a different corridor.",
+                note="A source-labelled replay is unavailable for this resolved chokepoint in the local prototype.",
+            )
+            decision_clock_context = CaseDecisionClockContext(
+                status="NOT_AVAILABLE",
+                source_status=DataStatus.SIMULATED,
+                disclaimer="No decision-clock fixture is attached because no matching replay fixture exists for this chokepoint.",
+                note="The local Hormuz timing fixture is intentionally not projected onto another corridor.",
+            )
+
+        return CanonicalIntelligenceCase(
+            case_id=f"CASE-{case_token}",
+            status="LOCAL_SCENARIO",
+            evidence_ledger=evidence_ledger,
+            evidence_validation=EvidenceValidationSummary(
+                status="REQUIRES_ANALYST_REVIEW",
+                freshness_confidence=0.0,
+                validation_confidence=validation_confidence,
+                independently_verified_evidence_count=0,
+                unverified_evidence_count=len(evidence_ledger),
+                rationale=(
+                    "The ledger validates only local structure and seeded entity compatibility. No entry has an independently "
+                    "verified publisher, freshness timestamp, or operational source chain, so the case remains analyst-reviewable."
+                ),
+                next_actions=[
+                    "Attach a publisher, source URL, and observed time before treating the signal as verified intelligence.",
+                    "Confirm AIS, port, sanctions, tanker, supplier, inventory, and route-capacity facts through approved operational systems.",
+                ],
+            ),
+            replay_context=replay_context,
+            decision_clock_context=decision_clock_context,
+            national_scope_status=(
+                "EXPLICIT_NATIONAL_SCOPE" if request.national_demand_lines is not None else "SIMULATED_NATIONAL_IMPACT_DRILL"
+            ),
+            national_capacity_request=national_request,
+            limitations=[
+                "The canonical case is an offline local scenario assembled from user-entered text, seeded constraints, and simulated fixtures.",
+                "No live AIS, news, price, sanctions, tanker, port, inventory, supplier, or procurement feed is connected.",
+                "National impact is a shared-capacity planning drill and never creates cargo bookings, supplier commitments, or external execution.",
+            ],
+        )
+
+    @staticmethod
+    def _with_confirmed_national_request(
+        case_context: CanonicalIntelligenceCase,
+        assumptions: WorkflowAssumptions,
+    ) -> CanonicalIntelligenceCase:
+        """Use the confirmed capacity ratio for both single and national allocation."""
+
+        national_request = case_context.national_capacity_request.model_copy(
+            update={
+                "alternative_route_capacity_ratio": assumptions.alternative_route_capacity_ratio,
+                "assumption_source_status": DataStatus.USER_ENTERED,
+            }
+        )
+        return case_context.model_copy(update={"national_capacity_request": national_request})
 
     @staticmethod
     def _propose_assumptions(signal, risk_score: float) -> WorkflowAssumptions:

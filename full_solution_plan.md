@@ -1,19 +1,21 @@
-# PETRAVIGIL — AI-Driven Energy Supply Chain Resilience Platform
-## Full-Scale Enterprise / Government-Grade Solution Architecture
+# PETRAVIGIL - Enterprise Energy Supply Resilience Target Architecture
+## Roadmap Only - Not the Current Prototype Runtime
 
 ---
 
-## 1. Executive Summary
+## 1. Executive Summary and Status Boundary
 
-**PetraVigil** (Latin: *petra* = rock/petroleum, *vigil* = watchman) is a sovereign energy intelligence platform that continuously monitors geopolitical risk signals, models disruption scenarios with probabilistic simulation, and generates executable procurement re-routing recommendations — compressing the signal-to-action cycle from **weeks to under 30 minutes**.
+This document describes a **proposed enterprise / government-grade target architecture**, not a statement of the active repository runtime or a claim about production performance, data access, customer deployment, response time, or ROI.
 
-Built for India's Ministry of Petroleum & Natural Gas (MoPNG), the Petroleum Planning & Analysis Cell (PPAC), and public-sector refiners like IndianOil/BPCL/HPCL, PetraVigil transforms India's reactive crude oil procurement posture into an anticipatory, resilience-first strategy.
+The working prototype is an evidence-labelled, analyst-confirmed local decision workflow: a user-entered signal is turned into a proposed structure (with optional Gemini extraction or a labelled fallback), reviewed by an analyst, processed through seeded deterministic risk/constraint services and a reproducible simulation, then recorded as a local human decision. It can return `NO_RECOMMENDATION_YET` rather than fabricate a recommendation. It does **not** continuously monitor feeds, track live vessels, use a deployed knowledge graph/RAG/multi-agent system, integrate with procurement systems, or execute an external action.
 
-> **Core Thesis**: The platform doesn't predict the future — it exhaustively pre-computes futures, scores them by probability, and keeps procurement playbooks warm for each one. When a disruption signal fires, the response is retrieval, not invention.
+The production vision is to build a governed decision layer for India's crude-supply resilience that can ingest licensed, verified geopolitical and logistics data; model uncertainty; and present analyst-approved contingency options. Every production capability in this document needs separately validated data provenance, calibration, security, operational controls, and customer approval.
+
+> **Target thesis**: Rather than claiming to predict the future, a production system should make disruption assumptions, constraints, evidence, uncertainty, and human accountability explicit enough to rehearse defensible decisions.
 
 ---
 
-## 2. Problem Decomposition
+## 2. Target Problem Decomposition
 
 The challenge breaks down into **five interconnected sub-problems**:
 
@@ -27,7 +29,7 @@ The challenge breaks down into **five interconnected sub-problems**:
 
 ---
 
-## 3. System Architecture
+## 3. Target System Architecture (Future State)
 
 ### 3.1 High-Level Architecture
 
@@ -53,9 +55,9 @@ The challenge breaks down into **five interconnected sub-problems**:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### 3.2 Multi-Agent Architecture (Agentic AI Core)
+### 3.2 Proposed Multi-Agent Architecture (Future State)
 
-PetraVigil uses a **multi-agent system** where specialized agents collaborate through a shared knowledge graph and event bus:
+The production target could use a **multi-agent system** in which specialized services collaborate through a governed graph and event bus. No such active orchestration is part of the current prototype:
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -322,7 +324,7 @@ Subject to:
 
 ---
 
-## 4. Technology Stack
+## 4. Target Technology Stack
 
 ### 4.1 Core Infrastructure
 
@@ -361,34 +363,36 @@ Subject to:
 
 ---
 
-## 5. Key Differentiators (Why This Wins)
+## 5. Target Differentiators and Validation Hypotheses
 
-### 5.1 vs. Traditional SCRM Tools (SAP IBP, Kinaxis, o9 Solutions)
+The comparisons and differentiators below are product-positioning hypotheses, not an audited competitive study or a claim that the current prototype already delivers these capabilities. Validate them with domain users, licensed data providers, and representative historical cases.
 
-| Dimension | Traditional Tools | PetraVigil |
+### 5.1 Positioning Hypothesis vs. Traditional SCRM Tools
+
+| Dimension | Traditional Tools | Proposed PetraVigil Target |
 |---|---|---|
-| Signal source | Manual input, structured data only | Multi-modal: news NLP, AIS, sanctions, prices |
-| Update frequency | Weekly/monthly planning cycles | Continuous (sub-minute for critical signals) |
-| Scenario modeling | Deterministic what-if | Probabilistic Monte Carlo with confidence intervals |
-| Domain specificity | Generic supply chain | Purpose-built for crude oil import corridors |
-| Recommendation type | "Consider alternatives" | Executable action cards with specific grades, routes, costs |
-| Geospatial intelligence | None | Live vessel tracking, chokepoint monitoring |
+| Signal source | Varies by product and deployment | Intended: governed ingestion of verified news, AIS, sanctions, and market data where licensed. |
+| Update frequency | Varies by data provider and operating model | Target freshness must be defined and tested per source, not presumed. |
+| Scenario modeling | Varies by product and deployment | Intended: probabilistic scenarios with uncertainty bounds and explicit assumptions. |
+| Domain specificity | Varies | Intended: crude-grade, refinery-compatibility, route, and policy constraints. |
+| Recommendation type | Varies | Intended: analyst-approved decision cards with alternatives, blockers, and evidence; not autonomous execution. |
+| Geospatial intelligence | Varies | Intended: source-labelled maritime context only after licensed feeds and validation. |
 
-### 5.2 Novel Technical Contributions
+### 5.2 Candidate Technical Differentiators to Validate
 
-1. **Corridor-Level Disruption Probability Score (DPS)**: A composite, continuously-updated risk metric that fuses geopolitical, maritime, economic, and insurance signals into a single actionable score per supply corridor. No existing product offers this at corridor granularity with real-time updates.
+1. **Corridor-level disruption score**: A proposed composite score for geopolitical, maritime, economic, and insurance signals. It must be calibrated against historical outcomes and shown with uncertainty before it can be described as a probability.
 
-2. **Pre-Computed Scenario Playbooks**: Instead of generating recommendations after a crisis hits, PetraVigil maintains a library of "warm" playbooks for the top-N most probable disruption scenarios, updated daily. When a scenario triggers, the response is retrieval + minor adjustment, not computation from scratch.
+2. **Rehearsed scenario playbooks**: A production system could maintain governed, versioned playbooks for priority disruptions. Each needs ownership, review cadence, and evidence of calibration; this is not an active current runtime feature.
 
-3. **Refinery-Grade Compatibility Constraints**: Most supply chain tools treat "oil" as fungible. PetraVigil encodes the technical reality that a complex refinery like Jamnagar can process heavy sour crude that a simple refinery like Bina cannot. Recommendations respect refinery crude diet constraints.
+3. **Refinery-grade compatibility constraints**: The prototype already uses seeded compatibility and route capacity constraints. A production model would require refinery-validated crude-diet data, commercial constraints, and change controls.
 
-4. **Evidence Chain Transparency**: Every recommendation comes with a full evidence chain linking back to the specific signals, AIS observations, and price movements that triggered it. This is critical for government procurement where audit trails are mandatory.
+4. **Evidence-chain transparency**: The prototype source-labels user-entered, seeded/historical, and simulated information. Production evidence chains would need immutable source identifiers, freshness, licences, verification status, and audit retention.
 
-5. **SPR Integration**: Strategic Petroleum Reserve drawdown is modeled as a decision variable in the optimization, not an afterthought. The system knows India's SPR levels and can recommend optimal drawdown strategies as bridge supplies.
+5. **SPR policy modelling**: The prototype permits a finite, opt-in, single-refinery contingency assumption. A production model must represent a globally finite reserve and authority-specific policy approvals before any operational recommendation.
 
 ---
 
-## 6. Scalability Architecture
+## 6. Target Scalability Architecture
 
 ### 6.1 Horizontal Scaling
 
@@ -417,14 +421,14 @@ Subject to:
                               └──────────────────┘
 ```
 
-### 6.2 Multi-Tenancy
+### 6.2 Proposed Deployment Models
 
-The platform supports multiple deployment models:
+Potential deployment models to validate with customers:
 - **Sovereign Deployment**: On-premises for government (MoPNG, PPAC)
 - **Private Cloud**: For PSU refiners (IOC, BPCL, HPCL)
 - **SaaS Multi-Tenant**: For trading houses, insurance companies, shipping firms
 
-### 6.3 Performance Targets
+### 6.3 Target Performance Criteria (Not Yet Validated)
 
 | Metric | Target |
 |---|---|
@@ -439,7 +443,7 @@ The platform supports multiple deployment models:
 
 ---
 
-## 7. Security & Compliance
+## 7. Target Security & Compliance Controls
 
 | Aspect | Implementation |
 |---|---|
@@ -453,19 +457,19 @@ The platform supports multiple deployment models:
 
 ---
 
-## 8. Business Model & Impact Quantification
+## 8. Business Model and Value Validation
 
-### 8.1 Value Proposition (Quantified)
+### 8.1 Value Hypotheses (Not Quantified Claims)
 
-Based on the McKinsey finding that economies with integrated response intelligence stabilize **47 days faster**:
+The repository contains no validated customer baseline, live market integration, deployment, or cost-outcome study. Do not claim a response-time improvement, national import-bill saving, price saving, SPR efficiency, or productivity percentage. The correct enterprise validation plan is:
 
-| Metric | Without PetraVigil | With PetraVigil | Impact |
-|---|---|---|---|
-| Disruption response time | 5-14 days | < 1 day | 85% reduction |
-| Spot market premium exposure | Full Brent spike (avg +$8/bbl in 2025) | Partially hedged via early action (+$3/bbl) | ~$5/bbl savings |
-| SPR utilization efficiency | Reactive drawdown, often late | Optimized drawdown timing | 30% less SPR consumption |
-| Annual import bill savings (moderate disruption year) | Baseline | -$2.5B to -$4B annually | Significant fiscal impact |
-| Procurement team productivity | 80% time on data gathering | 80% time on decision-making | Role transformation |
+| Value hypothesis | Evidence required before making a quantified claim |
+|---|---|
+| Analysts can make a more traceable contingency decision | Time-stamped baseline and controlled pilot measurements across comparable cases. |
+| Constraints can reduce impossible procurement options | Refinery, route, contract, and supplier validation against real historical decisions. |
+| Earlier visibility can reduce commercial exposure | Licensed price/quote data, a defined counterfactual, and independent financial review. |
+| SPR assumptions can improve policy rehearsal | Authorized policy scenarios, a globally finite reserve model, and government sign-off. |
+| Evidence labelling can reduce review risk | User research, audit feedback, and documented incident/review outcomes. |
 
 ### 8.2 Target Users
 
@@ -479,7 +483,7 @@ Based on the McKinsey finding that economies with integrated response intelligen
 
 ---
 
-## 9. Deployment Roadmap
+## 9. Target Deployment Roadmap
 
 ### Phase 1: Foundation (Months 1-3)
 - Knowledge Graph construction (India crude import network)
@@ -511,21 +515,21 @@ Based on the McKinsey finding that economies with integrated response intelligen
 
 ---
 
-## 10. Competitive Landscape
+## 10. Market Positioning Hypotheses (Validate Before Sales)
 
-| Competitor | Strength | PetraVigil Advantage |
+| Competitor | Known category strength | Proposed PetraVigil wedge to validate |
 |---|---|---|
-| **Kpler** | Commodity data, vessel tracking | We add AI-driven recommendations + scenario simulation |
-| **Vortexa** | Real-time cargo tracking | We add geopolitical risk fusion + procurement optimization |
-| **Palantir Foundry** | General-purpose analytics | We are domain-specific with energy supply chain ontology |
-| **Everstream Analytics** | Supply chain risk monitoring | We go beyond risk scoring to executable procurement actions |
-| **Preset Analytics (PPAC)** | Government data repository | We add real-time intelligence + AI-driven decision support |
+| **Kpler** | Commodity data and vessel-tracking category | Use trusted data-provider inputs as part of a governed India-specific decision workflow; validate integration and overlap. |
+| **Vortexa** | Cargo-tracking category | Validate whether a constrained contingency-decision layer adds value beyond tracking. |
+| **Palantir Foundry** | General-purpose data and operational analytics category | Validate domain-data, governance, and implementation advantages rather than asserting differentiation. |
+| **Everstream Analytics** | Supply-chain risk-monitoring category | Validate whether crude-grade and shared-capacity constraints address a distinct buyer workflow. |
+| **PPAC and public data sources** | Government reference-data category | Treat them as possible inputs/stakeholders, not as a system to replace. |
 
-**PetraVigil's moat**: No existing tool combines geopolitical NLP + AIS intelligence + energy-specific knowledge graph + Monte Carlo simulation + constrained procurement optimization in a single, real-time platform. Each competitor covers 1-2 of these; PetraVigil integrates all five.
+**Positioning hypothesis:** PetraVigil's possible wedge is an India-specific, governed decision and constraint layer that consumes trusted data-provider and enterprise inputs. Whether this is differentiated, defensible, and worth paying for must be validated through customer discovery and competitive diligence.
 
 ---
 
-## 11. Risk Mitigation (For the Platform Itself)
+## 11. Target Risk Mitigations
 
 | Risk | Mitigation |
 |---|---|
@@ -537,4 +541,4 @@ Based on the McKinsey finding that economies with integrated response intelligen
 
 ---
 
-*PetraVigil: From reactive crisis management to anticipatory resilience — because the next disruption won't wait for a committee meeting.*
+*Target direction: make disruption planning more explicit, evidence-aware, and accountable before any production automation is considered.*

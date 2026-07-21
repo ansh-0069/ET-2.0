@@ -16,11 +16,12 @@ function number(value: number): string {
 
 type MultiRefineryAllocationSurfaceProps = {
   result: MultiRefineryAllocationResult | null;
+  resultOrigin?: "canonical" | "sensitivity";
   loading: boolean;
   onRun: (payload: MultiRefineryRequest) => void;
 };
 
-export default function MultiRefineryAllocationSurface({ result, loading, onRun }: MultiRefineryAllocationSurfaceProps) {
+export default function MultiRefineryAllocationSurface({ result, resultOrigin = "sensitivity", loading, onRun }: MultiRefineryAllocationSurfaceProps) {
   const [demandLines, setDemandLines] = useState<MultiRefineryDemandLine[]>(DEFAULT_DEMANDS);
   const [capacityRatio, setCapacityRatio] = useState(0.72);
 
@@ -38,13 +39,15 @@ export default function MultiRefineryAllocationSurface({ result, loading, onRun 
   const totalDemand = demandLines.reduce((total, line) => total + (Number.isFinite(line.required_volume_bpd) ? line.required_volume_bpd : 0), 0);
 
   return (
-    <section className="stage-card multi-refinery-surface" aria-labelledby="multi-refinery-title">
-      <div className="section-heading"><div><p className="label">NETWORK PROCUREMENT · SHARED CARGO CONSTRAINT</p><h3 id="multi-refinery-title">Allocate finite alternatives across three refineries</h3><p>Each route capacity is scaled once and shared across all compatible refineries. The output is a local, source-labelled allocation drill—not a market offer, tanker booking, or reserve activation.</p></div><span className="badge">No duplicate cargo capacity</span></div>
+    <section className="context-surface multi-refinery-surface" aria-labelledby="multi-refinery-title">
+      <div className="section-heading"><div><p className="label">NATIONAL IMPACT · SHARED CARGO CONSTRAINT</p><h3 id="multi-refinery-title">Allocate finite alternatives across linked refineries</h3><p>Each route capacity is scaled once and shared across all compatible refineries. The output is a local, source-labelled allocation drill, not a market offer, tanker booking, or reserve activation.</p></div><span className="badge">No duplicate cargo capacity</span></div>
+
+      {resultOrigin === "canonical" && result && <p className="canonical-allocation-note">This result was generated inside the confirmed workflow. Any rerun below is a separate sensitivity, not a replacement for the recorded case.</p>}
 
       <div className="multi-refinery-controls">
         <div className="multi-demand-grid">{demandLines.map((line) => <label key={line.refinery}>{line.refinery}<input type="number" min="0" max="500000" step="5000" value={line.required_volume_bpd} onChange={(event) => updateDemand(line.refinery, Number(event.target.value))} /><small>bpd demand</small></label>)}</div>
         <label className="multi-capacity-control">Shared alternative capacity <strong>{Math.round(capacityRatio * 100)}%</strong><input type="range" min="0.3" max="1" step="0.02" value={capacityRatio} onChange={(event) => setCapacityRatio(Number(event.target.value))} /><small>Applied once to each seeded physical route.</small></label>
-        <div className="multi-action-row"><span>Total requested: <strong>{number(totalDemand)} bpd</strong></span><button type="button" className="secondary-button" disabled={loading || demandLines.some((line) => !Number.isFinite(line.required_volume_bpd) || line.required_volume_bpd < 0)} onClick={() => onRun({ demand_lines: demandLines, alternative_route_capacity_ratio: capacityRatio, disrupted_chokepoint: "HORMUZ" })}>{loading ? "Allocating shared cargo..." : "Run shared-cargo allocation"}</button></div>
+        <div className="multi-action-row"><span>Total requested: <strong>{number(totalDemand)} bpd</strong></span><button type="button" className="secondary-button" disabled={loading || demandLines.some((line) => !Number.isFinite(line.required_volume_bpd) || line.required_volume_bpd < 0)} onClick={() => onRun({ demand_lines: demandLines, alternative_route_capacity_ratio: capacityRatio, disrupted_chokepoint: "HORMUZ" })}>{loading ? "Allocating shared cargo..." : resultOrigin === "canonical" ? "Run separate what-if" : "Run shared-cargo allocation"}</button></div>
       </div>
 
       {result && <>

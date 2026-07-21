@@ -65,13 +65,16 @@ npm.cmd run dev -- -p 3000
 
 Open [http://localhost:3000](http://localhost:3000). Interactive API documentation is available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-## Five-step demo runbook
+## Six-step judge demo runbook
 
-1. **Open the workspace.** Start with the source-labelled Hormuz replay and Decision Clock. Show the map's offline disclaimer, then vary the approval-delay sensitivity to demonstrate how the local last-responsible-action milestone moves.
-2. **Create a proposal.** Use **Load Hormuz example** or paste an energy-relevant disruption signal, select a refinery and volume, then choose **Analyse signal and propose assumptions**. Explain that the raw text is retained as unverified evidence.
-3. **Review the first three stages.** Inspect the extracted proposal, entity matching, corridor score, confidence, and visible unknowns. Do not describe the signal as a live feed unless a real source integration has been added.
-4. **Confirm assumptions and run.** Adjust closure severity, duration, alternative capacity, elasticity, simulation count, or seed as needed; then choose **Confirm assumptions and run workflow**. This produces reproducible scenario results and constrained portfolio alternatives.
-5. **Record a local human decision.** Review the selected portfolio, rejected alternatives, and the labelled Gemini/fallback explanation. Record Approve, Defer, or Reject with a justification. State explicitly that this records a local audit decision only; no external procurement action occurs.
+Tell one Hormuz case from uncertainty to a reviewable decision. The product claim is a constrained, analyst-confirmed prototype; it is not a live intelligence feed or autonomous procurement system. The canonical presentation narrative is in [canonical_product_narrative.md](canonical_product_narrative.md).
+
+1. **Set the truth boundary.** Start with the source-labelled Hormuz replay and Decision Clock. State that both are local, offline scenario artefacts; vary the approval-delay sensitivity to demonstrate how the local last-responsible-action milestone moves.
+2. **Create a proposal.** Use **Load Hormuz example** or paste an energy-relevant disruption signal, select a refinery and volume, then choose **Analyse signal and propose assumptions**. Explain that the raw text is retained as unverified `User-entered` evidence.
+3. **Review evidence before risk.** Inspect the extraction, entity matching, corridor score, confidence, and visible unknowns. Gemini (when configured) proposes structure; deterministic checks and the analyst decide what proceeds. Do not describe the signal as a live feed.
+4. **Confirm assumptions and run.** Adjust closure severity, duration, alternative capacity, elasticity, simulation count, or seed; then choose **Confirm assumptions and run workflow**. This produces reproducible simulated results and constrained portfolio alternatives.
+5. **Prove the refusal path.** Run a capacity-shortfall case and show `NO_RECOMMENDATION_YET`, its blockers, and next actions. A safe system must be able to decline an unsupported procurement recommendation.
+6. **Review a feasible case and record a decision.** Show the selected portfolio, rejected alternatives, finite SPR contingency (where eligible), and the labelled Gemini/fallback explanation. Use the separate multi-refinery drill to show that shared route capacity cannot be counted once per refinery. Record Approve, Defer, or Reject with a justification; this creates a local audit record only and never executes procurement.
 
 ## Gemini and frontend configuration
 
@@ -94,6 +97,8 @@ NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000
 Restart the Next.js development server after changing `.env.local`. [`.env.example`](.env.example) lists safe variable names and placeholder values. The FastAPI service does not automatically load a root `.env` file, so export backend variables in the launch environment (or configure them in your deployment platform).
 
 ## Verification
+
+The last verified local backend run passed **37 tests**. Re-run the commands below after any code change; do not present this count as a production reliability metric.
 
 Run the backend suite before presenting:
 

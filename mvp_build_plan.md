@@ -8,30 +8,32 @@
 >
 > The runtime has **no live AIS, news, commodity-price, tanker, port, sanctions, or supplier feed**; no RAG/vector database, Neo4j, Redis, PostgreSQL, or LangGraph service is active. It does include a local D3-projected, source-labelled replay map, a deterministic Decision Clock, finite single-refinery SPR-contingency modelling, a no-recommendation safety gate, and a shared-capacity multi-refinery allocation drill. Bundled network data and scenario outputs are explicitly labelled seeded/simulated, and no recommendation executes an external procurement action. See `README.md` for the current runbook and configuration.
 
+> **Presentation source of truth:** Use the six-step runbook in `README.md` and `canonical_product_narrative.md` for the judge story. The architecture, screens, integrations, performance numbers, and technology choices below are target-state planning notes unless they are repeated in the authoritative runtime note above.
+
 ---
 
-## 1. MVP Philosophy
+## 1. Target MVP Philosophy (roadmap)
 
-> **Principle**: Build a **vertically complete slice** — from raw signal ingestion to executable procurement recommendation — rather than a horizontally broad but shallow prototype. Judges want to see the full pipeline work end-to-end, not 10 half-built features.
+> **Target principle**: Build a vertically complete, analyst-governed slice from signal intake to a reviewable recommendation. A production system may integrate procurement workflows only after data validation, security controls, and explicit customer authorization.
 
-**What the MVP IS:**
-- A working end-to-end pipeline: signal → evidence extraction → risk scoring → scenario simulation → procurement recommendation → human approval record
-- A real processing prototype: Gemini API calls, Pydantic-validated structured outputs, real Monte Carlo runs, real OR-Tools optimisation, live UI updates, and persistent scenario/audit data
-- A polished decision workspace with dedicated pages for evidence, maps, simulations, portfolios, feasibility, and approvals—not one overloaded dashboard
-- Real public reference data seeded from historical disruption events, transparently combined with clearly labelled simulated AIS and showcase signals
+**Target MVP should include:**
+- A linked pipeline: signal -> evidence extraction -> risk scoring -> analyst confirmation -> scenario simulation -> recommendation -> human approval record.
+- Bounded LLM extraction, deterministic validation, reproducible simulation, constrained optimisation, and visible provenance.
+- Screens that let a reviewer inspect evidence, assumptions, scenarios, portfolios, feasibility, and approvals without hiding the decision logic.
+- Reference data only when its provenance, date, licence, and simulation status are shown.
 
-**What the MVP is NOT:**
+**The current prototype does not claim:**
 - A production-hardened system with 99.99% uptime
 - Integrated with actual government procurement systems
 - A claim that seeded/simulated data is live. The UI must label every input as `Live API`, `Historical`, `Simulated`, or `User-entered`.
 
-### MVP Product Standard
+### Target MVP Product Standard
 
 Every primary screen must be usable on its own and connected to the same scenario state. A user should be able to paste any relevant geopolitical, shipping, sanctions, weather, or market input; see Gemini extract and validate it; inspect the evidence and assumptions; modify scenario parameters; compare portfolios; and log an approval decision. Use deterministic fallbacks only when an external API is unavailable, and label the fallback state in the UI.
 
 ---
 
-## 2. Architecture (MVP Scope)
+## 2. Target Architecture (Roadmap - Not the Active Runtime)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -72,7 +74,7 @@ Every primary screen must be usable on its own and connected to the same scenari
 
 ---
 
-## 3. Tech Stack (MVP)
+## 3. Target Technology Stack (Roadmap - Not the Active Runtime)
 
 | Layer | Technology | Why This Choice |
 |---|---|---|
@@ -93,7 +95,7 @@ Every primary screen must be usable on its own and connected to the same scenari
 | **Styling** | Tailwind CSS + shadcn/ui | Rapid prototyping with premium look (hackathon speed) |
 | **Containerization** | Docker Compose | One-command local deployment of all services |
 
-### 3.1 Gemini-Powered Processing Contract
+### 3.1 Target Gemini-Powered Processing Contract
 
 Use the Gemini API for reasoning and extraction, but keep every critical number and decision constraint in deterministic Python code. Gemini is not a source of truth for prices, volumes, legal status, or feasibility; it converts unstructured inputs into a validated proposal that the backend checks against seeded/live data.
 
@@ -634,86 +636,65 @@ The home page is an orientation surface, not a compressed version of the whole p
 
 ---
 
-## 7. Demo Script — The "Wow" Moments
+## 7. Authoritative Judge Demo: One Hormuz Case (5 minutes)
 
-### 7.1 Judge-Impressing Demo Flow (8-10 minutes)
+This is the demonstration script for the **current implementation**. It deliberately proves a safe decision workflow rather than a broad dashboard. Do not combine it with the target-state map, graph, live-feed, latency, ROI, or multi-agent claims elsewhere in this roadmap.
 
-> This script is designed to hit EVERY judging criterion systematically.
+### 7.1 Five-minute flow
 
-**Opening (30 sec):**
-> "India imports 88% of its crude oil, with 40-45% flowing through a single chokepoint — the Strait of Hormuz. When disruptions hit, India's current response is reactive: phone calls, emergency meetings, spot market scrambles at peak prices. PetraVigil changes this from reactive crisis response to anticipatory resilience."
+**0:00-0:30 - Open with the claim boundary.**
 
-**Act 1: Crisis Replay & Signal Detection (2 min) → Innovation + Technical Excellence**
+> "PetraVigil is an evidence-labelled, analyst-confirmed contingency-decision prototype. It does not claim live AIS, news, price, sanctions, tanker, or supplier data, and it never executes procurement. What it proves is the safer decision path between an uncertain signal and a human decision."
 
-1. Show the Command Center with current DPS scores (all green/yellow)
-2. Start the rehearsed Crisis Replay. It injects an explicitly `Simulated` headline, AIS deviation, and insurance-signal sequence; then paste an additional user-entered headline to demonstrate real Gemini processing.
-3. Show the Signal Inbox processing state in real-time:
-   - Gemini extracts a schema-validated structured risk event and highlights supporting source text
-   - Entity resolution maps "Iran" → Persian Gulf corridor
-   - DPS for Hormuz corridor spikes from 0.35 to 0.78
-   - Alert pushes to dashboard via WebSocket
-4. Open the Evidence page and show the causal chain and input status badges.
-5. **Judge Impress Moment**: "That took 12 seconds from source text to a validated, traceable risk score. The simulation is visibly labelled; the user-entered item is processed by Gemini and checked against the graph."
+**0:30-1:00 - Rehearse the Hormuz signal.**
 
-**Act 2: Geospatial Intelligence (2 min) → Technical Excellence + User Experience**
+1. Open the source-labelled Hormuz replay and Decision Clock.
+2. State that the map and clock are offline local scenario artefacts, not vessel telemetry or operational deadlines.
+3. Change the approval-delay sensitivity and show that only the local decision milestone moves.
 
-1. Switch to the Map view
-2. Show vessels on active routes, colored by risk exposure
-3. Zoom into Strait of Hormuz — show chokepoint congestion
-4. **Live Demo**: Show 3 VLCCs that have "deviated" from Hormuz route (AIS anomaly)
-5. Click a vessel — show its cargo (2M barrels of Arab Light), origin (Ras Tanura), destination (Jamnagar), ETA impact if rerouted via COGH
-6. Toggle "Alternative Routes" layer — show COGH routes lighting up as green arcs
-7. **Judge Impress Moment**: "Every vessel, every route, every chokepoint — monitored continuously. Not weekly Excel reports."
+**1:00-1:45 - Turn text into a proposal, not a fact.**
 
-**Act 3: Knowledge Graph (1 min) → Innovation + Technical Excellence**
+1. Load the Hormuz example or paste a user-entered disruption signal.
+2. Show the raw text, the Gemini structured proposal when configured (or the visible deterministic fallback), entity matches, confidence, and unknowns.
+3. Explain that the analyst must inspect and confirm the scenario assumptions before execution.
 
-1. Switch to Knowledge Graph Explorer
-2. Show the full India crude import network in 3D
-3. **Interactive Demo**: Click "Strait of Hormuz" → immediately see:
-   - Which crude grades flow through it (Basrah Medium, Arab Light, Kuwait Export, Murban...)
-   - Which Indian refineries depend on these grades
-   - Which refineries can't switch easily (low complexity = limited crude diet)
-4. **Judge Impress Moment**: "This isn't just data — it's an energy supply chain digital twin. 400+ relationships encoding the technical reality that oil is NOT fungible."
+**1:45-2:35 - Run a reproducible constrained scenario.**
 
-**Act 4: Scenario Lab & Portfolio Trade-offs (2 min) → Innovation + Business Impact**
+1. Confirm or adjust closure severity, duration, alternative capacity, elasticity, simulation count, and seed.
+2. Run the workflow and show the simulated scenario result and constrained portfolio alternatives.
+3. State that the scenario output is simulated and the network constraints are seeded; it is not a market forecast or live supplier quote.
 
-1. Switch to Scenario Panel
-2. Select the warm "Hormuz Partial Blockade" playbook, then adjust closure severity in the assumption sandbox
-3. **Live Demo**: Run Monte Carlo simulation (1,000 runs) — show progress and a result transition
-4. Results appear:
-   - Supply impact: 1.2M bpd reduction to India (P50)
-   - Brent premium: +$6.50/bbl (P50), +$12.30/bbl (P90)
-   - Additional cost to India: $48M/day (P50)
-   - SPR depletion: 15 days at current drawdown rate
-5. Show fan chart of price trajectories
-6. Open Portfolio Comparison: "Do nothing", "Lowest cost", "Balanced", and "Maximum resilience"; highlight the act-now-versus-wait-72-hours counterfactual
-7. **Judge Impress Moment**: "This scenario ran 1,000 simulations in 8 seconds. Each simulation models supply disruption, price elasticity, and refinery feedstock constraints. The assumptions, sources, and trade-offs are visible and testable."
+**2:35-3:25 - Demonstrate the refusal path.**
 
-**Act 5: Procurement Recommendations (2 min) → Business Impact + Scalability**
+1. Run a capacity-shortfall case.
+2. Show `NO_RECOMMENDATION_YET`, the specific provenance/confidence/feasibility blockers, and next actions.
+3. Say: "The product is designed to decline a plausible-looking answer when the evidence or capacity cannot support one."
 
-1. Show auto-generated Procurement Action Cards
-2. Walk through top recommendation:
-   - "Increase US WTI Midland imports by 150,000 bpd via Cape of Good Hope"
-   - Show the route on the map (no chokepoint exposure)
-   - Show crude grade compatibility (WTI Midland API 41.5, sulfur 0.3% — compatible with Jamnagar complex refinery)
-   - Show cost analysis: +$3.20/bbl premium, but saves $5.00/bbl vs panic spot buying
-3. Expand its feasibility proof and show why a Basrah alternative was rejected; then show Plan B / Plan C and the SPR bridge recommendation
-4. Request approval and show the append-only decision log. No external purchase is placed.
-5. **Judge Impress Moment**: "These aren't vague suggestions. They're decision-ready actions with specific grades, volumes, routes, costs, feasibility checks, evidence, and accountable human approval."
+**3:25-4:20 - Demonstrate physical scarcity and a feasible path.**
 
-**Closing (30 sec):**
-> "PetraVigil compressed the signal-to-action cycle from 47 days to 30 minutes. Every recommendation is backed by evidence, constrained by refinery physics, and optimized for cost. India's energy security shouldn't depend on who answers the phone at 3 AM."
+1. Return to a feasible portfolio and show selected and rejected alternatives.
+2. Show the finite, opt-in, single-refinery SPR contingency only as a decision-support bridge with authorization assumptions; it never triggers a drawdown.
+3. Run the separate multi-refinery allocation drill. Show that Jamnagar, Paradip, and Kochi compete for the same physical route capacity, rather than each receiving an independently duplicated allocation.
 
-### 7.2 Backup "Wow" Demos (If Judges Ask Questions)
+**4:20-5:00 - Close with accountability and the production path.**
 
-- **"How does it handle multiple simultaneous disruptions?"** → Run compound scenario (Hormuz + Red Sea) → show how the optimizer redistributes across remaining corridors
-- **"What about crude grade substitutability?"** → Show KG query: "If Basrah Medium is unavailable, which grades have similar API gravity and sulfur content that Paradip refinery can process?"
-- **"How real-time is this?"** → Open GDELT API in another tab, show a recent energy-related article, paste it into the signal input → watch the pipeline process it live
-- **"How scalable is this?"** → Show Docker Compose architecture, explain stateless backend, Kafka event streaming, horizontal agent scaling. "Add more countries by extending the Knowledge Graph — Japan and South Korea have the same Hormuz dependency."
+1. Record Approve, Defer, or Reject with a justification. The record is local only; no purchase order is sent.
+2. Close: "PetraVigil proves the governance and constraint layer first: label evidence, confirm assumptions, respect finite capacity, refuse unsupported answers, and keep a human accountable. Verified data adapters, calibration, identity controls, and enterprise integrations are the next steps."
+
+### 7.2 Honest judge-question responses
+
+| Judge question | Demonstrate or answer |
+|---|---|
+| "Is the signal live?" | No. The current input is user-entered and the replay is offline/source-labelled. A production data-adapter roadmap is documented, but it is not active. |
+| "What does Gemini decide?" | Gemini extracts a proposed structure and can explain a result. Deterministic validation, analyst confirmation, simulation, and optimisation determine whether the workflow advances. |
+| "What happens when there is no safe option?" | Show `NO_RECOMMENDATION_YET`, its blockers, and next actions. |
+| "Can several refineries claim the same vessel or route?" | Show the shared-capacity multi-refinery drill; a route is one global capacity constraint. |
+| "Does it buy crude?" | No. The prototype writes only a local human decision record. |
+| "How reliable is it?" | The last verified local backend run passed 37 tests. Re-run the suite after changes; this is not a production SLA. |
 
 ---
 
-## 8. Implementation Timeline
+## 8. Target Implementation Timeline (Roadmap)
 
 ### Day 1-2: Foundation
 - [ ] Set up monorepo structure
@@ -758,46 +739,25 @@ The home page is an orientation surface, not a compressed version of the whole p
 
 ---
 
-## 9. Judging Criteria Strategy
+## 9. Current Judging Strategy (Evidence-Based)
 
-### Innovation (25%)
-| What Judges Want | How We Deliver |
-|---|---|
-| Novel approach | Multi-agent system with specialized energy domain agents — not a single LLM wrapper |
-| Creative use of technology | Knowledge Graph + Monte Carlo + Constrained Optimization + Geospatial AI — four cutting-edge technologies integrated |
-| Non-obvious insights | Pre-computed scenario playbooks (anticipatory, not reactive), crude grade compatibility constraints (oil is not fungible) |
+Use the current implementation, not the target architecture, as the proof point. The official criteria weight innovation and business impact most heavily; the strongest defensible story is safe, reviewable decision support under uncertainty.
 
-### Business Impact (25%)
-| What Judges Want | How We Deliver |
-|---|---|
-| Quantified value | $2.5-4B annual savings on India's oil import bill, 85% reduction in response time |
-| Real-world applicability | Built on real crude grades, real refineries, real routes — not toy data |
-| Stakeholder relevance | Direct applicability to PPAC, MoPNG, IOC/BPCL/HPCL procurement teams |
+| Criterion | What the current prototype can demonstrate | Boundary to state explicitly |
+|---|---|---|
+| Innovation (25%) | An evidence-labelled pipeline where an analyst must confirm assumptions; a no-recommendation gate; finite SPR assumptions; and shared multi-refinery route capacity. | No active multi-agent system, knowledge graph, or live data fusion. |
+| Business impact (25%) | A realistic operating problem: show why a procurement team needs a defensible decision record and a safe refusal when inputs do not support a route/capacity recommendation. | Do not claim national savings, response-time reduction, live market price impact, or customer adoption without validation. |
+| Technical excellence (20%) | FastAPI/Pydantic workflow boundaries; optional Gemini with labelled fallback; reproducible NumPy simulation; OR-Tools constraints; local SQLite decision trace. The last verified local backend run passed 37 tests. | Seeded constraints and simulated output are not a calibrated operational model. |
+| Scalability (15%) | A clean separation between input extraction, deterministic calculation, optimisation, and decision record makes future adapters possible. | The active runtime is a local prototype, not a measured distributed or multi-tenant deployment. |
+| User experience (15%) | One coherent workspace walks a reviewer from signal through confirmation, simulation, recommendation/refusal, and local approval. Source status and unresolved assumptions are visible. | The current UI is not the planned ten-page command centre. |
 
-### Technical Excellence (20%)
-| What Judges Want | How We Deliver |
-|---|---|
-| Architecture quality | Clean multi-agent architecture with event-driven communication |
-| Code quality | Typed Python (Pydantic models), proper separation of concerns |
-| Appropriate technology choices | Each technology choice has a clear rationale (Neo4j for graphs, OR-Tools for optimization, Deck.gl for geospatial) |
+### Presentation rule
 
-### Scalability (15%)
-| What Judges Want | How We Deliver |
-|---|---|
-| Can it grow? | Dockerized services, stateless backend, Kafka-ready architecture |
-| Multi-tenant? | Architecture supports sovereign (gov), private cloud (PSU), SaaS (traders) |
-| International? | Knowledge Graph is extensible — add Japan, South Korea, EU by extending nodes/edges |
-
-### User Experience (15%)
-| What Judges Want | How We Deliver |
-|---|---|
-| Visual polish | Warm pastel decision workspace, purposeful data animations, pale map, and optional 3D knowledge graph |
-| Intuitive navigation | 10 focused pages with persistent selected-scenario state and clear deep links |
-| Actionable output | Procurement Action Cards are the final deliverable — not charts and graphs, but specific executable actions |
+For every metric or output, say whether it is `User-entered`, `Historical/seeded`, `Simulated`, or a local decision record. Prefer the refusal path and shared-capacity drill over unsupported visual claims. The target technology plan remains useful as a roadmap only.
 
 ---
 
-## 10. Project Structure
+## 10. Target Project Structure (Roadmap)
 
 ```
 petravigil/
@@ -935,25 +895,22 @@ petravigil/
 
 ---
 
-## 11. Critical Implementation Notes
+## 11. Target Build Acceptance Notes (Roadmap)
 
-### 11.1 What to Build Real vs. What to Simulate Transparently
+### 11.1 Target Components and Transparent Simulation Rules
 
-| Component | Real or Simulated | Notes |
-|---|---|---|
-| Knowledge Graph data | **REAL** | Use actual crude grades, refineries, routes — this is publicly available data |
-| Gemini signal extraction and explanation | **REAL** | Call Gemini using schema-validated output; retain source spans, prompt version, caching, and backend validation |
-| Risk scoring (DPS) | **REAL** | Actual computation with real weights |
-| AIS vessel data | **SIMULATED** | Generate realistic positions for 50 VLCCs on real shipping lanes |
-| Monte Carlo simulation | **REAL** | Actual NumPy-based simulation with 1,000 runs |
-| OR-Tools optimization | **REAL** | Real constrained optimization solver |
-| News feed / free-text input | **REAL + SIMULATED** | Gemini processes pasted input; seeded and replay signals remain visibly labelled by origin |
-| Commodity prices | **HISTORICAL / SEEDED** | Use dated historical Brent prices and label them; never present them as current |
-| WebSocket updates | **REAL** | Actual real-time push from backend to frontend |
-| Scenario, portfolios, feasibility and SPR bridge | **REAL** | Deterministic calculations from explicit prototype assumptions and seeded constraints |
-| Approval workflow | **REAL, LOCAL ONLY** | Persist draft/approve/reject records with justification; never integrate or submit a purchase order |
+| Target component | Evidence and labelling rule |
+|---|---|
+| Knowledge graph or public reference data | Add only with source, licence, retrieval date, refresh policy, and explicit distinction between reference data and live operational availability. |
+| Gemini extraction and explanation | Keep schema validation, source spans, prompt version, fallback status, and analyst review. Gemini must not act as source of truth. |
+| Risk score | Publish calibration data and uncertainty bounds before describing it as a probability. |
+| AIS or vessel data | Use licensed adapters and label every feed; simulated tracks must remain visibly simulated. |
+| Scenario and optimisation | Keep assumptions, solver constraints, reproducibility seed, rejected alternatives, and no-solution output visible. |
+| Market prices | Use dated/licensed data and prevent a stale quote from being framed as current. |
+| Real-time updates | Add only after the data source, transport, and freshness semantics are tested end-to-end. |
+| Approval workflow | Add identity, authorization, retention, and controlled integration before any production action; never make a purchase automatically. |
 
-### 11.2 Performance Targets for Demo
+### 11.2 Target Performance Criteria (Not Yet Validated)
 
 - Signal extraction (LLM call): < 5 seconds
 - DPS recomputation: < 1 second

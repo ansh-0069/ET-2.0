@@ -53,7 +53,7 @@ export default function CrisisReplaySurface({ replay, selectedRoutes, onUseRepla
   }, [replay]);
 
   return (
-    <section className="stage-card crisis-replay" aria-labelledby="crisis-replay-title">
+    <section className="context-surface crisis-replay" aria-labelledby="crisis-replay-title">
       <div className="section-heading replay-heading">
         <div>
           <p className="label">SOURCE-LABELLED CRISIS REPLAY</p>
