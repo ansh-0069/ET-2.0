@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 
 import httpx
 
@@ -17,6 +18,37 @@ from petravigil.models import (
 
 DEFAULT_MODEL = "gemini-2.5-flash"
 DISCLAIMER = "Gemini output is an unverified proposal. Costs, volumes, legal status, and executable actions remain deterministic backend decisions."
+
+
+# The offline fallback may only name an entity when the submitted text contains
+# one of its explicit aliases.  These are deliberately narrow: they are not a
+# geography or event-inference model.
+FALLBACK_COUNTRY_ALIASES: dict[str, tuple[str, ...]] = {
+    "Iraq": ("iraq", "iraqi"),
+    "Saudi Arabia": ("saudi arabia", "saudi"),
+    "United Arab Emirates": ("united arab emirates", "uae", "emirati"),
+    "United States": ("united states", "u.s.", "us", "american"),
+    "Guyana": ("guyana", "guyanese"),
+    "Nigeria": ("nigeria", "nigerian"),
+    "Iran": ("iran", "iranian"),
+    "India": ("india", "indian"),
+}
+FALLBACK_CHOKEPOINT_ALIASES: dict[str, tuple[str, ...]] = {
+    "HORMUZ": ("hormuz", "strait of hormuz"),
+    "BAB_EL_MANDEB": ("bab el-mandeb", "bab el mandeb", "bab-al-mandab"),
+    "SUEZ": ("suez", "suez canal"),
+    "MALACCA": ("malacca", "strait of malacca"),
+    "CAPE_OF_GOOD_HOPE": ("cape of good hope",),
+}
+
+
+def _contains_alias(text: str, alias: str) -> bool:
+    """Return true only for a whole-word textual mention, never an inference."""
+    return re.search(rf"(?<!\\w){re.escape(alias)}(?!\\w)", text, flags=re.IGNORECASE) is not None
+
+
+def _matched_entities(text: str, aliases: dict[str, tuple[str, ...]]) -> list[str]:
+    return [canonical for canonical, terms in aliases.items() if any(_contains_alias(text, term) for term in terms)]
 
 
 class GeminiService:
@@ -90,16 +122,54 @@ class GeminiService:
 
     @staticmethod
     def _fallback_signal(text: str) -> GeminiSignalProposal:
+        relevant_terms = ("crude", "oil", "tanker", "shipping", "vessel", "hormuz", "refinery", "sanction", "port", "pipeline")
+        lowered_text = text.casefold()
+        if not any(term in lowered_text for term in relevant_terms):
+            return GeminiSignalProposal(
+                energy_relevant=False,
+                event_type="UNCLASSIFIED",
+                severity=1.0,
+                confidence=0.25,
+                affected_countries=[],
+                affected_chokepoints=[],
+                time_horizon="DAYS",
+                summary="Cached demo extraction: the submitted text cannot be linked to an energy supply-chain disruption from the available offline evidence.",
+                evidence_note="No GEMINI_API_KEY is configured. The offline fallback will not invent a corridor, country, or disruption event for unrelated text.",
+            )
+
+        countries = _matched_entities(text, FALLBACK_COUNTRY_ALIASES)
+        chokepoints = _matched_entities(text, FALLBACK_CHOKEPOINT_ALIASES)
+        if not chokepoints:
+            return GeminiSignalProposal(
+                energy_relevant=True,
+                event_type="UNCLASSIFIED",
+                severity=3.0,
+                confidence=0.3,
+                affected_countries=countries,
+                affected_chokepoints=[],
+                time_horizon="DAYS",
+                summary=(
+                    "Cached demo extraction: the submitted text is energy-related, but it does not explicitly "
+                    "name a seeded chokepoint. No disruption corridor is proposed."
+                ),
+                evidence_note=(
+                    "No GEMINI_API_KEY is configured. The offline fallback only returns countries and "
+                    "chokepoints explicitly mentioned in the submitted text; it will not infer Hormuz or a route."
+                ),
+            )
         return GeminiSignalProposal(
             energy_relevant=True,
             event_type="SHIPPING_DISRUPTION",
             severity=7.4,
             confidence=0.68,
-            affected_countries=["Iran", "India"],
-            affected_chokepoints=["HORMUZ"],
+            affected_countries=countries,
+            affected_chokepoints=chokepoints,
             time_horizon="DAYS",
             summary=f"Cached demo extraction: the submitted text may indicate shipping disruption relevant to Indian crude imports. Input preview: {text[:140]}",
-            evidence_note="No GEMINI_API_KEY is configured, so this is a deterministic showcase fallback rather than a live model result.",
+            evidence_note=(
+                "No GEMINI_API_KEY is configured. This deterministic fallback returns only entities explicitly "
+                "matched in the submitted text and is not a live model result."
+            ),
         )
 
     def _fallback_explanation(self, supplier: str, grade: str, refinery: str, route: str) -> GeminiExplanationResponse:

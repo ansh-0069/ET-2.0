@@ -60,7 +60,11 @@ class SignalMeshService:
         resolutions = self._resolve(gemini_result.proposal.affected_countries, gemini_result.proposal.affected_chokepoints)
         signal_id = f"SIG-{str(uuid4()).upper()}"
         risk_scores = self._risk_scores(signal_id, request.text, gemini_result.proposal.severity, gemini_result.proposal.confidence, resolutions)
-        review_required = gemini_result.provider_status != DataStatus.LIVE_API or any(not result.resolved for result in resolutions)
+        review_required = (
+            request.source_status == DataStatus.USER_ENTERED
+            or gemini_result.provider_status != DataStatus.LIVE_API
+            or any(not result.resolved for result in resolutions)
+        )
         return self.repository.save(
             ProcessedSignal(
                 signal_id=signal_id,

@@ -46,7 +46,7 @@ class PortfolioOptimizer:
         self.network = network
 
     def generate(self, request: PortfolioRequest) -> PortfolioComparison:
-        candidates = self.network.alternatives(request.refinery, "HORMUZ")
+        candidates = self.network.alternatives(request.refinery, request.disrupted_chokepoint)
         portfolios = [self._do_nothing(request)]
         portfolios.extend(self._solve(request, candidates, label, risk_penalty) for label, risk_penalty in (("LOWEST_COST", 0.0), ("BALANCED", 8.0), ("MAX_RESILIENCE", 28.0)))
         return self.repository.save(PortfolioComparison(comparison_id=f"PC-{str(uuid4()).upper()}", created_at=datetime.now(timezone.utc), status="COMPLETED", request=request, portfolios=portfolios))
@@ -58,7 +58,10 @@ class PortfolioOptimizer:
         solver = pywraplp.Solver.CreateSolver("GLOP")
         if solver is None:
             raise RuntimeError("Linear optimisation solver is unavailable")
-        capacity = [int(option.available_volume_bpd * request.alternative_route_capacity_ratio) for option in candidates]
+        # Round rather than truncate: binary floating-point representation of
+        # values such as 0.70 must not turn a valid 63,000 bpd capacity into
+        # 62,999 bpd and falsely report an infeasible portfolio.
+        capacity = [round(option.available_volume_bpd * request.alternative_route_capacity_ratio) for option in candidates]
         variables = [solver.NumVar(0, capacity[index], f"v_{index}") for index in range(len(candidates))]
         solver.Add(solver.Sum(variables) == request.required_volume_bpd)
         if label == "BALANCED":

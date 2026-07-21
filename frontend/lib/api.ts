@@ -31,6 +31,11 @@ export type Simulation = { simulation_id: string; data_status: string; assumptio
 export type Portfolio = { portfolio_id: string; label: "DO_NOTHING" | "LOWEST_COST" | "BALANCED" | "MAX_RESILIENCE"; total_volume_bpd: number; total_daily_cost_usd: number; weighted_route_risk: number; expected_avoided_exposure_usd: number; allocations: Array<{ supplier_country: string; crude_grade: string; route: string; volume_bpd: number; cost_usd_per_bbl: number; route_risk_score: number }>; rationale: string };
 export type PortfolioComparison = { comparison_id: string; request: { refinery: string; required_volume_bpd: number; alternative_route_capacity_ratio: number }; portfolios: Portfolio[] };
 export type ApprovalRecord = { approval_id: string; recommendation_id: string; decision: "DRAFT" | "APPROVED" | "REJECTED" | "DEFERRED"; decided_by: string; decided_at: string; justification: string; execution_external: false };
+export type AgentTraceEntry = { stage: "SIGNAL" | "INTELLIGENCE" | "RISK" | "ECONOMIC" | "PROCUREMENT" | "EXECUTIVE"; status: "COMPLETED" | "REQUIRES_REVIEW"; confidence: number; summary: string; rationale: string; unknowns: string[] };
+export type WorkflowAssumptions = { closure_severity: number; disruption_duration_days: number; brent_elasticity_usd_per_mmbpd: number; alternative_route_capacity_ratio: number; n_runs: number; random_seed: number; confidence: number; rationale: string; unknowns: string[] };
+export type RecommendationTransparency = { selected_portfolio: "LOWEST_COST" | "BALANCED" | "MAX_RESILIENCE"; confidence: number; evidence: string[]; assumptions: string[]; risk_factors: string[]; rejected_alternatives: string[]; unknowns: string[]; why_this_won: string; requires_human_approval: true };
+export type WorkflowProposal = { workflow_id: string; status: "AWAITING_ANALYST_CONFIRMATION"; created_at: string; refinery: string; required_volume_bpd: number; processed_signal: ProcessedSignal; proposed_assumptions: WorkflowAssumptions; agent_trace: AgentTraceEntry[] };
+export type WorkflowExecution = { workflow_id: string; status: "COMPLETED" | "BLOCKED"; completed_at: string; analyst_name: string; processed_signal: ProcessedSignal; assumptions: WorkflowAssumptions; recommendation_id: string | null; simulation: Simulation | null; portfolios: PortfolioComparison | null; executive_brief: ExplanationResult | null; transparency: RecommendationTransparency | null; blocking_reason: string | null; agent_trace: AgentTraceEntry[] };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
@@ -41,7 +46,13 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   });
 
   if (!response.ok) {
-    throw new Error(`API request failed (${response.status})`);
+    const payload = await response.json().catch(() => null) as { detail?: string | Array<{ msg?: string }> } | null;
+    const detail = typeof payload?.detail === "string"
+      ? payload.detail
+      : Array.isArray(payload?.detail)
+        ? payload.detail.map((item) => item.msg).filter(Boolean).join(" ")
+        : null;
+    throw new Error(detail || `API request failed (${response.status})`);
   }
 
   return response.json() as Promise<T>;
@@ -63,3 +74,6 @@ export const generatePortfolios = (alternativeRouteCapacityRatio: number) => req
 export const briefPortfolio = (label: Portfolio["label"]) => request<ExplanationResult>(`/api/v1/portfolios/${label}/brief`, { method: "POST" });
 export const getApprovals = () => request<ApprovalRecord[]>("/api/v1/approvals?limit=6");
 export const createApproval = (payload: Pick<ApprovalRecord, "decision" | "decided_by" | "justification">) => request<ApprovalRecord>("/api/v1/approvals/canonical", { method: "POST", body: JSON.stringify(payload) });
+export const proposeWorkflow = (payload: { text: string; refinery: string; required_volume_bpd: number }) => request<WorkflowProposal>("/api/v1/workflows/propose", { method: "POST", body: JSON.stringify(payload) });
+export const executeWorkflow = (workflowId: string, payload: { analyst_name: string; assumptions: WorkflowAssumptions }) => request<WorkflowExecution>(`/api/v1/workflows/${workflowId}/execute`, { method: "POST", body: JSON.stringify({ ...payload, analyst_confirmed: true }) });
+export const approveWorkflow = (workflowId: string, payload: Pick<ApprovalRecord, "decision" | "decided_by" | "justification">) => request<ApprovalRecord>(`/api/v1/workflows/${workflowId}/approval`, { method: "POST", body: JSON.stringify(payload) });

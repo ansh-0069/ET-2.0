@@ -349,6 +349,7 @@ class PortfolioRequest(BaseModel):
     refinery: str = "Jamnagar"
     required_volume_bpd: int = Field(default=210_000, ge=50_000, le=500_000)
     alternative_route_capacity_ratio: Probability = 0.72
+    disrupted_chokepoint: str = Field(default="HORMUZ", min_length=3, max_length=80)
 
 
 class ProcurementAllocation(BaseModel):
@@ -385,3 +386,106 @@ class PortfolioComparison(BaseModel):
     status: Literal["COMPLETED"]
     request: PortfolioRequest
     portfolios: list[ProcurementPortfolio] = Field(min_length=4, max_length=4)
+
+
+class AgentStage(StrEnum):
+    """Named, independently auditable stages in the lightweight workflow."""
+
+    SIGNAL = "SIGNAL"
+    INTELLIGENCE = "INTELLIGENCE"
+    RISK = "RISK"
+    ECONOMIC = "ECONOMIC"
+    PROCUREMENT = "PROCUREMENT"
+    EXECUTIVE = "EXECUTIVE"
+
+
+class AgentTraceEntry(BaseModel):
+    """Concise, user-facing rationale rather than hidden model reasoning."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    stage: AgentStage
+    status: Literal["COMPLETED", "REQUIRES_REVIEW"]
+    confidence: Probability
+    summary: str = Field(min_length=10, max_length=800)
+    rationale: str = Field(min_length=10, max_length=1_200)
+    unknowns: list[str] = Field(default_factory=list)
+
+
+class WorkflowAssumptions(BaseModel):
+    """Explicit assumptions proposed from the processed signal for analyst review."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    closure_severity: Probability
+    disruption_duration_days: int = Field(ge=1, le=120)
+    brent_elasticity_usd_per_mmbpd: float = Field(ge=0.1, le=30)
+    alternative_route_capacity_ratio: Probability
+    n_runs: int = Field(ge=100, le=5000)
+    random_seed: int = Field(ge=0)
+    confidence: Probability
+    rationale: str = Field(min_length=20, max_length=1_200)
+    unknowns: list[str] = Field(default_factory=list)
+
+
+class WorkflowProposalRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    text: str = Field(min_length=20, max_length=12_000)
+    refinery: str = Field(default="Jamnagar", min_length=2, max_length=120)
+    required_volume_bpd: int = Field(default=210_000, ge=50_000, le=500_000)
+
+
+class WorkflowProposal(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    workflow_id: str = Field(pattern=r"^WF-[A-F0-9-]+$")
+    status: Literal["AWAITING_ANALYST_CONFIRMATION"]
+    created_at: datetime
+    refinery: str
+    required_volume_bpd: int
+    processed_signal: ProcessedSignal
+    proposed_assumptions: WorkflowAssumptions
+    agent_trace: list[AgentTraceEntry] = Field(min_length=3, max_length=3)
+
+
+class WorkflowConfirmationRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    analyst_confirmed: Literal[True]
+    analyst_name: str = Field(min_length=2, max_length=100)
+    assumptions: WorkflowAssumptions
+
+
+class RecommendationTransparency(BaseModel):
+    """Decision-ready evidence and limitations for the selected portfolio."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    selected_portfolio: Literal["LOWEST_COST", "BALANCED", "MAX_RESILIENCE"]
+    confidence: Probability
+    evidence: list[str] = Field(min_length=1)
+    assumptions: list[str] = Field(min_length=1)
+    risk_factors: list[str] = Field(min_length=1)
+    rejected_alternatives: list[str] = Field(min_length=1)
+    unknowns: list[str] = Field(min_length=1)
+    why_this_won: str = Field(min_length=30, max_length=1_500)
+    requires_human_approval: Literal[True] = True
+
+
+class WorkflowExecution(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    workflow_id: str = Field(pattern=r"^WF-[A-F0-9-]+$")
+    status: Literal["COMPLETED", "BLOCKED"]
+    completed_at: datetime
+    analyst_name: str
+    processed_signal: ProcessedSignal
+    assumptions: WorkflowAssumptions
+    recommendation_id: str | None = Field(default=None, pattern=r"^PA-[A-F0-9-]+$")
+    simulation: SimulationResult | None = None
+    portfolios: PortfolioComparison | None = None
+    executive_brief: GeminiExplanationResponse | None = None
+    transparency: RecommendationTransparency | None = None
+    blocking_reason: str | None = Field(default=None, max_length=1_000)
+    agent_trace: list[AgentTraceEntry] = Field(min_length=4, max_length=6)

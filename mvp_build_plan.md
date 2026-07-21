@@ -3,6 +3,13 @@
 
 ---
 
+> ## Current implemented prototype (authoritative runtime note)
+> This document is the **target MVP roadmap**, not a claim that every component below is already running. The current repository implements one linked, analyst-confirmed path: user-entered signal -> optional Gemini structured proposal (or labelled deterministic fallback) -> seeded entity/risk checks -> analyst-confirmed assumptions -> reproducible NumPy simulation -> seeded OR-Tools procurement portfolios -> optional Gemini/local explanation -> local SQLite decision record. The active UI is a single workflow workspace rather than the planned suite of dedicated pages.
+>
+> The runtime has **no live AIS, news, commodity-price, tanker, port, sanctions, or supplier feed**; no map, RAG/vector database, Neo4j, Redis, PostgreSQL, or LangGraph service is active. Bundled network data and scenario outputs are explicitly labelled seeded/simulated, and no recommendation executes an external procurement action. See `README.md` for the current runbook and configuration.
+
+---
+
 ## 1. MVP Philosophy
 
 > **Principle**: Build a **vertically complete slice** — from raw signal ingestion to executable procurement recommendation — rather than a horizontally broad but shallow prototype. Judges want to see the full pipeline work end-to-end, not 10 half-built features.

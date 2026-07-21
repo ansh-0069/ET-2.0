@@ -10,7 +10,12 @@ def test_health() -> None:
     response = client.get("/health")
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok", "phase": "8"}
+    assert response.json() == {
+        "status": "ok",
+        "phase": "8",
+        "workflow": "analyst-confirmed",
+        "runtime": "local-prototype",
+    }
 
 
 def test_canonical_scenario_endpoint_returns_contract() -> None:

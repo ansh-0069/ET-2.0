@@ -9,6 +9,7 @@ from petravigil.models import (
     ApprovalRecord,
     AlternativeRouteOption,
     CanonicalScenarioResponse,
+    DataStatus,
     GeminiExplanationResponse,
     GeminiSignalRequest,
     GeminiSignalResponse,
@@ -21,6 +22,10 @@ from petravigil.models import (
     SimulationRequest,
     SimulationResult,
     SignalProcessRequest,
+    WorkflowConfirmationRequest,
+    WorkflowExecution,
+    WorkflowProposal,
+    WorkflowProposalRequest,
 )
 from petravigil.services.gemini import get_gemini_service
 from petravigil.services.scenario_runs import ScenarioRunRepository
@@ -29,12 +34,13 @@ from petravigil.services.scenario_engine import ScenarioEngine, SimulationReposi
 from petravigil.services.portfolio_optimizer import PortfolioOptimizer, PortfolioRepository
 from petravigil.services.approvals import ApprovalRepository
 from petravigil.services.supply_network import get_supply_network
+from petravigil.services.decision_workflow import DecisionWorkflowRepository, DecisionWorkflowService
 
 
 app = FastAPI(
     title="PetraVigil API",
-    version="0.1.0",
-    description="Phase 0 contract and deterministic showcase fixture.",
+    version="0.2.0",
+    description="Analyst-confirmed energy supply resilience decision workflow with explicit local prototype data labels.",
 )
 
 app.add_middleware(
@@ -50,11 +56,31 @@ signal_repository = SignalRepository(Path(".state") / "petravigil.sqlite3")
 simulation_repository = SimulationRepository(Path(".state") / "petravigil.sqlite3")
 portfolio_repository = PortfolioRepository(Path(".state") / "petravigil.sqlite3")
 approval_repository = ApprovalRepository(Path(".state") / "petravigil.sqlite3")
+workflow_repository = DecisionWorkflowRepository(Path(".state") / "petravigil.sqlite3")
+
+
+def get_decision_workflow_service() -> DecisionWorkflowService:
+    """Compose explicit prototype agents around the existing, tested services."""
+    network = get_supply_network()
+    gemini = get_gemini_service()
+    return DecisionWorkflowService(
+        repository=workflow_repository,
+        signal_mesh=SignalMeshService(signal_repository, gemini, network),
+        scenario_engine=ScenarioEngine(simulation_repository),
+        portfolio_optimizer=PortfolioOptimizer(portfolio_repository, network),
+        gemini=gemini,
+        approval_repository=approval_repository,
+    )
 
 
 @app.get("/health", tags=["system"])
 def health() -> dict[str, str]:
-    return {"status": "ok", "phase": "8"}
+    return {
+        "status": "ok",
+        "phase": "8",
+        "workflow": "analyst-confirmed",
+        "runtime": "local-prototype",
+    }
 
 
 @app.get(
@@ -138,8 +164,12 @@ async def explain_recommendation() -> GeminiExplanationResponse:
 
 @app.post("/api/v1/signals/process", response_model=ProcessedSignal, status_code=status.HTTP_201_CREATED, tags=["signals"])
 async def process_signal(request: SignalProcessRequest) -> ProcessedSignal:
+    # This public endpoint receives manually pasted content. Only trusted source
+    # adapters (not implemented in this prototype) may create live/historical
+    # provenance records, so callers cannot self-label text as a live feed.
+    trusted_request = request.model_copy(update={"source_status": DataStatus.USER_ENTERED})
     service = SignalMeshService(signal_repository, get_gemini_service(), get_supply_network())
-    return await service.process(request)
+    return await service.process(trusted_request)
 
 
 @app.get("/api/v1/signals", response_model=list[ProcessedSignal], tags=["signals"])
@@ -194,3 +224,48 @@ def create_canonical_approval(request: ApprovalCreateRequest) -> ApprovalRecord:
 @app.get("/api/v1/approvals", response_model=list[ApprovalRecord], tags=["approvals"])
 def get_approvals(limit: int = 12) -> list[ApprovalRecord]:
     return approval_repository.latest(min(max(limit, 1), 50))
+
+
+@app.post(
+    "/api/v1/workflows/propose",
+    response_model=WorkflowProposal,
+    status_code=status.HTTP_201_CREATED,
+    tags=["decision workflows"],
+)
+async def propose_decision_workflow(request: WorkflowProposalRequest) -> WorkflowProposal:
+    """Process a signal and stop for explicit analyst confirmation of assumptions."""
+    try:
+        return await get_decision_workflow_service().propose(request)
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
+
+
+@app.post(
+    "/api/v1/workflows/{workflow_id}/execute",
+    response_model=WorkflowExecution,
+    tags=["decision workflows"],
+)
+async def execute_decision_workflow(
+    workflow_id: str, confirmation: WorkflowConfirmationRequest
+) -> WorkflowExecution:
+    """Run the downstream economic, procurement, and executive stages after review."""
+    try:
+        return await get_decision_workflow_service().execute(workflow_id, confirmation)
+    except KeyError as error:
+        raise HTTPException(status_code=404, detail="Decision workflow not found") from error
+
+
+@app.post(
+    "/api/v1/workflows/{workflow_id}/approval",
+    response_model=ApprovalRecord,
+    status_code=status.HTTP_201_CREATED,
+    tags=["decision workflows", "approvals"],
+)
+def approve_decision_workflow(workflow_id: str, request: ApprovalCreateRequest) -> ApprovalRecord:
+    """Record a local-only approval against the actual selected workflow recommendation."""
+    try:
+        return get_decision_workflow_service().approve(workflow_id, request)
+    except KeyError as error:
+        raise HTTPException(status_code=404, detail="Decision workflow not found") from error
+    except ValueError as error:
+        raise HTTPException(status_code=409, detail=str(error)) from error

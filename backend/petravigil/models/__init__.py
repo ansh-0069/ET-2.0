@@ -28,6 +28,14 @@ from petravigil.models.contracts import (
     SimulationResult,
     SimulationSeriesPoint,
     SignalProcessRequest,
+    AgentStage,
+    AgentTraceEntry,
+    WorkflowAssumptions,
+    WorkflowProposalRequest,
+    WorkflowProposal,
+    WorkflowConfirmationRequest,
+    RecommendationTransparency,
+    WorkflowExecution,
 )
 
 __all__ = [
@@ -60,4 +68,12 @@ __all__ = [
     "SimulationResult",
     "SimulationSeriesPoint",
     "SignalProcessRequest",
+    "AgentStage",
+    "AgentTraceEntry",
+    "WorkflowAssumptions",
+    "WorkflowProposalRequest",
+    "WorkflowProposal",
+    "WorkflowConfirmationRequest",
+    "RecommendationTransparency",
+    "WorkflowExecution",
 ]
