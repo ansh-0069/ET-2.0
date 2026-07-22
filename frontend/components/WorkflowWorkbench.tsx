@@ -42,6 +42,8 @@ const JOURNEY_STAGES = [
   { id: "stage-5", number: "05", label: "Executive action" },
 ] as const;
 
+type JourneyStageId = (typeof JOURNEY_STAGES)[number]["id"];
+
 function number(value: number): string {
   return new Intl.NumberFormat("en-IN").format(Math.round(value));
 }
@@ -109,11 +111,11 @@ function optionalScopeUnsupported(cause: unknown): boolean {
   return message.includes("national_demand_lines") || message.includes("extra inputs") || message.includes("extra_forbidden");
 }
 
-function stageState(index: number, proposal: WorkflowProposal | null, execution: WorkflowExecution | null, approved: boolean): "current" | "complete" | "pending" {
-  if (!proposal) return index === 0 ? "current" : "pending";
-  if (!execution) return index < 1 ? "complete" : index === 1 ? "current" : "pending";
-  if (execution.status === "BLOCKED") return index < 3 ? "complete" : index === 3 ? "current" : "pending";
-  if (!approved) return index < 4 ? "complete" : index === 4 ? "current" : "pending";
+function stageState(index: number, proposal: WorkflowProposal | null, execution: WorkflowExecution | null, approved: boolean): "next" | "complete" | "pending" {
+  if (!proposal) return index === 0 ? "next" : "pending";
+  if (!execution) return index < 1 ? "complete" : index === 1 ? "next" : "pending";
+  if (execution.status === "BLOCKED") return index < 3 ? "complete" : index === 3 ? "next" : "pending";
+  if (!approved) return index < 4 ? "complete" : index === 4 ? "next" : "pending";
   return "complete";
 }
 
@@ -144,6 +146,7 @@ export default function WorkflowWorkbench() {
   const [working, setWorking] = useState<"signal" | "execute" | "approval" | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [lastLocalResponseAt, setLastLocalResponseAt] = useState<Date | null>(null);
+  const [activeStageId, setActiveStageId] = useState<JourneyStageId>(JOURNEY_STAGES[0].id);
 
   async function loadWorkspace(): Promise<void> {
     setLoading(true);
@@ -169,6 +172,35 @@ export default function WorkflowWorkbench() {
 
   useEffect(() => {
     void loadWorkspace();
+  }, []);
+
+  useEffect(() => {
+    function updateActiveStage(): void {
+      const navBottom = document.querySelector<HTMLElement>(".journey-nav")?.getBoundingClientRect().bottom ?? 0;
+      const focusLine = navBottom + 24;
+      let nextActiveStage: JourneyStageId = JOURNEY_STAGES[0].id;
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        setActiveStageId(JOURNEY_STAGES[JOURNEY_STAGES.length - 1].id);
+        return;
+      }
+
+      for (const stage of JOURNEY_STAGES) {
+        const section = document.getElementById(stage.id);
+        if (section && section.getBoundingClientRect().top <= focusLine) nextActiveStage = stage.id;
+        else break;
+      }
+
+      setActiveStageId((current) => current === nextActiveStage ? current : nextActiveStage);
+    }
+
+    updateActiveStage();
+    window.addEventListener("scroll", updateActiveStage, { passive: true });
+    window.addEventListener("resize", updateActiveStage);
+    return () => {
+      window.removeEventListener("scroll", updateActiveStage);
+      window.removeEventListener("resize", updateActiveStage);
+    };
   }, []);
 
   const selectedPortfolio = useMemo(
@@ -359,7 +391,8 @@ export default function WorkflowWorkbench() {
       <nav className="journey-nav" aria-label="Guided decision journey">
         {JOURNEY_STAGES.map((stage, index) => {
           const state = stageState(index, proposal, execution, Boolean(workflowApproval));
-          return <button type="button" className={`journey-nav-step is-${state}`} onClick={() => scrollToStage(stage.id)} aria-current={state === "current" ? "step" : undefined} key={stage.id}><span>{stage.number}</span><strong>{stage.label}</strong></button>;
+          const isActive = activeStageId === stage.id;
+          return <button type="button" className={`journey-nav-step is-${state}${isActive ? " is-active" : ""}`} onClick={() => { setActiveStageId(stage.id); scrollToStage(stage.id); }} aria-current={isActive ? "step" : undefined} key={stage.id}><span>{stage.number}</span><strong>{stage.label}</strong></button>;
         })}
       </nav>
 

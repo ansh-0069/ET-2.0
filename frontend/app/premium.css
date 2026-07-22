@@ -524,8 +524,9 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 .journey-nav-step:hover:not(:disabled) { color: var(--ink); background: #141924; box-shadow: none; transform: none; }
 .journey-nav-step > span { display: grid; width: 24px; height: 24px; flex: 0 0 auto; place-items: center; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--muted); font-size: .67rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .journey-nav-step strong { color: inherit; font-size: .76rem; font-weight: 690; line-height: 1.15; }
-.journey-nav-step.is-current { border-color: rgba(77,141,255,.64); color: var(--ink); background: #101827; }
-.journey-nav-step.is-current > span, .journey-nav-step.is-complete > span { border-color: var(--blue); color: var(--blue-bright); background: var(--blue-wash); }
+.journey-nav-step.is-active { border-color: rgba(77,141,255,.64); color: var(--ink); background: #101827; }
+.journey-nav-step.is-next > span, .journey-nav-step.is-complete > span { border-color: var(--blue); color: var(--blue-bright); background: var(--blue-wash); }
+.journey-nav-step.is-next { color: #c3cad5; }
 .journey-nav-step.is-complete { color: #c3cad5; }
 
 .journey-stage {
